@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <Platforms>AnyCPU;x64</Platforms>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="Types\Converters\**" />
+      <EmbeddedResource Remove="Types\Converters\**" />
+      <None Remove="Types\Converters\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <SkipDefaultEditorConfigAsAdditionalFile>true</SkipDefaultEditorConfigAsAdditionalFile>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <Description>Общие классы / утилиты для работы сервисов.</Description>
+    </PropertyGroup>
+    <ItemGroup Condition="Exists('..\..\.editorconfig')">
+        <AdditionalFiles Include="..\..\.editorconfig" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Confluent.Kafka" Version="1.5.3" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" />
+        <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.7" />
+        <PackageReference Include="OpenTracing" Version="0.12.1" />
+        <PackageReference Include="OpenTracing.Contrib.NetCore" Version="0.7.1" />
+        <PackageReference Include="Jaeger" Version="0.4.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Library.Common.Database\Library.Common.Database.csproj" />
+    </ItemGroup>
+
+</Project>
