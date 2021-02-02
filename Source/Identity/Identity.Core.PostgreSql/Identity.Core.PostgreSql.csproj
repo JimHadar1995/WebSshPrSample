@@ -10,11 +10,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Identity.Application\Identity.Core.csproj" />
+    <ProjectReference Include="..\Identity.Core\Identity.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Contexts\Configurations\" />
-    <Folder Include="Implementations\" />
   </ItemGroup>
 
 </Project>
