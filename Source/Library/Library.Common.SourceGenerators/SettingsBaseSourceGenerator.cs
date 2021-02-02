@@ -13,13 +13,13 @@ namespace Library.Common.SourceGenerators
         /// <inheritdoc />
         public void Initialize(GeneratorInitializationContext context)
         {
-            throw new NotImplementedException();
+            
         }
 
         /// <inheritdoc />
         public void Execute(GeneratorExecutionContext context)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

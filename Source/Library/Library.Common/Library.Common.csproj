@@ -29,16 +29,13 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Ardalis.Specification" Version="4.2.0" />
         <PackageReference Include="Confluent.Kafka" Version="1.5.3" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.2" />
         <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.7" />
         <PackageReference Include="OpenTracing" Version="0.12.1" />
         <PackageReference Include="OpenTracing.Contrib.NetCore" Version="0.7.1" />
         <PackageReference Include="Jaeger" Version="0.4.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Library.Common.Database\Library.Common.Database.csproj" />
     </ItemGroup>
 
 </Project>

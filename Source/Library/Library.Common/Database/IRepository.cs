@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.Specification;
+using Library.Common.Exceptions;
 
 namespace Library.Common.Database
 {
@@ -12,12 +13,8 @@ namespace Library.Common.Database
     /// </summary>
     /// <typeparam name="T">Тип сущности БД</typeparam>
     public interface IRepository<T>
-        where T : class
+        where T : class, IAggregateRoot
     {
-        /// <summary>
-        /// IQueryable для прямого доступа к сущностям через EF
-        /// </summary>
-        IQueryable<T> Query { get; }
 
         /// <summary>
         /// Возвращает список сущностей, удовлетворяющих условиям поиска
@@ -25,22 +22,14 @@ namespace Library.Common.Database
         /// <param name="match">Условие поиска сущностей.</param>
         /// <param name="token"></param>
         /// <returns>Список найденных сущностей</returns>
-        Task<List<T>> GetAsync(Expression<Func<T, bool>> match, CancellationToken token = default);
+        Task<IReadOnlyList<T>> GetAsync(ISpecification<T> spec, CancellationToken token = default);
 
         /// <summary>
         /// Возвращает список всех сущностей Типа
         /// </summary>
         /// 
         /// <returns>Список сущностей</returns>
-        Task<List<T>> GetAllAsync(CancellationToken token = default);
-
-        /// <summary>
-        /// Возвращает первую найденную сущность, удовлетворяющую условиям или Null, если ничего не найдено
-        /// </summary>
-        /// <param name="match">Условие поиска.</param>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> match, CancellationToken token = default);
+        Task<IReadOnlyList<T>> GetAllAsync(CancellationToken token = default);
 
         /// <summary>
         /// Возвращает  сущность c Id или Null, если ничего не найдено
@@ -48,15 +37,7 @@ namespace Library.Common.Database
         /// <param name="id">Id.</param>
         /// <param name="token"></param>
         /// <returns></returns>
-       T FindByIdAsync(int id, CancellationToken token = default);
-        
-
-        /// <summary>
-        /// Создание сущности без вызова SaveChanges
-        /// </summary>
-        /// <param name="entity">The entity.</param>
-        /// <returns></returns>
-        T Create(T entity);
+        T FindByIdAsync(int id, CancellationToken token = default);
 
         /// <summary>
         /// Создание сущности с вызовом SaveChangesAsync
@@ -65,13 +46,6 @@ namespace Library.Common.Database
         /// <param name="token"></param>
         /// <returns></returns>
         Task<T> CreateAsync(T entity, CancellationToken token = default);
-
-        /// <summary>
-        /// Обновление сущности без вызова SaveChanges
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        T Update(T entity);
 
         /// <summary>
         /// Обновление сущности с вызовом SaveChangesAsync
@@ -90,19 +64,37 @@ namespace Library.Common.Database
         Task<int> DeleteAsync(T entity, CancellationToken token = default);
 
         /// <summary>
-        /// Deletes the specified entity.
-        /// </summary>
-        /// <param name="entity">The entity.</param>
-        /// <returns></returns>
-        void Delete(T entity);
-
-        /// <summary>
         /// Удаление сущностей, удовлетворяющих условиям <paramref name="predicate"></paramref>
         /// </summary>
         /// <param name="predicate">Условие поиска.</param>
         /// <param name="token"></param>
         /// <returns></returns>
         Task<int> DeleteAsync(Expression<Func<T, bool>> predicate, CancellationToken token = default);
+
+        /// <summary>
+        /// Получение количества записей на основе спецификации
+        /// </summary>
+        /// <param name="spec">Спецификация</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<int> CountAsync(ISpecification<T> spec, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Получение первого элемента БД, удовлетворяющего условию спецификации. Если элемента не найдено, то выдается исключение <seealso cref="EntityNotFoundException"/>
+        /// </summary>
+        /// <param name="spec"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="EntityNotFoundException"></exception>
+        Task<T> FirstAsync(ISpecification<T> spec, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Получение первого элемента или null, удовлетворяющего условию спецификации
+        /// </summary>
+        /// <param name="spec"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<T?> FirstOrDefaultAsync(ISpecification<T> spec, CancellationToken cancellationToken = default);
 
     }
 }
