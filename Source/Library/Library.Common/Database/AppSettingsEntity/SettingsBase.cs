@@ -85,20 +85,12 @@ namespace Library.Common.Database.AppSettingsEntity
             foreach (var propertyInfo in _properties)
             {
                 var propertyValue = propertyInfo.GetValue(this, null);
-                string value;
-                switch (propertyInfo.PropertyType.Name)
+                var value = propertyInfo.PropertyType.Name switch
                 {
-                    case "IEnumerable`1":
-                        value = JsonConvert.SerializeObject(propertyValue);
-                        break;
-                    case "DateTime":
-                        value = Convert.ToDateTime(propertyValue).ToString("s");
-                        break;
-                    default:
-                        value = propertyValue?.ToString() ?? string.Empty;
-                        break;
-                }
-
+                    "IEnumerable`1" => JsonConvert.SerializeObject(propertyValue),
+                    "DateTime" => Convert.ToDateTime(propertyValue).ToString("s"),
+                    _ => propertyValue?.ToString() ?? string.Empty,
+                };
                 var setting = settings.SingleOrDefault(s => s.Name == propertyInfo.Name);
                 if (setting != null)
                 {

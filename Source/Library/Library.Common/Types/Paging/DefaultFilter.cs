@@ -39,7 +39,6 @@ namespace Library.Common.Types.Paging
             {
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    var fields = AllowedSortingFields;
                     string lowerValue = value.ToLower(CultureInfo.CurrentCulture);
                     _sortField = lowerValue;
                 }

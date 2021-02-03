@@ -16,13 +16,13 @@ namespace Identity.Core.PostgreSql.Contexts
     /// Db context
     /// </summary>
     public sealed class IdentityContext : IdentityDbContext<
-        User, 
-        Role, 
-        int, 
-        IdentityUserClaim<int>, 
-        IdentityUserRole<int>, 
+        User,
+        Role,
+        int,
+        IdentityUserClaim<int>,
+        IdentityUserRole<int>,
         IdentityUserLogin<int>,
-        IdentityRoleClaim<int>, 
+        IdentityRoleClaim<int>,
         RefreshToken>
     {
         private static readonly Regex KeysRegex = new Regex("^(PK|FK|IX)_", RegexOptions.Compiled);
@@ -153,9 +153,9 @@ namespace Identity.Core.PostgreSql.Contexts
             ConvertGeneralToSnake(mapper, KeysRegex.Replace(keyName, match => match.Value.ToLower()));
 
         private string ConvertGeneralToSnake(INpgsqlNameTranslator mapper, string entityName) =>
-            mapper.TranslateMemberName(ModifyNameBeforeConvertion(mapper, entityName));
+            mapper.TranslateMemberName(ModifyNameBeforeConvertion(entityName));
 
-        private string ModifyNameBeforeConvertion(INpgsqlNameTranslator mapper, string entityName) => entityName;
+        private string ModifyNameBeforeConvertion(string entityName) => entityName;
 
         #endregion
     }

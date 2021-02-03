@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.Specification;
@@ -14,7 +15,10 @@ namespace Library.Common.Database
     public interface IRepository<T>
         where T : class, IAggregateRoot
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        IQueryable<T> Query { get; }
         /// <summary>
         /// Возвращает список сущностей, удовлетворяющих условиям поиска
         /// </summary>
@@ -68,7 +72,7 @@ namespace Library.Common.Database
         /// <param name="spec">Спецификация</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> CountAsync(ISpecification<T> spec, CancellationToken cancellationToken = default);
+        Task<int> CountAsync(ISpecification<T>? spec = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Получение первого элемента БД, удовлетворяющего условию спецификации. Если элемента не найдено, то выдается исключение <seealso cref="EntityNotFoundException"/>

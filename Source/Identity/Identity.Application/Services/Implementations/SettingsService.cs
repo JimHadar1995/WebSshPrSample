@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Identity.Application.Dto;
 using Identity.Application.Services.Contracts;
@@ -15,7 +11,6 @@ namespace Identity.Application.Services.Implementations
     /// <inheritdoc/>
     public sealed class SettingsService : ISettingsService
     {
-        private readonly IUnitOfWork _ufw;
         private readonly IMapper _mapper;
         private readonly IIdentityAppSettings _identityAppSettings;
 
@@ -23,11 +18,9 @@ namespace Identity.Application.Services.Implementations
         /// 
         /// </summary>
         public SettingsService(
-            IUnitOfWork ufw,
             IMapper mapper,
             IIdentityAppSettings identityAppSettings)
         {
-            _ufw = ufw;
             _mapper = mapper;
             _identityAppSettings = identityAppSettings;
         }
@@ -43,7 +36,7 @@ namespace Identity.Application.Services.Implementations
         public async Task SavePasswordPolicyAsync(PasswordPolicyDto model, CancellationToken token)
         {
             var policy = _identityAppSettings.PasswordPolicy;
-            
+
             _mapper.Map(model, policy);
 
             await _identityAppSettings.Save();

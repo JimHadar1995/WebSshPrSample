@@ -19,6 +19,8 @@ namespace Identity.Core.PostgreSql.Implementations
 
         private IQueryable<T> Set => _dbContext.Set<T>();
 
+        public IQueryable<T> Query => _dbContext.Set<T>();
+
         /// <summary>
         /// 
         /// </summary>
@@ -28,9 +30,14 @@ namespace Identity.Core.PostgreSql.Implementations
         }
 
         /// <inheritdoc/>
-        public async Task<int> CountAsync(ISpecification<T> spec, CancellationToken cancellationToken = default)
+        public async Task<int> CountAsync(ISpecification<T>? spec = null, CancellationToken cancellationToken = default)
         {
-            var query = ApplySpecification(spec);            
+            if (spec == null)
+            {
+                return await Set.CountAsync(cancellationToken);
+            }
+
+            var query = ApplySpecification(spec);
 
             return await query.CountAsync(cancellationToken);
         }
@@ -38,7 +45,7 @@ namespace Identity.Core.PostgreSql.Implementations
         /// <inheritdoc/>
         public async Task<T> CreateAsync(T entity, CancellationToken token = default)
         {
-            await _dbContext.Set<T>().AddAsync(entity);
+            await _dbContext.Set<T>().AddAsync(entity, token);
             await _dbContext.SaveChangesAsync(token);
 
             return entity;
