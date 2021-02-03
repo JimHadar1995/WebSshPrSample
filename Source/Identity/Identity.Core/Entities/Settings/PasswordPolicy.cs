@@ -7,7 +7,7 @@ namespace Identity.Core.Entities.Settings
     /// <summary>
     /// Настройки парольных политик.
     /// </summary>
-    public sealed class PasswordPolicy : SettingsBase
+    public sealed record PasswordPolicy : SettingsBase
     {
         /// <summary>
         /// Минимальная длина пароля

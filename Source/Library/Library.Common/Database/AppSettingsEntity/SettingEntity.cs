@@ -3,21 +3,23 @@
     /// <summary>
     /// Строка настроек в БД
     /// </summary>
-    public class SettingEntity
+    public record SettingEntity : IAggregateRoot
     {
         /// <summary>
         /// Название настройки.
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public string Name { get; init; }
 
         /// <summary>
         /// Название типа из Reflection
         /// </summary>
-        public string Type { get; set; } = string.Empty;
+        public string Type { get; init; } 
 
         /// <summary>
         /// Значение
         /// </summary>
-        public string Value { get; set; }
+        public string Value { get; init; }
     }
 }

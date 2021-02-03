@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
@@ -8,8 +8,20 @@
         <Platforms>AnyCPU;x64</Platforms>
     </PropertyGroup>
 
+    <ItemGroup Condition="Exists('..\..\..\.editorconfig')">
+        <AdditionalFiles Include="..\..\..\.editorconfig" />
+    </ItemGroup>
+
     <ItemGroup>
-      <ProjectReference Include="..\Identity.Core\Identity.Core.csproj" />
+        <ProjectReference Include="..\Identity.Core\Identity.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Commands\" />
+      <Folder Include="Dto\" />
+      <Folder Include="Services\Implementations\" />
+      <Folder Include="Specifications\" />
+      <Folder Include="Queries\" />
     </ItemGroup>
 
 </Project>

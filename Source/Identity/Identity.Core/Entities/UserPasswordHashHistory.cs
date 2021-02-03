@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Library.Common.Database;
 
 namespace Identity.Core.Entities
 {
@@ -7,14 +8,8 @@ namespace Identity.Core.Entities
     /// <summary>
     /// История изменения пароля пользователя.
     /// </summary>
-    public class UserPasswordHashHistory
+    public class UserPasswordHashHistory : IAggregateRoot
     {
-        /// <summary>
-        /// Идентификатор записи.
-        /// </summary>
-        [Key]
-        public long Id { get; init; }
-
         /// <summary>
         /// Идентификатор пользователя.
         /// </summary>

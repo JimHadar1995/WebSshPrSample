@@ -24,8 +24,8 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Description>Общие классы / утилиты для работы сервисов.</Description>
     </PropertyGroup>
-    <ItemGroup Condition="Exists('..\..\.editorconfig')">
-        <AdditionalFiles Include="..\..\.editorconfig" />
+    <ItemGroup Condition="Exists('..\..\..\.editorconfig')">
+        <AdditionalFiles Include="..\..\..\.editorconfig" />
     </ItemGroup>
 
     <ItemGroup>

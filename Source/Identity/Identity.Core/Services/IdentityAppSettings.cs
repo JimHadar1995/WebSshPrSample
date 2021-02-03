@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Identity.Core.Entities.Settings;
 using Library.Common.Database;
 using Library.Common.Database.AppSettingsEntity;
 
-namespace Identity.Core.Entities.Settings
+namespace Identity.Core.Services
 {
     /// <summary>
     /// Системные настройки
     /// </summary>
-    public sealed class IdentityAppSettings : IAppBaseSettingsManager
+    public sealed class IdentityAppSettings : IIdentityAppSettings
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<SettingEntity> _settingsRepo;
@@ -50,20 +51,13 @@ namespace Identity.Core.Entities.Settings
         public async Task Save()
         {
             if (_passwordPolicy.IsValueCreated)
-                await _passwordPolicy.Value.Save(_settingsRepo).ConfigureAwait(false);
-
-            await _unitOfWork.Commit();
+                await _passwordPolicy.Value.Save(_settingsRepo);
         }
 
 
         private T CreateSettings<T>() where T : SettingsBase, new()
         {
             var settings = new T();
-
-            if (_unitOfWork.IsTableExists(nameof(settings)))
-            {
-                settings.Load(_settingsRepo).Wait();
-            }
 
             return settings;
         }

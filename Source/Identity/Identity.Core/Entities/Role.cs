@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Library.Common.Database;
 using Microsoft.AspNetCore.Identity;
 
 namespace Identity.Core.Entities
@@ -7,7 +8,7 @@ namespace Identity.Core.Entities
     /// <summary>
     /// Роль пользователя
     /// </summary>
-    public class UserRole : IdentityRole<int>
+    public class Role : IdentityRole<int>, IAggregateRoot
     {
         /// <summary>
         /// The full administrator role

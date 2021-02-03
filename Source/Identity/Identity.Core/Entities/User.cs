@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Identity.Core.Enums;
+using Library.Common.Database;
 using Library.Common.Types.Attributes;
 using Microsoft.AspNetCore.Identity;
 
@@ -13,7 +14,7 @@ namespace Identity.Core.Entities
     /// Пользователь
     /// </summary>
     [Table("users")]
-    public class User : IdentityUser<int>
+    public class User : IdentityUser<int>, IAggregateRoot
     {
         /// <summary>
         /// The default admin
@@ -76,8 +77,8 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Роли пользователя. Многие-ко-многим
         /// </summary>
-        public ICollection<UserRole> Roles { get; init; }
-            = new List<UserRole>();
+        public ICollection<Role> Roles { get; init; }
+            = new List<Role>();
 
         /// <summary>
         /// Gets or sets the hash history.

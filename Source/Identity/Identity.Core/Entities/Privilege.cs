@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Library.Common.Database;
 using Library.Common.Types.Attributes;
 
 namespace Identity.Core.Entities
@@ -8,7 +9,7 @@ namespace Identity.Core.Entities
     /// <summary>
     /// Привилегия
     /// </summary>
-    public class Privilege
+    public class Privilege : IAggregateRoot
     {
         /// <summary>
         /// Идентификатор привилегии
@@ -33,8 +34,8 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Связанные с привилегий роли. Многие-ко-многим
         /// </summary>
-        public ICollection<UserRole> Roles { get; init; }
-            = new List<UserRole>();
+        public ICollection<Role> Roles { get; init; }
+            = new List<Role>();
 
         #endregion
     }

@@ -14,13 +14,7 @@ namespace Library.Common.Database
         /// <typeparam name="T">Тип сущности</typeparam>
         /// <returns>Набор базовых операций над сущностями</returns>
         IRepository<T> Repository<T>() 
-            where T : class;
-
-        /// <summary>
-        /// Подтверждение в БД
-        /// </summary>
-        /// <returns></returns>
-        Task<int> Commit(CancellationToken token = default);
+            where T : class, IAggregateRoot;
 
         /// <summary>
         /// Начать транзакцию в БД.
@@ -36,11 +30,5 @@ namespace Library.Common.Database
         /// Откатить транзакцию
         /// </summary>
         void RollbackTransaction();
-
-        /// <summary>
-        /// Проверка наличия таблицы в БД
-        /// </summary>
-        /// <param name="tableName">Name of the table.</param>
-        bool IsTableExists(string tableName);
     }
 }

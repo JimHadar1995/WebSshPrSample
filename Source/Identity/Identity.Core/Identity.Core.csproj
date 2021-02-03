@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
@@ -9,12 +9,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Library\Library.Common\Library.Common.csproj" />
+        <ProjectReference Include="..\..\Library\Library.Common\Library.Common.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Condition="Exists('..\..\..\.editorconfig')">
+        <AdditionalFiles Include="..\..\..\.editorconfig" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Exceptions\" />
-      <Folder Include="Entities\" />
+        <Folder Include="Exceptions\" />
+        <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>

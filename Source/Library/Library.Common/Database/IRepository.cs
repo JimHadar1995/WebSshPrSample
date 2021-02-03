@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.Specification;
@@ -37,7 +36,7 @@ namespace Library.Common.Database
         /// <param name="id">Id.</param>
         /// <param name="token"></param>
         /// <returns></returns>
-        T FindByIdAsync(int id, CancellationToken token = default);
+        Task<T> FindByIdAsync(int id, CancellationToken token = default);
 
         /// <summary>
         /// Создание сущности с вызовом SaveChangesAsync
@@ -64,14 +63,6 @@ namespace Library.Common.Database
         Task<int> DeleteAsync(T entity, CancellationToken token = default);
 
         /// <summary>
-        /// Удаление сущностей, удовлетворяющих условиям <paramref name="predicate"></paramref>
-        /// </summary>
-        /// <param name="predicate">Условие поиска.</param>
-        /// <param name="token"></param>
-        /// <returns></returns>
-        Task<int> DeleteAsync(Expression<Func<T, bool>> predicate, CancellationToken token = default);
-
-        /// <summary>
         /// Получение количества записей на основе спецификации
         /// </summary>
         /// <param name="spec">Спецификация</param>
@@ -95,6 +86,13 @@ namespace Library.Common.Database
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<T?> FirstOrDefaultAsync(ISpecification<T> spec, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Проверяет существование записи в БД на основе условия спецификации
+        /// </summary>
+        /// <param name="spec"></param>
+        /// <returns></returns>
+        bool Any(ISpecification<T> spec);
 
     }
 }

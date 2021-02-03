@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Library.Common.Database;
 using Microsoft.AspNetCore.Identity;
 
 namespace Identity.Core.Entities
@@ -9,23 +9,12 @@ namespace Identity.Core.Entities
     /// <summary>
     /// Куакуыр ещлут утешен
     /// </summary>
-    public class RefreshToken
+    public class RefreshToken : IdentityUserToken<int>, IAggregateRoot
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        [Key]
-        public int Id { get; init; }
-
-        /// <summary>
-        /// Идентификатор пользователя
-        /// </summary>
-        public int UserId { get; init; }
-
         /// <summary>
         /// Сам refresh token
         /// </summary>
-        public string Token { get; init; }
+        public string RToken { get; init; }
 
         /// <summary>
         /// Дата создания
@@ -55,7 +44,7 @@ namespace Identity.Core.Entities
             User = user;
             CreatedAt = DateTime.UtcNow;
             ExpiredAt = expiredAt;
-            Token = CreateToken(user, passwordHasher);
+            RToken = CreateToken(user, passwordHasher);
         }
 
         private static string CreateToken(User user, IPasswordHasher<User> passwordHasher)

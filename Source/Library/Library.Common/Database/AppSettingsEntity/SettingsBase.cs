@@ -13,7 +13,7 @@ namespace Library.Common.Database.AppSettingsEntity
     /// https://developingsoftware.com/how-to-store-application-settings-in-aspnet-mvc-using-entity-framework/
     /// </remarks>
     /// </summary>
-    public abstract class SettingsBase
+    public abstract record SettingsBase
     {
         // 1 name and properties cached in readonly fields
         private readonly string _name;
@@ -35,9 +35,10 @@ namespace Library.Common.Database.AppSettingsEntity
         /// <param name="repository"></param>
         public virtual async Task Load(IRepository<SettingEntity> repository)
         {
+            var spec = new SettingsBaseSpecification(_name);
             // ARGUMENT CHECKING SKIPPED FOR BREVITY
             // 3 get settings for this type name
-            var settings = await repository.GetAsync(w => w.Type == _name);
+            var settings = await repository.GetAsync(spec);
 
             foreach (var propertyInfo in _properties)
             {
@@ -77,8 +78,9 @@ namespace Library.Common.Database.AppSettingsEntity
         /// <param name="repository"></param>
         public virtual async Task Save(IRepository<SettingEntity> repository)
         {
+            var spec = new SettingsBaseSpecification(_name);
             // 5 load existing settings for this type
-            var settings = await repository.GetAsync(w => w.Type == _name);
+            var settings = await repository.GetAsync(spec);
 
             foreach (var propertyInfo in _properties)
             {
@@ -93,7 +95,7 @@ namespace Library.Common.Database.AppSettingsEntity
                         value = Convert.ToDateTime(propertyValue).ToString("s");
                         break;
                     default:
-                        value = propertyValue?.ToString();
+                        value = propertyValue?.ToString() ?? string.Empty;
                         break;
                 }
 
@@ -101,7 +103,8 @@ namespace Library.Common.Database.AppSettingsEntity
                 if (setting != null)
                 {
                     // 6 update existing value
-                    setting.Value = value;
+                    setting = setting with { Value = value };
+                    await repository.UpdateAsync(setting);
                 }
                 else
                 {
