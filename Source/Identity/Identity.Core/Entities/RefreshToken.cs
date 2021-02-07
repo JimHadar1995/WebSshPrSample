@@ -14,17 +14,17 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Сам refresh token
         /// </summary>
-        public string RToken { get; init; }
+        public string RToken { get; set; }
 
         /// <summary>
         /// Дата создания
         /// </summary>
-        public DateTimeOffset CreatedAt { get; init; }
+        public DateTimeOffset CreatedAt { get; set; }
 
         /// <summary>
         /// Время, когда протухнет refresh token
         /// </summary>
-        public DateTimeOffset ExpiredAt { get; init; }
+        public DateTimeOffset ExpiredAt { get; set; }
 
         /// <summary>
         /// 
@@ -58,7 +58,7 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Пользователь, с которым связан данный refresh token
         /// </summary>
-        public User User { get; init; } = null!;
+        public User User { get; set; } = null!;
 
         #endregion
 

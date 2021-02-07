@@ -15,5 +15,4 @@
     <ItemGroup Condition="Exists('..\..\..\.editorconfig')">
         <AdditionalFiles Include="..\..\..\.editorconfig" />
     </ItemGroup>
-
 </Project>

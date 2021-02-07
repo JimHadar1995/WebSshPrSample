@@ -15,55 +15,55 @@ namespace Identity.Core.Entities
         /// Идентификатор события.
         /// </summary>
         [Key]
-        public long Id { get; init; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Дата события.
         /// </summary>
-        public DateTime Date { get; init; }
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// Текст исключения
         /// </summary>
         [FullTextSearchProperty]
-        public string? Exception { get; init; }
+        public string? Exception { get; set; }
 
         /// <summary>
         /// Уровень события
         /// </summary>
-        public string Level { get; init; }
+        public string Level { get; set; }
 
         /// <summary>
         /// Тип логера.
         /// </summary>
 
-        public string Logger { get; init; }
+        public string Logger { get; set; }
 
         /// <summary>
         /// Сообщение.
         /// </summary>
         [FullTextSearchProperty]
-        public string? Message { get; init; }
+        public string? Message { get; set; }
 
         /// <summary>
         /// Трассировка исключения.
         /// </summary>
-        public string? Stacktrace { get; init; }
+        public string? Stacktrace { get; set; }
 
         /// <summary>
         /// Пользователь.
         /// </summary>
         [FullTextSearchProperty]
-        public string? Username { get; init; }
+        public string? Username { get; set; }
 
         /// <summary>
         /// Тип сущности, на которой произошло исключение.
         /// </summary>
-        public string? EntityType { get; init; }
+        public string? EntityType { get; set; }
 
         /// <summary>
         /// ThreadId
         /// </summary>
-        public string? Thread { get; init; }
+        public string? Thread { get; set; }
     }
 }

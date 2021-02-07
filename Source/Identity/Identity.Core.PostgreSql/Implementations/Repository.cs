@@ -2,12 +2,15 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Ardalis.Specification;
-using Ardalis.Specification.EntityFrameworkCore;
 using Identity.Core.PostgreSql.Contexts;
 using Library.Common.Database;
+using Library.Common.Database.Specifications;
 using Library.Common.Exceptions;
+using Library.Common.Types.Attributes;
+using Library.Common.Types.Paging;
+using Library.Common.Types.Wrappers;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Dynamic.Core;
 
 namespace Identity.Core.PostgreSql.Implementations
 {
@@ -16,6 +19,7 @@ namespace Identity.Core.PostgreSql.Implementations
         where T : class, IAggregateRoot
     {
         private readonly IdentityContext _dbContext;
+        private readonly ICacheWrapper _cache;
 
         private IQueryable<T> Set => _dbContext.Set<T>();
 
@@ -24,9 +28,10 @@ namespace Identity.Core.PostgreSql.Implementations
         /// <summary>
         /// 
         /// </summary>
-        public Repository(IdentityContext context)
+        public Repository(IdentityContext context, ICacheWrapper cache)
         {
             _dbContext = context;
+            _cache = cache;
         }
 
         /// <inheritdoc/>
@@ -40,6 +45,27 @@ namespace Identity.Core.PostgreSql.Implementations
             var query = ApplySpecification(spec);
 
             return await query.CountAsync(cancellationToken);
+        }
+
+        public async Task<(IReadOnlyList<T>, long count)> GetPaged<TFilter>(PagedQuery<TFilter> paging, ISpecification<T>? spec = null, CancellationToken token = default)
+            where TFilter : class, IFilter
+        {
+            var filter = paging.Filter;
+            IQueryable<T> query = Set.FullTextSearch(filter.Search, _cache);
+
+            if (spec != null)
+            {
+                query = query.Where(spec.ToExpression());
+            }
+
+            query = query.OrderBy($"{filter.SortField} {filter.OrderBy}");
+
+            var count = query.Count();
+
+            var pagedQuery = await query.Skip(paging.PageNumber * paging.PageSize)
+                .Take(paging.PageSize).ToListAsync(token);
+
+            return (pagedQuery, count);
         }
 
         /// <inheritdoc/>
@@ -93,7 +119,7 @@ namespace Identity.Core.PostgreSql.Implementations
         }
 
         /// <inheritdoc/>
-        public async Task<IReadOnlyList<T>> GetAsync(ISpecification<T> spec, CancellationToken token = default)
+        public async Task<IReadOnlyList<T>> GetAsync(ISpecification<T>? spec, CancellationToken token = default)
         {
             var query = ApplySpecification(spec);
 
@@ -119,10 +145,12 @@ namespace Identity.Core.PostgreSql.Implementations
 
         #region [ Help methods ]
 
-        private IQueryable<T> ApplySpecification(ISpecification<T> spec)
+        private IQueryable<T> ApplySpecification(ISpecification<T>? spec)
         {
-            var evaluator = new SpecificationEvaluator<T>();
-            return evaluator.GetQuery(Set, spec);
+            if (spec == null)
+                return Set;
+
+            return Set.Where(spec.ToExpression());
         }
 
         #endregion

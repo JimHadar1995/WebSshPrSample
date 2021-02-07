@@ -24,7 +24,7 @@ namespace Identity.Application.Services.Contracts
         /// <param name="token">The token.</param>
         /// <returns></returns>
         /// <exception cref="EntityNotFoundException"></exception>
-        Task<RoleDto> GetByIdAsync(string id, CancellationToken token);
+        Task<RoleDto> GetByIdAsync(int id, CancellationToken token);
 
         /// <summary>
         /// Создание роли
@@ -49,7 +49,7 @@ namespace Identity.Application.Services.Contracts
         /// <param name="id">Идентификатор роли для удаления.</param>
         /// <param name="token">The token.</param>
         /// <returns></returns>
-        Task DeleteAsync(string id, CancellationToken token);
+        Task DeleteAsync(int id, CancellationToken token);
 
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using Library.Common.Database;
 
 namespace Identity.Core.Entities
@@ -13,24 +12,24 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Идентификатор пользователя.
         /// </summary>
-        public int UserId { get; init; }
+        public int UserId { get; set; }
 
         /// <summary>
         /// Хэш пароля.
         /// </summary>
-        public string Hash { get; init; }
+        public string Hash { get; set; }
 
         /// <summary>
         /// Дата создания записи.
         /// </summary>
-        public DateTimeOffset DateChanged { get; init; }
+        public DateTimeOffset DateChanged { get; set; }
 
         #region [ Navigation ]
 
         /// <summary>
         /// Связанный пользователь.
         /// </summary>
-        public User User { get; init; }
+        public User User { get; set; }
 
         #endregion
     }

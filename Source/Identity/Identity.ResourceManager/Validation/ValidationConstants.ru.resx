@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Admin {0} was blocked due to exceeding the number of password attempts by {1} min." xml:space="preserve">
+    <value>Администратор {0} заблокирован из-за превышения количества попыток ввода пароля на {1} мин.</value>
+  </data>
+  <data name="Cannot tie admin to LDAP user" xml:space="preserve">
+    <value>Невозможно привязать локального пользователя к учетной записи LDAP</value>
+  </data>
+  <data name="Changing the preset role is prohibited" xml:space="preserve">
+    <value>Изменение предустановленной роли запрещено</value>
+  </data>
+  <data name="Changing the preset user is prohibited" xml:space="preserve">
+    <value>Изменение предустановленного пользователя запрещено</value>
+  </data>
+  <data name="Field 'New password' and field 'Confirm password' must be equals" xml:space="preserve">
+    <value>Значения полей "Новый пароль"  и "Подтверждение пароля" должны совпадать</value>
+  </data>
+  <data name="Field 'Password' value length must be contains minimum {0} and maximum {1} symbols" xml:space="preserve">
+    <value>Поле 'Пароль' должно содержать не менее {0} и не более {1} символов</value>
+  </data>
+  <data name="Field '{PropertyName}' can contains only latin alphabets, numbers and spec symbols:  -, _" xml:space="preserve">
+    <value>Поле '{PropertyName}' может содержать только латинские буквы, цифры и спец символы -, _</value>
+  </data>
+  <data name="Field '{PropertyName}' is required" xml:space="preserve">
+    <value>Поле '{PropertyName}' обязательно</value>
+  </data>
+  <data name="Field '{PropertyName}' must be contains digits" xml:space="preserve">
+    <value>Поле '{PropertyName}' должно содержать цифры</value>
+  </data>
+  <data name="Field '{PropertyName}' must be contains not alfa symbols, not numeric symbols" xml:space="preserve">
+    <value>Поле '{PropertyName}' должно содержать нечисловые и нецифровые символы</value>
+  </data>
+  <data name="Field '{PropertyName}' must be contains symbols in lower case" xml:space="preserve">
+    <value>Поле '{PropertyName}' должно содержать символы в нижнем регистре</value>
+  </data>
+  <data name="Field '{PropertyName}' must be contains symbols in upper case" xml:space="preserve">
+    <value>Поле '{PropertyName}' должно содержать символы в верхнем регистре</value>
+  </data>
+  <data name="Field '{PropertyName}' must be unique" xml:space="preserve">
+    <value>Поле '{PropertyName}' должно быть уникальным</value>
+  </data>
+  <data name="Field '{PropertyName}' value must be less or equal" xml:space="preserve">
+    <value>Значение поля '{PropertyName}' должно быть меньше или равно</value>
+  </data>
+  <data name="Field length '{PropertyName}' cannot greater 250 symbols" xml:space="preserve">
+    <value>Длина поля '{PropertyName}' не должна превышать 250 символов</value>
+  </data>
+  <data name="Field length '{PropertyName}' cannot greater 50 symbols" xml:space="preserve">
+    <value>Длина поля '{PropertyName}' не должна превышать 50 символов</value>
+  </data>
+  <data name="Field value '{PropertyName}' must be greater 0" xml:space="preserve">
+    <value>Значение поля '{PropertyName}' должно бьть больше 0</value>
+  </data>
+  <data name="Field value '{PropertyName}' must be greater or equal" xml:space="preserve">
+    <value>Значение поля '{PropertyName}' должно быть больше или равно</value>
+  </data>
+  <data name="Incorrect password entered" xml:space="preserve">
+    <value>Текущий пароль введен неверно</value>
+  </data>
+  <data name="Invalid login or password" xml:space="preserve">
+    <value>Неверный логин или пароль</value>
+  </data>
+  <data name="LDAP domain connection settings are incorrect" xml:space="preserve">
+    <value>Настройки подключения к домену LDAP заданы некорректно</value>
+  </data>
+  <data name="LDAP user not found" xml:space="preserve">
+    <value>Пользователь LDAP не найден</value>
+  </data>
+  <data name="No privileges specified for the role" xml:space="preserve">
+    <value>Для роли не указано ни одной привилегии</value>
+  </data>
+  <data name="Old and new passwords must not match" xml:space="preserve">
+    <value>Новый пароль и текущий не должны совпадать</value>
+  </data>
+  <data name="Preset administrator lock disabled" xml:space="preserve">
+    <value>Блокировка предустановленного администратора запрещена</value>
+  </data>
+  <data name="Removing the preset role is prohibited" xml:space="preserve">
+    <value>Удаление предустановленнй роли запрещено</value>
+  </data>
+  <data name="Removing the preset user is prohibited" xml:space="preserve">
+    <value>Удаление предустановленного пользователя запрещено</value>
+  </data>
+  <data name="Roles not exists" xml:space="preserve">
+    <value>Указанные роли не найдены</value>
+  </data>
+  <data name="Service user not found" xml:space="preserve">
+    <value>Не найден сервисный пользователь</value>
+  </data>
+  <data name="The minimum number of characters changed in the password must be {0}" xml:space="preserve">
+    <value>Минимальное количество измененных символов в пароле должно быть {0}</value>
+  </data>
+  <data name="The new password has already been used before. Please enter a different password" xml:space="preserve">
+    <value>Новый пароль уже был использован ранее. Пожалуйста введите другой пароль</value>
+  </data>
+  <data name="The password contains one of the popular passwords." xml:space="preserve">
+    <value>Пароль содержит один из популярных паролей.</value>
+  </data>
+  <data name="The value of the field 'Minimum number of changed password characters on edit' cannot be greater than or equal to the value of the field 'Minimum password length'" xml:space="preserve">
+    <value>Значение поля 'Минимальное количество измененных символов при редактировании пароля' не может быть больше или равно значения поля 'Минимальная длина пароля'</value>
+  </data>
+  <data name="The value of the field 'Minimum password age' shall not exceed the value of the field 'Maximum password age'" xml:space="preserve">
+    <value>Значение поля 'Минимальное время действия пароля' не должно превышать значение поля 'Максимальное время действия пароля'</value>
+  </data>
+  <data name="To continue working with the system, you must change the password" xml:space="preserve">
+    <value>Для продолжения работы с системой необходимо сменить пароль</value>
+  </data>
+  <data name="User group not found" xml:space="preserve">
+    <value>Группа пользователей не найдена</value>
+  </data>
+  <data name="User locked" xml:space="preserve">
+    <value>Пользователь заблокирован</value>
+  </data>
+  <data name="User with ID = {0} not found" xml:space="preserve">
+    <value>Пользователь с ID = {0} не найден</value>
+  </data>
+</root>

@@ -17,25 +17,25 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Описание роли.
         /// </summary>
-        public string? Description { get; init; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Является ли роль ролью по умолчанию
         /// </summary>
-        public bool IsDefaultRole { get; init; }
+        public bool IsDefaultRole { get; set; }
 
         #region [ Navigation ]
 
         /// <summary>
         /// Пользователи. Многие-ко-многим
         /// </summary>
-        public ICollection<User> Users { get; init; }
+        public ICollection<User> Users { get; set; }
             = new List<User>();
 
         /// <summary>
         /// Привилегии, доступные для роли. Многие-ко-многим
         /// </summary>
-        public ICollection<Privilege> Privileges { get; init; }
+        public ICollection<Privilege> Privileges { get; set; }
             = new List<Privilege>();
 
         #endregion

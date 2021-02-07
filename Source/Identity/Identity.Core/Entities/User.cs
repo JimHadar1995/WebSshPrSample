@@ -25,7 +25,7 @@ namespace Identity.Core.Entities
         /// Описание пользователя
         /// </summary>
         [FullTextSearchProperty]
-        public string? Description { get; init; }
+        public string? Description { get; set; }
 
         /// <inheritdoc />
         [FullTextSearchProperty]
@@ -35,55 +35,55 @@ namespace Identity.Core.Entities
         /// Статус пользователя
         /// </summary>
         [Required]
-        public UserStatus Status { get; init; }
+        public UserStatus Status { get; set; }
 
         /// <summary>
         /// Время создания пользователя.
         /// </summary>
-        public DateTimeOffset CreatedAt { get; init; }
+        public DateTimeOffset CreatedAt { get; set; }
 
         /// <summary>
         /// Время последнего обновления пользователя
         /// </summary>
-        public DateTimeOffset UpdatedAt { get; init; }
+        public DateTimeOffset UpdatedAt { get; set; }
 
         /// <summary>
         /// Время последней авторизации пользователя
         /// </summary>
-        public DateTimeOffset? LastLogin { get; init; }
+        public DateTimeOffset? LastLogin { get; set; }
 
         /// <summary>
         /// Время изменения пароля пользователя.
         /// </summary>
-        public DateTimeOffset DatePasswordChanged { get; init; }
+        public DateTimeOffset DatePasswordChanged { get; set; }
 
         /// <summary>
         /// Является ли пользователем по умолчанию, создаваемым системой
         /// </summary>
-        public bool IsDefaultUser { get; init; }
+        public bool IsDefaultUser { get; set; }
 
         /// <summary>
         /// Флаг, означающий, что пароль был сброшен администратором, вне зависимости от действий пользователя.
         /// </summary>
-        public bool PasswordResetedByAdministrator { get; init; }
+        public bool PasswordResetedByAdministrator { get; set; }
 
         /// <summary>
         /// Язык интерфейса
         /// </summary>
-        public Locale UiLocale { get; init; }
+        public Locale UiLocale { get; set; }
 
         #region [ Navigation ]
 
         /// <summary>
         /// Роли пользователя. Многие-ко-многим
         /// </summary>
-        public ICollection<Role> Roles { get; init; }
+        public ICollection<Role> Roles { get; set; }
             = new List<Role>();
 
         /// <summary>
         /// Gets or sets the hash history.
         /// </summary>
-        public ICollection<UserPasswordHashHistory> HashHistory { get; init; }
+        public ICollection<UserPasswordHashHistory> HashHistory { get; set; }
             = new List<UserPasswordHashHistory>();
 
         #endregion

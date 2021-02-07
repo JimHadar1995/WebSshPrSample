@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
@@ -18,10 +18,16 @@
 
     <ItemGroup>
       <Folder Include="Commands\" />
-      <Folder Include="Dto\" />
-      <Folder Include="Services\Implementations\" />
-      <Folder Include="Specifications\" />
       <Folder Include="Queries\" />
+      <Folder Include="Specifications\Users\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="5.1.1" />
+      <PackageReference Include="Mapster" Version="7.1.3" />
+      <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
+      <PackageReference Include="Mapster.EFCore" Version="1.1.0" />
+      <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.7" />
     </ItemGroup>
 
 </Project>

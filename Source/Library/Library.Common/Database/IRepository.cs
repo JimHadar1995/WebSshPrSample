@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Ardalis.Specification;
+using Library.Common.Database.Specifications;
 using Library.Common.Exceptions;
+using Library.Common.Types.Paging;
 
 namespace Library.Common.Database
 {
@@ -25,7 +25,18 @@ namespace Library.Common.Database
         /// <param name="match">Условие поиска сущностей.</param>
         /// <param name="token"></param>
         /// <returns>Список найденных сущностей</returns>
-        Task<IReadOnlyList<T>> GetAsync(ISpecification<T> spec, CancellationToken token = default);
+        Task<IReadOnlyList<T>> GetAsync(ISpecification<T>? spec, CancellationToken token = default);
+
+        /// <summary>
+        /// Получение списка сущностей БД с постраничной разбивкой и сортировкой
+        /// </summary>
+        /// <typeparam name="TFilter">Тип фильтра</typeparam>
+        /// <param name="query">Параметры запроса</param>
+        /// <param name="spec">Спецификация</param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        Task<(IReadOnlyList<T>, long count)> GetPaged<TFilter>(PagedQuery<TFilter> query, ISpecification<T>? spec = null, CancellationToken token = default)
+            where TFilter : class, IFilter;
 
         /// <summary>
         /// Возвращает список всех сущностей Типа

@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Common.Types.Paging
 {
+
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="TFilter">The type of the filter.</typeparam>
     [ModelBinder(typeof(PagingModelBinder))]
-    public sealed class PagedQuery<TFilter> : PagedQuery
+    public class PagedQuery<TFilter> : PagedQuery
         where TFilter : class, IFilter
     {
         /// <summary>

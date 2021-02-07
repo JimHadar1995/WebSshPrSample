@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Identity.Core.PostgreSql.Contexts;
 using Library.Common.Database;
+using Library.Common.Types.Wrappers;
 
 namespace Identity.Core.PostgreSql.Implementations
 {
@@ -11,13 +12,15 @@ namespace Identity.Core.PostgreSql.Implementations
         private readonly IdentityContext _dbContext;
 
         private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
+        private readonly ICacheWrapper _cache;
 
         /// <summary>
         /// 
         /// </summary>
-        public UnitOfWork(IdentityContext dbContext)
+        public UnitOfWork(IdentityContext dbContext, ICacheWrapper cache)
         {
             _dbContext = dbContext;
+            _cache = cache;
         }
 
         /// <inheritdoc/>
@@ -41,7 +44,7 @@ namespace Identity.Core.PostgreSql.Implementations
                 return value as IRepository<T> ?? throw new InvalidOperationException();
             }
 
-            IRepository<T> repo = new Repository<T>(_dbContext);
+            IRepository<T> repo = new Repository<T>(_dbContext, _cache);
             _repositories.Add(type, repo);
             return repo;
         }

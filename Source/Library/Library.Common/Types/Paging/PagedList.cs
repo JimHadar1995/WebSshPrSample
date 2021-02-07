@@ -12,7 +12,7 @@ namespace Library.Common.Types.Paging
         /// <summary>
         /// Данные для выборки
         /// </summary>
-        public IList<TDtoModel> Data { get; set; }
+        public IReadOnlyList<TDtoModel> Data { get; set; }
             = new List<TDtoModel>();
     }
 

@@ -49,7 +49,6 @@ namespace Identity.Application.Services.Implementations
 
         private async Task<List<LogDto>> MappingFunc(IQueryable<LogEntity> records)
         {
-
             return await records.AsNoTracking().ProjectToType<LogDto>(_mapper.Config).ToListAsync();
         }
     }

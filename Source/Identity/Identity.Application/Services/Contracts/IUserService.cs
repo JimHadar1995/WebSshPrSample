@@ -74,7 +74,7 @@ namespace Identity.Application.Services.Contracts
         /// Получение всех пользователей.
         /// </summary>
         /// <returns></returns>
-        Task<List<UserDto>> GetAllAsync(CancellationToken token);
+        Task<IReadOnlyList<UserDto>> GetAllAsync(CancellationToken token);
 
         /// <summary>
         /// Удаление пользователя по его идентификатору
@@ -82,7 +82,7 @@ namespace Identity.Application.Services.Contracts
         /// <param name="id">Идентификатор пользователя для удаления.</param>
         /// <param name="token"></param>
         /// <returns>Асинхронная операция.</returns>
-        Task DeleteUserAsync(string id, CancellationToken token);
+        Task DeleteAsync(int id, CancellationToken token);
 
     }
 }
