@@ -1,5 +1,6 @@
 ﻿using System.Linq;
-using Identity.Application.Dto;
+using Identity.Application.Dto.Roles;
+using Identity.Application.Dto.Users;
 using Identity.Core.Entities;
 using Identity.Core.Entities.Settings;
 using Mapster;

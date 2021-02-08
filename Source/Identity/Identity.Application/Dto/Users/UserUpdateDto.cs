@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Identity.Application.Dto
+namespace Identity.Application.Dto.Users
 {
     /// <summary>
-    /// Модель обновления роли
+    /// 
     /// </summary>
-    public record RoleUpdateDto : RoleAddDto
+    public record UserUpdateDto : UserAddDto
     {
         /// <summary>
-        /// Идентификатор роли.
+        /// Идентификатор пользователя.
         /// </summary>
         [Required]
         public int Id { get; init; }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Identity.Application.Dto;
+using Identity.Application.Dto.Roles;
 
 namespace Identity.Application.Services.Contracts
 {

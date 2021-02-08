@@ -29,6 +29,27 @@ namespace Library.Common.Types.Paging
                 TotalItems = allCount
             };
         }
+
+        /// <summary>
+        /// Converts to pagedlist.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data">The data.</param>
+        /// <param name="pagedQuery">The paging parameters.</param>
+        /// <param name="allCount">All count.</param>
+        /// <returns></returns>
+        public static PagedList<T> ToPagedList<T>(this IReadOnlyList<T> data, PagedQuery pagedQuery, int allCount)
+            where T : class, new()
+        {
+            return new PagedList<T>
+            {
+                Data = data,
+                PageNumber = pagedQuery.PageNumber,
+                PageSize = pagedQuery.PageSize,
+                TotalItems = allCount
+            };
+        }
+
         /// <summary>
         /// Converts to pagedlist.
         /// </summary>

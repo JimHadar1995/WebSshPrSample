@@ -47,7 +47,8 @@ namespace Identity.Core.PostgreSql.Implementations
             return await query.CountAsync(cancellationToken);
         }
 
-        public async Task<(IReadOnlyList<T>, long count)> GetPaged<TFilter>(PagedQuery<TFilter> paging, ISpecification<T>? spec = null, CancellationToken token = default)
+        /// <inheritdoc/>
+        public async Task<(IReadOnlyList<T> data, long count)> GetPaged<TFilter>(PagedQuery<TFilter> paging, ISpecification<T>? spec = null, CancellationToken token = default)
             where TFilter : class, IFilter
         {
             var filter = paging.Filter;
@@ -117,6 +118,10 @@ namespace Identity.Core.PostgreSql.Implementations
         {
             return await Set.ToListAsync(token);
         }
+
+        /// <inheritdoc/>
+        public IReadOnlyList<T> GetAll()
+            => Set.ToList();
 
         /// <inheritdoc/>
         public async Task<IReadOnlyList<T>> GetAsync(ISpecification<T>? spec, CancellationToken token = default)

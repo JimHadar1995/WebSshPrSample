@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Identity.Application.Dto;
+using Identity.Application.Dto.Roles;
 using Identity.Application.Services.Contracts;
 using Identity.Application.Specifications.Roles;
 using Identity.Core.Entities;
@@ -112,11 +112,7 @@ namespace Identity.Application.Services.Implementations
         /// <inheritdoc />
         public async Task<IReadOnlyList<PrivilegeDto>> GetAllPrivilegesAsync(CancellationToken token)
         {
-            var privileges = await _ufw.Repository<Privilege>()
-                .Query
-                .ProjectToType<PrivilegeDto>(_mapper.Config)
-                .ToListAsync(token)
-                .ConfigureAwait(false);
+            var privileges = await _ufw.Repository<Privilege>().GetAllAsync(token);
             return _mapper.Map<List<PrivilegeDto>>(privileges);
         }
 
@@ -143,7 +139,7 @@ namespace Identity.Application.Services.Implementations
 
                 foreach (var privilege in privileges)
                 {
-                    await SavePrivilege(privilege, null);
+                    await SavePrivilege(privilege);
                 }
 
                 _ufw.CommitTransaction();
@@ -179,7 +175,7 @@ namespace Identity.Application.Services.Implementations
             await _roleManager.UpdateAsync(role);
         }
 
-        private async Task SavePrivilege(PrivilegesLoadDto privilegeLoadDto, int? privilegeParentId)
+        private async Task SavePrivilege(PrivilegesLoadDto privilegeLoadDto)
         {
             var privilegeRepo = _ufw.Repository<Privilege>();
 

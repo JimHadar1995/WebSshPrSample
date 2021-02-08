@@ -15,10 +15,10 @@ namespace Library.Common.Database
     public interface IRepository<T>
         where T : class, IAggregateRoot
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        IQueryable<T> Query { get; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //IQueryable<T> Query { get; }
         /// <summary>
         /// Возвращает список сущностей, удовлетворяющих условиям поиска
         /// </summary>
@@ -35,13 +35,18 @@ namespace Library.Common.Database
         /// <param name="spec">Спецификация</param>
         /// <param name="token"></param>
         /// <returns></returns>
-        Task<(IReadOnlyList<T>, long count)> GetPaged<TFilter>(PagedQuery<TFilter> query, ISpecification<T>? spec = null, CancellationToken token = default)
+        Task<(IReadOnlyList<T> data, long count)> GetPaged<TFilter>(PagedQuery<TFilter> query, ISpecification<T>? spec = null, CancellationToken token = default)
             where TFilter : class, IFilter;
 
         /// <summary>
         /// Возвращает список всех сущностей Типа
         /// </summary>
-        /// 
+        /// <returns>Список сущностей</returns>
+        IReadOnlyList<T> GetAll();
+
+        /// <summary>
+        /// Возвращает список всех сущностей Типа
+        /// </summary>
         /// <returns>Список сущностей</returns>
         Task<IReadOnlyList<T>> GetAllAsync(CancellationToken token = default);
 

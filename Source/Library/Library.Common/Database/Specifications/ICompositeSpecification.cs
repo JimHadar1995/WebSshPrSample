@@ -19,5 +19,12 @@
         /// <param name="other"></param>
         /// <returns></returns>
         ISpecification<T> Or(ISpecification<T> other) => new OrSpecification<T>(this, other);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spec"></param>
+        /// <returns></returns>
+        ISpecification<T> Not(ISpecification<T> spec) => new NotSpecification<T>(spec);
     }
 }

@@ -13,7 +13,7 @@ namespace Library.Common.Authentication.Models
         /// <summary>
         /// Идентификатор пользователя
         /// </summary>
-        public string UserId { get; init; }
+        public int UserId { get; init; }
 
         /// <summary>
         /// Gets or sets the name of the user.

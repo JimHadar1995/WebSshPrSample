@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Identity.Application.Dto;
@@ -8,13 +6,10 @@ using Identity.Application.Dto.Filters;
 using Identity.Application.Services.Contracts;
 using Identity.Core.Entities;
 using Library.Common.Database;
-using Library.Common.Types.Attributes;
 using Library.Common.Types.Paging;
 using Library.Common.Types.Wrappers;
 using MapsterMapper;
-using System.Linq.Dynamic.Core;
-using Microsoft.EntityFrameworkCore;
-using Mapster;
+using Identity.Application.Specifications.Logs;
 
 namespace Identity.Application.Services.Implementations
 {
@@ -22,34 +17,31 @@ namespace Identity.Application.Services.Implementations
     public class LogService : ILogService
     {
         private readonly IUnitOfWork _ufw;
-        private readonly ICacheWrapper _cache;
         private readonly IMapper _mapper;
         public LogService(
            IUnitOfWork ufw,
-            ICacheWrapper cache,
             IMapper mapper)
         {
             _mapper = mapper;
             _ufw = ufw;
-            _cache = cache;
         }
         /// <inheritdoc />
         public async Task<PagedList<LogDto>> GetLogs(PagedQuery<LogFilter> filter, CancellationToken token = default)
         {
             filter.Filter.ThrowIfInvalidSortField();
 
-            var logsQuery = _ufw.Repository<LogEntity>()
-                .Query
-                .Where(_ => _.Level == "Info")
-                .FullTextSearch(filter.Filter.Search, _cache)
-                .OrderBy($"{filter.Filter.SortField} {filter.Filter.OrderBy}");
+            var (data, count) = await _ufw.Repository<LogEntity>()
+                .GetPaged(filter, new LogsInfoFilterSpec("Info"), token);
 
-            return await logsQuery.ToPagedList(MappingFunc, filter);
-        }
+            var dataDto = _mapper.Map<List<LogDto>>(data);
 
-        private async Task<List<LogDto>> MappingFunc(IQueryable<LogEntity> records)
-        {
-            return await records.AsNoTracking().ProjectToType<LogDto>(_mapper.Config).ToListAsync();
+            return new PagedList<LogDto>
+            {
+                Data = dataDto,
+                PageNumber = filter.PageNumber,
+                PageSize = filter.PageSize,
+                TotalItems = (int)count
+            };
         }
     }
 }

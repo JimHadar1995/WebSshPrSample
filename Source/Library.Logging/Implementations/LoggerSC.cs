@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using Library.Logging.Contracts;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +12,6 @@ namespace Library.Logging.Implementations
     /// <seealso cref="ILogger" />
     public sealed class LoggerSC : ILogger
     {
-#pragma warning disable CS8632 // The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
         /// <summary>
         /// NLog logger.
         /// </summary>
@@ -24,7 +21,12 @@ namespace Library.Logging.Implementations
         /// The accessor
         /// </summary>
         private readonly IHttpContextAccessor? _accessor;
+        /// <summary>
+        /// 
+        /// </summary>
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public LoggerSC() { }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         /// <summary>
         /// Initializes a new instance of the <see cref="NLogLogger"/> class.
         /// </summary>
@@ -133,7 +135,7 @@ namespace Library.Logging.Implementations
         }
 
         /// <inheritdoc />
-        public void Fatal(string format, params object[] args)
+        public void Fatal(string? format, params object[] args)
         {
             Log(NLog.LogLevel.Fatal, null, format, args);
         }
@@ -141,7 +143,7 @@ namespace Library.Logging.Implementations
         /// <inheritdoc />
         public void Fatal(Exception exception, string? format, params object[] args)
         {
-            Log(NLog.LogLevel.Fatal, exception, format, null, args);
+            Log(NLog.LogLevel.Fatal, exception, format, args);
         }
 
         #region [ Help methods ]

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Library.Common.Database.Specifications
 {
-    public class OrSpecification<T> : Specification<T>
+    public class OrSpecification<T> : Specification<T>, ICompositeSpecification<T>
         where T : class, IAggregateRoot
     {
         private readonly ISpecification<T> _left;

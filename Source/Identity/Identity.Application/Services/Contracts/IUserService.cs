@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Identity.Application.Dto;
+using Identity.Application.Dto.Users;
 using Library.Common.Exceptions;
 
 namespace Identity.Application.Services.Contracts

@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Identity.Application.Dto;
+using Identity.Application.Dto.Users;
 
 namespace Identity.Application.Services.Contracts
 {

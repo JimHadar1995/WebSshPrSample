@@ -8,7 +8,7 @@ namespace Library.Common.Database.Specifications
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class AndSpecification<T> : Specification<T>
+    public class AndSpecification<T> : Specification<T>, ICompositeSpecification<T>
         where T : class, IAggregateRoot
     {
         private readonly ISpecification<T> _left;

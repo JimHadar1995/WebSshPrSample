@@ -1,4 +1,4 @@
-﻿namespace Identity.Application.Dto
+﻿namespace Identity.Application.Dto.Users
 {
     /// <summary>
     /// Парольные политики

@@ -56,7 +56,7 @@ namespace Library.Common.Authentication
 
             return new JsonWebTokenPayload
             {
-                UserId = jwt.Claims.First(_ => _.Type == ClaimTypes.NameIdentifier).Value,
+                UserId = Convert.ToInt32(jwt.Claims.First(_ => _.Type == ClaimTypes.NameIdentifier).Value),
                 UserName = jwt.Subject,
                 Expires = jwt.ValidTo.ToTimestamp(),
                 Claims = claims,

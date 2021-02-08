@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Identity.Application.Dto;
+using Identity.Application.Dto.Users;
 using Library.Common.Authentication.Models;
 
 namespace Identity.Application.Services.Contracts
@@ -14,12 +14,5 @@ namespace Identity.Application.Services.Contracts
         /// </summary>
         /// <returns></returns>
         Task<JsonWebToken> LoginByPassAsync(LoginByPassCredentials credentials);
-
-        /// <summary>
-        /// Creates the access token asynchronous.
-        /// </summary>
-        /// <param name="token">The token.</param>
-        /// <returns></returns>
-        Task<JsonWebToken> LoginByRefreshToken(string token);
     }
 }

@@ -21,7 +21,7 @@ namespace Library.Logging.Common
             services.AddTransient<ILogger>((s) =>
             {
                 var factory = s.GetRequiredService<ILoggerFactory>();
-                return factory.SCLogger();
+                return factory.DefaultLogger();
             });
         }
     }
