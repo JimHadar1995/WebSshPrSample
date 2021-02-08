@@ -14,7 +14,7 @@ using Identity.Core.Entities;
 using Identity.Core.Enums;
 using Identity.Core.Exceptions;
 using Identity.Core.Services;
-using Identity.ResourceManager;
+using Identity.ResourceManager.Constants;
 using Identity.ResourceManager.Validation;
 using Library.Common.Authentication;
 using Library.Common.Authentication.Models;

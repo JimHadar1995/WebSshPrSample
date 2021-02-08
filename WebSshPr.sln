@@ -28,9 +28,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Application", "Sou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Core.PostgreSql", "Source\Identity\Identity.Core.PostgreSql\Identity.Core.PostgreSql.csproj", "{D2E569ED-68CB-4570-A178-891087A16DB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.ResourceManager", "Source\Identity\Identity.ResourceManager\Identity.ResourceManager.csproj", "{9A0E061B-107A-4692-BD98-6203AC4F9102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.ResourceManager", "Source\Identity\Identity.ResourceManager\Identity.ResourceManager.csproj", "{9A0E061B-107A-4692-BD98-6203AC4F9102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Logging", "Source\Library.Logging\Library.Logging.csproj", "{56329BB6-8618-467C-BFC9-51ECE6D61D1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Logging", "Source\Library.Logging\Library.Logging.csproj", "{56329BB6-8618-467C-BFC9-51ECE6D61D1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Infrastructure", "Source\Identity\Identity.Infrastructure\Identity.Infrastructure.csproj", "{F2859C58-92A8-452F-B68C-044F720FA08E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +80,10 @@ Global
 		{56329BB6-8618-467C-BFC9-51ECE6D61D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56329BB6-8618-467C-BFC9-51ECE6D61D1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56329BB6-8618-467C-BFC9-51ECE6D61D1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2859C58-92A8-452F-B68C-044F720FA08E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2859C58-92A8-452F-B68C-044F720FA08E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2859C58-92A8-452F-B68C-044F720FA08E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2859C58-92A8-452F-B68C-044F720FA08E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +95,7 @@ Global
 		{212BFB38-7C8B-463F-BFEE-7A0E7B6E42C9} = {BD19C995-5713-42CD-A439-BEA88D46C48E}
 		{D2E569ED-68CB-4570-A178-891087A16DB8} = {BD19C995-5713-42CD-A439-BEA88D46C48E}
 		{9A0E061B-107A-4692-BD98-6203AC4F9102} = {BD19C995-5713-42CD-A439-BEA88D46C48E}
+		{F2859C58-92A8-452F-B68C-044F720FA08E} = {BD19C995-5713-42CD-A439-BEA88D46C48E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3AE469B7-0CA0-4F7A-AB9D-5821CB6B1F37}

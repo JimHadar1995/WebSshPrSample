@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Identity.Application.Commands.Roles;
+using Identity.Application.Dto.Roles;
+using Identity.Application.Services.Contracts;
+using Identity.Core.Exceptions;
+using Identity.ResourceManager.Constants;
+using Library.Common.Exceptions;
+using Library.Common.Localization;
+using Library.Logging.Contracts;
+using MediatR;
+
+namespace SC.Identity.Infrastructure.Handlers.Queries.Roles
+{
+    /// <summary>
+    /// Обработчик команды получения всех привилегий.
+    /// </summary>
+    public sealed class GetAllPrivilegesCommandHandler : IRequestHandler<GetAllPrivilegesCommand, IReadOnlyList<PrivilegeDto>>
+    {
+        private readonly IRoleService _roleService;
+        private readonly IOwnSystemLocalizer<RolesConstants> _localizer;
+        private readonly ILogger _logger;
+        public GetAllPrivilegesCommandHandler(
+            IRoleService roleService,
+            IOwnSystemLocalizer<RolesConstants> localizer,
+            ILogger logger)
+        {
+            _roleService = roleService;
+            _localizer = localizer;
+            _logger = logger;
+        }
+        /// <inheritdoc />
+        public async Task<IReadOnlyList<PrivilegeDto>> Handle(GetAllPrivilegesCommand request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await _roleService.GetAllPrivilegesAsync(cancellationToken);
+            }
+            catch (BaseException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                string message = _localizer[RolesConstants.GettingPrivilegesError].Value;
+                _logger.Error(ex, message);
+                throw new IdentityServiceException(message);
+            }
+        }
+    }
+}

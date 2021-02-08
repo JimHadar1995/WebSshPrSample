@@ -50,7 +50,7 @@ namespace Identity.Application.Services.Contracts
         /// <param name="token"></param>
         /// <returns>Асинхронная операция.</returns>
         /// <exception cref="EntityNotFoundException"></exception>
-        Task LockAsync(string userId, CancellationToken token);
+        Task LockAsync(int userId, CancellationToken token);
 
         /// <summary>
         /// Разблокировка пользователя.
@@ -59,7 +59,7 @@ namespace Identity.Application.Services.Contracts
         /// <param name="token"></param>
         /// <returns>Асинхронная операция.</returns>
         /// <exception cref="EntityNotFoundException"></exception>
-        Task UnLockAsync(string userId, CancellationToken token);
+        Task UnLockAsync(int userId, CancellationToken token);
 
         /// <summary>
         /// Получение пользователя по его идентификатору.
@@ -68,7 +68,7 @@ namespace Identity.Application.Services.Contracts
         /// <param name="token"></param>
         /// <returns>Пользователь.</returns>
         /// <exception cref="EntityNotFoundException"></exception>
-        Task<UserDto> GetAsync(string id, CancellationToken token);
+        Task<UserDto> GetAsync(int id, CancellationToken token);
 
         /// <summary>
         /// Получение всех пользователей.

@@ -117,64 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="An error occurred while getting the list of users" xml:space="preserve">
-    <value>При получении списка пользователей произошла ошибка</value>
-  </data>
-  <data name="An error occurred while getting user with ID = {0}" xml:space="preserve">
-    <value>При получении пользователя с ID = {0} произошла ошибка</value>
-  </data>
-  <data name="An error occurred while retrieving the password policy settings" xml:space="preserve">
-    <value>При получении настроек парольной политики произошла ошибка</value>
-  </data>
-  <data name="An error occurred while retrieving user settings" xml:space="preserve">
-    <value>При получении настроек пользователя произошла ошибка</value>
-  </data>
-  <data name="Failed to block user {0}" xml:space="preserve">
-    <value>Не удалось заблокировать пользователя {0}</value>
-  </data>
-  <data name="Failed to change password for user {0}" xml:space="preserve">
-    <value>Не удалось изменить пароль пользователя {0}</value>
-  </data>
-  <data name="Failed to create user {0}" xml:space="preserve">
-    <value>Не удалось создать пользователя {0}</value>
-  </data>
-  <data name="Failed to delete user {0}" xml:space="preserve">
-    <value>Не удалось удалить пользователя {0}</value>
-  </data>
-  <data name="Failed to unlock user {0}" xml:space="preserve">
-    <value>Не удалось розблокировать пользователя {0}</value>
-  </data>
-  <data name="Failed to update the password policy settings" xml:space="preserve">
-    <value>Не удалось обновить парольные политик</value>
-  </data>
-  <data name="Failed to update user" xml:space="preserve">
-    <value>Не удалось обновить пользователя</value>
-  </data>
-  <data name="Password for user {0} has been reset" xml:space="preserve">
-    <value>Пароль пользователя {0} сброшен</value>
-  </data>
-  <data name="The password policy settings updated successfully" xml:space="preserve">
-    <value>Настройки парольноых политик успешно обновлены</value>
-  </data>
-  <data name="User {0} has been successfully created" xml:space="preserve">
-    <value>Пользователь {0} успешно создан</value>
-  </data>
-  <data name="User {0} has successfully changed password" xml:space="preserve">
-    <value>У пользователя {0} успешно изменен пароль</value>
-  </data>
-  <data name="User {0} successfully authorized" xml:space="preserve">
-    <value>Пользователь {0} успешно авторизован</value>
-  </data>
-  <data name="User {0} successfully blocked" xml:space="preserve">
-    <value>Пользователь {0} успешно заблокирован</value>
-  </data>
-  <data name="User {0} successfully deleted" xml:space="preserve">
-    <value>Пользователь {0} успешно удален</value>
-  </data>
-  <data name="User {0} unlocked successfully" xml:space="preserve">
-    <value>Пользователь {0} успешно разблокирован</value>
-  </data>
-  <data name="User {0} updated successfully" xml:space="preserve">
-    <value>Пользователь {0} успешно обновлен</value>
+  <data name="An error occurred while getting the list of logs" xml:space="preserve">
+    <value>При получении списка логов произошла ошибка</value>
   </data>
 </root>

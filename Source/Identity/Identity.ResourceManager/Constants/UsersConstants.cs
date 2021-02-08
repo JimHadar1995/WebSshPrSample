@@ -1,4 +1,4 @@
-﻿namespace Identity.ResourceManager
+﻿namespace Identity.ResourceManager.Constants
 {
     /// <summary>
     /// Для пользователей

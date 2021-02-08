@@ -145,9 +145,9 @@ namespace Identity.Application.Services.Implementations
         }
 
         /// <inheritdoc />
-        public async Task LockAsync(string userId, CancellationToken token = default)
+        public async Task LockAsync(int userId, CancellationToken token = default)
         {
-            var curUser = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            var curUser = await _userManager.FindByIdAsync(userId.ToString());
             if (curUser == null)
                 throw new EntityNotFoundException();
 
@@ -162,9 +162,9 @@ namespace Identity.Application.Services.Implementations
         }
 
         /// <inheritdoc />
-        public async Task UnLockAsync(string userId, CancellationToken token = default)
+        public async Task UnLockAsync(int userId, CancellationToken token = default)
         {
-            var curUser = await _userManager.FindByIdAsync(userId).ConfigureAwait(false);
+            var curUser = await _userManager.FindByIdAsync(userId.ToString());
             if (curUser == null)
                 throw new EntityNotFoundException();
 
@@ -176,9 +176,9 @@ namespace Identity.Application.Services.Implementations
         }
 
         /// <inheritdoc />
-        public async Task<UserDto> GetAsync(string id, CancellationToken token = default)
+        public async Task<UserDto> GetAsync(int id, CancellationToken token = default)
         {
-            var curUser = await _userManager.FindByIdAsync(id).ConfigureAwait(false);
+            var curUser = await _userManager.FindByIdAsync(id.ToString());
             if (curUser == null)
                 throw new EntityNotFoundException();
 
