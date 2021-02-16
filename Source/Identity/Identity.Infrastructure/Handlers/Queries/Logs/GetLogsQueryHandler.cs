@@ -11,7 +11,7 @@ using Library.Common.Types.Paging;
 using Library.Logging.Contracts;
 using MediatR;
 
-namespace Identity.Infrastructure.Queries.Logs
+namespace Identity.Infrastructure.Handlers.Queries.Logs
 {
     /// <summary>
     /// Обработчик запроса получения логов
@@ -41,7 +41,7 @@ namespace Identity.Infrastructure.Queries.Logs
             }
             catch (Exception ex)
             {
-                string message = LogsConstants.GettingLogsError;
+                var message = LogsConstants.GettingLogsError;
                 _logger.Error(ex, message);
                 throw new IdentityServiceException(message);
             }

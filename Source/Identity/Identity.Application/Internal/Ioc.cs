@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Identity.Application.Services.Contracts;
+﻿using Identity.Application.Services.Contracts;
 using Identity.Application.Services.Implementations;
 using Identity.Core.Services;
 using Identity.ResourceManager.Implementations;
+using Library.Common.Kafka;
 using Library.Common.Localization;
 using Library.Common.Types.Wrappers;
 using Library.Logging.Contracts;
@@ -42,11 +38,11 @@ namespace Identity.Application.Internal
             services.AddScoped<ILogService, LogService>();
 
             services.AddScoped<ILoggerFactory, LoggerFactorySC>();
-            services.AddScoped<IdentityAppSettings>();
+            services.AddScoped<IIdentityAppSettings, IdentityAppSettings>();
             services.AddScoped<ISettingsService, SettingsService>();
 
             services.ConfigureLocalization();
-            //services.InitKafkaServices(configuration);
+            services.InitKafkaServices(configuration);
         }
 
         private static void ConfigureLocalization(this IServiceCollection services)

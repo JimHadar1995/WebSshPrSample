@@ -8,7 +8,7 @@ namespace Identity.Application.Commands.Users
     /// </summary>
     /// <seealso cref="UserAddDto" />
     /// <seealso cref="IRequest{String}" />
-    public sealed class CreateUserCommand : IRequest<string>
+    public sealed class CreateUserCommand : IRequest<int>
     {
         public readonly UserAddDto Model;
         /// <summary>

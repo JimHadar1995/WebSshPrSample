@@ -1,4 +1,5 @@
-﻿using Library.Common.Exceptions;
+﻿using System;
+using Library.Common.Exceptions;
 
 namespace Identity.Core.Exceptions
 {
@@ -7,8 +8,16 @@ namespace Identity.Core.Exceptions
     /// </summary>
     public class IdentityServiceException : BaseException
     {
+        /// <inheritdoc />
         public IdentityServiceException(string? message) : base(message)
         {
+        }
+
+        /// <inheritdoc />
+        public IdentityServiceException(string? message, Exception? innerException)
+            : base(message, innerException)
+        {
+
         }
     }
 }

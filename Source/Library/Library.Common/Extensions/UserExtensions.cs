@@ -13,6 +13,6 @@ namespace Library.Common.Extensions
         /// <param name="accessor">The accessor.</param>
         /// <returns></returns>
         public static string? UserName(this IHttpContextAccessor accessor)
-            => accessor.HttpContext.User.Identity.Name;
+            => accessor.HttpContext?.User?.Identity?.Name;
     }
 }

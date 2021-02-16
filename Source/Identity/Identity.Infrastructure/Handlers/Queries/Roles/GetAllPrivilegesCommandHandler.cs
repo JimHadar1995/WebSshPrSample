@@ -12,7 +12,7 @@ using Library.Common.Localization;
 using Library.Logging.Contracts;
 using MediatR;
 
-namespace SC.Identity.Infrastructure.Handlers.Queries.Roles
+namespace Identity.Infrastructure.Handlers.Queries.Roles
 {
     /// <summary>
     /// Обработчик команды получения всех привилегий.
@@ -44,7 +44,7 @@ namespace SC.Identity.Infrastructure.Handlers.Queries.Roles
             }
             catch (Exception ex)
             {
-                string message = _localizer[RolesConstants.GettingPrivilegesError].Value;
+                var message = _localizer[RolesConstants.GettingPrivilegesError].Value;
                 _logger.Error(ex, message);
                 throw new IdentityServiceException(message);
             }

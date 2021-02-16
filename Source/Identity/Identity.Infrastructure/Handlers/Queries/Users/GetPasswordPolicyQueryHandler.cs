@@ -11,7 +11,7 @@ using Library.Common.Localization;
 using Library.Logging.Contracts;
 using MediatR;
 
-namespace Identity.Infrastructure.Queries.Users
+namespace Identity.Infrastructure.Handlers.Queries.Users
 {
     /// <summary>
     /// Обработчик запроса получения настроек парольной политики.
@@ -50,7 +50,7 @@ namespace Identity.Infrastructure.Queries.Users
             }
             catch (Exception ex)
             {
-                string message = _localizer[UsersConstants.GettingPasswordPolicyError].Value;
+                var message = _localizer[UsersConstants.GettingPasswordPolicyError].Value;
                 _logger.Error(ex, message);
                 throw new IdentityServiceException(message);
             }

@@ -14,18 +14,20 @@ namespace Tests.Common.TranslationTessInner
     public class TestTranslationBase
     {
         protected string ResourceManagerLibraryName;
+        protected readonly string _resourcesBasePath;
 
-        public TestTranslationBase(string resourceManagerLibraryName)
+        public TestTranslationBase(string resourceManagerLibraryName, string resourcesBasePath)
         {
             ResourceManagerLibraryName = resourceManagerLibraryName;
+            _resourcesBasePath = resourcesBasePath;
         }
 
         public void RunTest()
         {
             List<Translations> translations = new List<Translations>();
-            var fullPath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
-            var index = fullPath!.IndexOf("Source", StringComparison.Ordinal);
-            var sourcePath = fullPath.Substring(0, index + 6);
+            var fullPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var index = fullPath!.IndexOf(_resourcesBasePath, StringComparison.Ordinal);
+            var sourcePath = fullPath.Substring(0, index + _resourcesBasePath.Length);
             var certificatesPath = Path.Combine(sourcePath, ResourceManagerLibraryName);
 
             Dictionary<string, List<Element>> resources = new Dictionary<string, List<Element>>();
