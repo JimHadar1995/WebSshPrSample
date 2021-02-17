@@ -9,6 +9,9 @@ namespace Identity.Application.Queries.Users
     /// </summary>
     public sealed class GetAllUsersQuery : IRequest<IReadOnlyList<UserDto>>
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly GetAllUsersQuery Instance = new GetAllUsersQuery();
     }
 }

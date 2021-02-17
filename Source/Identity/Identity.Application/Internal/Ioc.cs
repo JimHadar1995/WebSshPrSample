@@ -43,6 +43,8 @@ namespace Identity.Application.Internal
 
             services.ConfigureLocalization();
             services.InitKafkaServices(configuration);
+
+            services.ConfigureMapster();
         }
 
         private static void ConfigureLocalization(this IServiceCollection services)

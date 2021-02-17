@@ -1,4 +1,5 @@
 ﻿using Identity.WebApi.Code;
+using Identity.WebApi.Code.Middlewares;
 using Library.Logging.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,8 @@ namespace Identity.WebApi
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             });
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseAuthentication();
 

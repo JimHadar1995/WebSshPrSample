@@ -4,6 +4,7 @@ using Identity.Application.Dto.Users;
 using Identity.Core.Entities;
 using Identity.Core.Entities.Settings;
 using Mapster;
+using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Identity.Application.Internal
@@ -13,6 +14,7 @@ namespace Identity.Application.Internal
         public static void ConfigureMapster(this IServiceCollection services)
         {
             services.AddSingleton(GetConfiguredMappingConfig());
+            services.AddScoped<IMapper, ServiceMapper>();
         }
 
         internal static TypeAdapterConfig GetConfiguredMappingConfig()

@@ -34,7 +34,7 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Связанные с привилегий роли. Многие-ко-многим
         /// </summary>
-        public ICollection<Role> Roles { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
             = new List<Role>();
 
         #endregion

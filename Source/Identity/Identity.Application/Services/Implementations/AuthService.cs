@@ -36,7 +36,7 @@ namespace Identity.Application.Services.Implementations
         private readonly RoleManager<Role> _roleManager;
         private readonly JwtOptions _jwtOptions;
         private readonly IValidationLocalizer _validationLocalizer;
-        private readonly IdentityAppSettings _settings;
+        private readonly IIdentityAppSettings _settings;
         private readonly ILogger _logger;
         private readonly IOwnSystemLocalizer<UsersConstants> _localizer;
 
@@ -49,7 +49,7 @@ namespace Identity.Application.Services.Implementations
             RoleManager<Role> roleManager,
             IOptionsSnapshot<JwtOptions> jwtOptions,
             IValidationLocalizer validationLocalizer,
-            IdentityAppSettings settings,
+            IIdentityAppSettings settings,
             ILogger logger,
             IOwnSystemLocalizer<UsersConstants> localizer)
         {

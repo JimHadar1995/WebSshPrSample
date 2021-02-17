@@ -25,7 +25,7 @@ namespace Identity.Application.Validators.Users
             IValidationLocalizer localizer,
             IHttpContextAccessor accessor,
             UserManager<User> userManager,
-            IdentityAppSettings settings,
+            IIdentityAppSettings settings,
             IConfiguration configuration)
         {
             _userManager = userManager;

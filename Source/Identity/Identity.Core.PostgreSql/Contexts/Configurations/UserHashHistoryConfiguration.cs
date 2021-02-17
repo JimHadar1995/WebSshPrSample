@@ -10,7 +10,6 @@ namespace Identity.Core.PostgreSql.Contexts.Configurations
         /// <inheritdoc />
         public void Configure(EntityTypeBuilder<UserPasswordHashHistory> builder)
         {
-
             builder.HasOne(_ => _.User)
                 .WithMany(_ => _.HashHistory)
                 .HasForeignKey(_ => _.UserId)

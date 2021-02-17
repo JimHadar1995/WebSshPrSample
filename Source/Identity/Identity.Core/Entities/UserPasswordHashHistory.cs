@@ -10,6 +10,11 @@ namespace Identity.Core.Entities
     public class UserPasswordHashHistory : IAggregateRoot
     {
         /// <summary>
+        /// Идентификатор
+        /// </summary>
+        public long Id { get; set; }
+
+        /// <summary>
         /// Идентификатор пользователя.
         /// </summary>
         public int UserId { get; set; }
@@ -29,7 +34,7 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Связанный пользователь.
         /// </summary>
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         #endregion
     }

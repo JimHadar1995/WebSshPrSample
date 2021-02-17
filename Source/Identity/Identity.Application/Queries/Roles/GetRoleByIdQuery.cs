@@ -6,7 +6,7 @@ namespace Identity.Application.Queries.Roles
     /// <summary>
     /// Запрос получения списка ролей системы
     /// </summary>
-    public sealed class GetRoleByIdCommand : IRequest<RoleDto>
+    public sealed class GetRoleByIdQuery : IRequest<RoleDto>
     {
         /// <summary>
         /// The role identifier
@@ -14,9 +14,9 @@ namespace Identity.Application.Queries.Roles
         public readonly int RoleId;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetRoleByIdCommand"/> class.
+        /// Initializes a new instance of the <see cref="GetRoleByIdQuery"/> class.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        public GetRoleByIdCommand(int id) => RoleId = id;
+        public GetRoleByIdQuery(int id) => RoleId = id;
     }
 }

@@ -8,5 +8,9 @@ namespace Identity.Application.Queries.Users
     /// </summary>
     public sealed class GetPasswordPolicyQuery : IRequest<PasswordPolicyDto>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public static readonly GetPasswordPolicyQuery Instance = new GetPasswordPolicyQuery();
     }
 }

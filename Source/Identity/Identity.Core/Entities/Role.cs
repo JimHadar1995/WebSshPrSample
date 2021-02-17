@@ -29,13 +29,13 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Пользователи. Многие-ко-многим
         /// </summary>
-        public ICollection<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
             = new List<User>();
 
         /// <summary>
         /// Привилегии, доступные для роли. Многие-ко-многим
         /// </summary>
-        public ICollection<Privilege> Privileges { get; set; }
+        public virtual ICollection<Privilege> Privileges { get; set; }
             = new List<Privilege>();
 
         #endregion

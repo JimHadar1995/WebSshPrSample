@@ -21,7 +21,7 @@ namespace Identity.Application.Validators.Users
         /// <inheritdoc />
         public ChangePasswordForUserValidator(
             IValidationLocalizer localizer,
-            IdentityAppSettings settings,
+            IIdentityAppSettings settings,
             IUnitOfWork ufw,
             IConfiguration? configuration)
         {

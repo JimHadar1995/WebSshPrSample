@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Identity.Application.Dto.Roles;
@@ -15,36 +14,36 @@ using MediatR;
 namespace Identity.Infrastructure.Handlers.Queries.Roles
 {
     /// <summary>
-    /// Обработчик запроса получения всех ролей.
+    /// 
     /// </summary>
-    public sealed class GetAllRolesCommandHandler : IRequestHandler<GetAllRolesCommand, IReadOnlyList<RoleDto>>
+    public sealed class GetRoleByIdQueryHandler : IRequestHandler<GetRoleByIdQuery, RoleDto>
     {
         private readonly IRoleService _roleService;
-        private readonly IOwnLocalizer<RolesConstants> _localizer;
+        private readonly IOwnSystemLocalizer<RolesConstants> _localizer;
         private readonly ILogger _logger;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetAllRolesCommandHandler"/> class.
+        /// Initializes a new instance of the <see cref="GetRoleByIdQueryHandler"/> class.
         /// </summary>
         /// <param name="roleService">The role service.</param>
         /// <param name="localizer"></param>
         /// <param name="logger"></param>
-        public GetAllRolesCommandHandler(
+        public GetRoleByIdQueryHandler(
             IRoleService roleService,
-            IOwnLocalizer<RolesConstants> localizer,
+            IOwnSystemLocalizer<RolesConstants> localizer,
             ILogger logger)
         {
             _roleService = roleService;
-            _logger = logger;
             _localizer = localizer;
+            _logger = logger;
         }
 
         /// <inheritdoc />
-        public async Task<IReadOnlyList<RoleDto>> Handle(GetAllRolesCommand request, CancellationToken cancellationToken)
+        public async Task<RoleDto> Handle(GetRoleByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                return await _roleService.GetAllAsync(cancellationToken);
+                return await _roleService.GetByIdAsync(request.RoleId, cancellationToken);
             }
             catch (BaseException)
             {
@@ -52,7 +51,7 @@ namespace Identity.Infrastructure.Handlers.Queries.Roles
             }
             catch (Exception ex)
             {
-                var message = _localizer[RolesConstants.GettingRolesError].Value;
+                var message = _localizer[RolesConstants.GettingRoleByIdError, request.RoleId].Value;
                 _logger.Error(ex, message);
                 throw new IdentityServiceException(message);
             }

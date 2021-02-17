@@ -30,7 +30,7 @@ namespace Identity.Application.Services.Implementations
         private readonly IHttpContextAccessor _accessor;
         private readonly IMapper _mapper;
         private readonly IValidationLocalizer _localizer;
-        private readonly IdentityAppSettings _settings;
+        private readonly IIdentityAppSettings _settings;
         private readonly ICacheWrapper _cache;
         /// <summary>
         /// Initializes a new instance of the <see cref="UserService"/> class.
@@ -42,7 +42,7 @@ namespace Identity.Application.Services.Implementations
             IHttpContextAccessor accessor,
             IMapper mapper,
             IValidationLocalizer localizer,
-            IdentityAppSettings settings,
+            IIdentityAppSettings settings,
             ICacheWrapper cache)
         {
             _ufw = ufw;

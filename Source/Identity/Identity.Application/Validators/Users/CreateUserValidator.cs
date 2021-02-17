@@ -26,7 +26,7 @@ namespace Identity.Application.Validators.Users
         public CreateUserValidator(
             IUnitOfWork ufw,
             IValidationLocalizer localizer,
-            IdentityAppSettings settings,
+            IIdentityAppSettings settings,
             IConfiguration? configuration)
         {
             _ufw = ufw;

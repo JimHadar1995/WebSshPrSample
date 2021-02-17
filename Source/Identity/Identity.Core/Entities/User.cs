@@ -77,13 +77,13 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Роли пользователя. Многие-ко-многим
         /// </summary>
-        public ICollection<Role> Roles { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
             = new List<Role>();
 
         /// <summary>
         /// Gets or sets the hash history.
         /// </summary>
-        public ICollection<UserPasswordHashHistory> HashHistory { get; set; }
+        public virtual ICollection<UserPasswordHashHistory> HashHistory { get; set; }
             = new List<UserPasswordHashHistory>();
 
         #endregion

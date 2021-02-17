@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Identity.Application.Services;
 using Identity.Core.Entities;
 using Identity.Core.PostgreSql.Contexts;
 using Identity.Core.PostgreSql.Implementations;
@@ -40,6 +41,7 @@ namespace Identity.Infrastructure.Code
                 options.Password.RequiredLength = 1;
             })
                 .AddEntityFrameworkStores<IdentityContext>()
+                .AddUserManager<IdentityUserManager>()
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

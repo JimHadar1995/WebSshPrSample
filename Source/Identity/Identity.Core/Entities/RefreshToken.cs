@@ -29,7 +29,7 @@ namespace Identity.Core.Entities
         /// <summary>
         /// 
         /// </summary>
-        protected RefreshToken()
+        public RefreshToken()
         {
         }
 
@@ -58,7 +58,7 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Пользователь, с которым связан данный refresh token
         /// </summary>
-        public User User { get; set; } = null!;
+        public virtual User User { get; set; } = null!;
 
         #endregion
 

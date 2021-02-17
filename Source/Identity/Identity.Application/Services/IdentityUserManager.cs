@@ -21,7 +21,7 @@ namespace Identity.Application.Services
             IdentityErrorDescriber errors,
             IServiceProvider services,
             ILogger<UserManager<User>> logger,
-            IdentityAppSettings settings)
+            IIdentityAppSettings settings)
             : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
         {
             try

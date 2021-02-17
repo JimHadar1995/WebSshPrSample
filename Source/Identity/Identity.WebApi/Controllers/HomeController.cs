@@ -8,6 +8,8 @@ namespace Identity.WebApi.Controllers
     /// Вспомогательный контроллер для редиректа с серверного на клиентский роутинг
     /// </summary>
     [AllowAnonymous]
+    [ApiController]
+    [Route("api/[controller]")]
     public class HomeController : Controller
     {
         /// <summary>

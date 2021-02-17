@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Identity.WebApi.Code
+namespace Identity.WebApi.Code.Filters
 {
     /// <inheritdoc />
     public class ValidatorActionFilter : IActionFilter
