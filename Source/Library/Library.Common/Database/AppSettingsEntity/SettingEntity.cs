@@ -10,16 +10,16 @@
         /// </summary>
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public string Name { get; init; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Название типа из Reflection
         /// </summary>
-        public string Type { get; init; } 
+        public string Type { get; set; } 
 
         /// <summary>
         /// Значение
         /// </summary>
-        public string Value { get; init; }
+        public string Value { get; set; }
     }
 }

@@ -65,18 +65,17 @@ namespace Identity.Application.Services.Implementations
             user.DatePasswordChanged = DateTimeOffset.UtcNow;
             user.PasswordResetedByAdministrator = false;
 
-            var roleIds = model.RoleIds.Distinct().ToList();
+            await _userManager.CreateAsync(user);
+
+            var roleId = model.RoleId;
             var allRoles = await _roleManager.Roles.ToListAsync(token);
 
-            foreach (var roleId in roleIds)
+            if (allRoles.Any(_ => _.Id == roleId))
             {
-                if (allRoles.Any(_ => roleIds.Contains(_.Id)))
+                var role = await _roleManager.FindByIdAsync(roleId.ToString());
+                if (role != null)
                 {
-                    var role = await _roleManager.FindByIdAsync(roleId.ToString());
-                    if (role != null)
-                    {
-                        await _userManager.AddToRoleAsync(user, role.Name);
-                    }
+                    await _userManager.AddToRoleAsync(user, role.Name);
                 }
             }
 
@@ -90,20 +89,20 @@ namespace Identity.Application.Services.Implementations
             if (curUser == null)
                 throw new EntityNotFoundException();
 
+            curUser = _mapper.Map(model, curUser);
+
             curUser.UpdatedAt = DateTimeOffset.UtcNow;
 
             await _userManager.UpdateAsync(curUser);
 
-            await _userManager.RemoveFromRolesAsync(curUser, curUser.Roles.Select(_ => _.Name).ToList());
-            var roleIds = model.RoleIds.Distinct().ToList();
+            await _userManager.RemoveFromRolesAsync(curUser, curUser.Roles.Select(_ => _.Role.Name).ToList());
+            var roleId = model.RoleId;
             var allRoles = await _roleManager.Roles.ToListAsync(token);
-            foreach (var roleId in roleIds)
+
+            if (allRoles.Any(_ => _.Id == roleId))
             {
-                if (allRoles.Any(_ => roleIds.Contains(_.Id)))
-                {
-                    var role = await _roleManager.FindByIdAsync(roleId.ToString());
-                    await _userManager.AddToRoleAsync(curUser, role.Name);
-                }
+                var role = await _roleManager.FindByIdAsync(roleId.ToString());
+                await _userManager.AddToRoleAsync(curUser, role.Name);
             }
         }
 

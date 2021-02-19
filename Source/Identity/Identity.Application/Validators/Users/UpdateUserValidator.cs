@@ -48,7 +48,7 @@ namespace Identity.Application.Validators.Users
                 .WithMessage(localizer.Message(ValidationConstants.EntityMustBeUniqueTemplate))
                 .WithName(localizer.Name(FieldNameConstants.UserName));
 
-            RuleFor(_ => _.RoleIds)
+            RuleFor(_ => _.RoleId)
                 .NotEmpty()
                 .WithMessage(localizer.Message(ValidationConstants.NotEmptyMessageTemplate))
                 .Must(RoleExists)
@@ -60,9 +60,10 @@ namespace Identity.Application.Validators.Users
         {
             try
             {
-                var userNameSpec = new UserWithNameExistsSpec(model.UserName);
+                var notWithCurId = new UserWithIdExistsSpec(model.Id).Not();
+                var spec = new UserWithNameExistsSpec(model.UserName).And(notWithCurId);
                 return !_ufw.Repository<User>()
-                    .Any(userNameSpec.Not(new UserWithIdExistsSpec(model.Id)));
+                    .Any(spec);
             }
             catch (Exception)
             {
@@ -70,24 +71,12 @@ namespace Identity.Application.Validators.Users
             }
         }
 
-        private bool RoleExists(List<int> roleIds)
+        private bool RoleExists(int roleId)
         {
             try
             {
-                if (!roleIds.Any())
-                    return true;
-
                 var roles = _ufw.Repository<Role>().GetAll();
-                var existsAnyRole = false;
-                foreach (var role in roles)
-                {
-                    if (roleIds.Contains(role.Id))
-                    {
-                        existsAnyRole = true;
-                    }
-                }
-
-                return existsAnyRole;
+                return roles.Any(_ => _.Id == roleId);
             }
             catch
             {
@@ -104,7 +93,7 @@ namespace Identity.Application.Validators.Users
                 return !_ufw.Repository<User>()
                     .Any(defaultUserSpec.And(userWithIdExistsSpec));
             }
-            catch
+            catch(Exception ex)
             {
                 return false;
             }

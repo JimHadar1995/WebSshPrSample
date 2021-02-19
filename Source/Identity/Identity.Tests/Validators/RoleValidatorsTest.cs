@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Identity.Application.Dto.Roles;
-using Identity.Application.Validators.Roles;
 using Identity.Core.Entities;
 using Identity.Tests.Inner;
 using Moq;

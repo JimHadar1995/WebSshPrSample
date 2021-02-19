@@ -73,7 +73,6 @@ namespace Identity.Infrastructure.Handlers.Commands.Users
             catch (Exception ex)
             {
                 _ufw.RollbackTransaction();
-                _logger.Error(ex, _localizer[UsersConstants.ChangePasswordError, _accessor.UserName()!]);
                 throw new IdentityServiceException(_localizer[UsersConstants.ChangePasswordError, _accessor.UserName()!], ex);
             }
 

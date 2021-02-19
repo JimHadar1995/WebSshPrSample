@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Identity.Application.Dto.Users;
 using Identity.Application.Services.Contracts;
 using Identity.Core.Services;
-using Library.Common.Database;
 using MapsterMapper;
 
 namespace Identity.Application.Services.Implementations

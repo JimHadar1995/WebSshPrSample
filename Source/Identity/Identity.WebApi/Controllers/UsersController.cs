@@ -14,7 +14,7 @@ namespace Identity.WebApi.Controllers
     /// <summary>
     /// Контроллер для работы с пользователями
     /// </summary>
-    [JwtBasePrivilege]
+    [JwtBase]
     [Route("api/[controller]")]
     public sealed class UsersController : BaseController
     {

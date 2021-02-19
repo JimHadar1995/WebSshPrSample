@@ -9,27 +9,12 @@ namespace Identity.Core.PostgreSql.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "privileges",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_privileges", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "roles",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     description = table.Column<string>(type: "text", nullable: true),
-                    is_default_role = table.Column<bool>(type: "boolean", nullable: false),
                     name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     normalized_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     concurrency_stamp = table.Column<string>(type: "text", nullable: true)
@@ -88,30 +73,6 @@ namespace Identity.Core.PostgreSql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "privilege_role",
-                columns: table => new
-                {
-                    privileges_id = table.Column<int>(type: "integer", nullable: false),
-                    roles_id = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_privilege_role", x => new { x.privileges_id, x.roles_id });
-                    table.ForeignKey(
-                        name: "fk_privilege_role_privileges_privileges_id",
-                        column: x => x.privileges_id,
-                        principalTable: "privileges",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_privilege_role_roles_roles_id",
-                        column: x => x.roles_id,
-                        principalTable: "roles",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "role_claims",
                 columns: table => new
                 {
@@ -128,30 +89,6 @@ namespace Identity.Core.PostgreSql.Migrations
                         name: "fk_role_claims_roles_role_id",
                         column: x => x.role_id,
                         principalTable: "roles",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "role_user",
-                columns: table => new
-                {
-                    roles_id = table.Column<int>(type: "integer", nullable: false),
-                    users_id = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_role_user", x => new { x.roles_id, x.users_id });
-                    table.ForeignKey(
-                        name: "fk_role_user_roles_roles_id",
-                        column: x => x.roles_id,
-                        principalTable: "roles",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_role_user_users_users_id",
-                        column: x => x.users_id,
-                        principalTable: "users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -273,19 +210,9 @@ namespace Identity.Core.PostgreSql.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_privilege_role_roles_id",
-                table: "privilege_role",
-                column: "roles_id");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_role_claims_role_id",
                 table: "role_claims",
                 column: "role_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_role_user_users_id",
-                table: "role_user",
-                column: "users_id");
 
             migrationBuilder.CreateIndex(
                 name: "role_name_index",
@@ -333,13 +260,7 @@ namespace Identity.Core.PostgreSql.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "privilege_role");
-
-            migrationBuilder.DropTable(
                 name: "role_claims");
-
-            migrationBuilder.DropTable(
-                name: "role_user");
 
             migrationBuilder.DropTable(
                 name: "settings");
@@ -358,9 +279,6 @@ namespace Identity.Core.PostgreSql.Migrations
 
             migrationBuilder.DropTable(
                 name: "user_tokens");
-
-            migrationBuilder.DropTable(
-                name: "privileges");
 
             migrationBuilder.DropTable(
                 name: "roles");

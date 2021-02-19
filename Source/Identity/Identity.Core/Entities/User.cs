@@ -40,12 +40,12 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Время создания пользователя.
         /// </summary>
-        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// Время последнего обновления пользователя
         /// </summary>
-        public DateTimeOffset UpdatedAt { get; set; }
+        public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// Время последней авторизации пользователя
@@ -77,8 +77,8 @@ namespace Identity.Core.Entities
         /// <summary>
         /// Роли пользователя. Многие-ко-многим
         /// </summary>
-        public virtual ICollection<Role> Roles { get; set; }
-            = new List<Role>();
+        public virtual ICollection<UserRole> Roles { get; set; }
+            = new List<UserRole>();
 
         /// <summary>
         /// Gets or sets the hash history.

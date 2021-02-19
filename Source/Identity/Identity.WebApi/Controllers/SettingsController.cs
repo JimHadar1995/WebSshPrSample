@@ -14,7 +14,7 @@ namespace Identity.WebApi.Controllers
     /// Контроллер для работы с настройками модуля
     /// </summary>
     [Route("api/[controller]")]
-    [JwtBasePrivilege]
+    [JwtBase]
     public sealed class SettingsController : BaseController
     {
         /// <summary>

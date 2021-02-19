@@ -14,6 +14,6 @@
         public ISpecification<T> Or(ISpecification<T> other) => new OrSpecification<T>(this, other);
 
         /// <inheritdoc/>
-        public ISpecification<T> Not(ISpecification<T> spec) => new NotSpecification<T>(spec);
+        public ISpecification<T> Not() => new NotSpecification<T>(this);
     }
 }

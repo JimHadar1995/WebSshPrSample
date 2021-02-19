@@ -20,7 +20,7 @@ namespace Identity.Core.PostgreSql.Contexts
         Role,
         int,
         IdentityUserClaim<int>,
-        IdentityUserRole<int>,
+        UserRole,
         IdentityUserLogin<int>,
         IdentityRoleClaim<int>,
         RefreshToken>
@@ -68,11 +68,6 @@ namespace Identity.Core.PostgreSql.Contexts
         public DbSet<SettingEntity> Settings { get; private set; }
 
         /// <summary>
-        /// Привилегии
-        /// </summary>
-        public DbSet<Privilege> Privileges { get; private set; }
-
-        /// <summary>
         /// История паролей
         /// </summary>
         public DbSet<UserPasswordHashHistory> UserPaswordHistories { get; private set; }
@@ -81,6 +76,11 @@ namespace Identity.Core.PostgreSql.Contexts
         /// Refresh tokens
         /// </summary>
         public DbSet<RefreshToken> RefreshTokens { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DbSet<LogEntity> Logs { get; private set; }
 
         #endregion
 

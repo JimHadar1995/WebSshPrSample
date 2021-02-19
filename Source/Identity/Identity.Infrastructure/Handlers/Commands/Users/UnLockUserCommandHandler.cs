@@ -70,7 +70,6 @@ namespace Identity.Infrastructure.Handlers.Commands.Users
             catch (Exception ex)
             {
                 _ufw.RollbackTransaction();
-                _logger.Error(ex, _localizer[UsersConstants.UnLockError, request.UserId]);
                 throw new IdentityServiceException(_localizer[UsersConstants.UnLockError, request.UserId], ex);
             }
             return Unit.Value;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -31,11 +32,9 @@ namespace Library.Common.Database.Specifications
             Expression<Func<T, bool>> leftExpression = _left.ToExpression();
             Expression<Func<T, bool>> rightExpression = _right.ToExpression();
 
-            BinaryExpression andExpression = Expression.AndAlso(
-                leftExpression.Body, rightExpression.Body);
+            var invokedExpr = Expression.Invoke(rightExpression, leftExpression.Parameters.Cast<Expression>());
 
-            return Expression.Lambda<Func<T, bool>>(
-                andExpression, leftExpression.Parameters.Single());
+            return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(leftExpression.Body, invokedExpr), leftExpression.Parameters);
         }
     }
 }

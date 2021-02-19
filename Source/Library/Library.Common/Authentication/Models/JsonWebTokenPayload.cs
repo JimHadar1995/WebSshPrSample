@@ -31,11 +31,6 @@ namespace Library.Common.Authentication.Models
         public Dictionary<string, string> Claims { get; set; } = new();
 
         /// <summary>
-        /// Привилегии
-        /// </summary>
-        public string[] Privileges { get; set; } = { };
-
-        /// <summary>
         /// Необходим ли сброс пароля.
         /// </summary>
         public bool NeedResetPassword { get; init; }

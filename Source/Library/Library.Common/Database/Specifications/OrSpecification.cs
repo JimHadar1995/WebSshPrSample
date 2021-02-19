@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 
 namespace Library.Common.Database.Specifications
 {
+    //https://assets.ctfassets.net/9n3x4rtjlya6/4icgRTX3Mcqs8SkkWm0SKe/6c88c397a918811a225690865d3e861f/Max_Arshinov._Expression_Trees.pdf
     public class OrSpecification<T> : Specification<T>, ICompositeSpecification<T>
         where T : class, IAggregateRoot
     {
@@ -27,11 +28,8 @@ namespace Library.Common.Database.Specifications
             Expression<Func<T, bool>> leftExpression = _left.ToExpression();
             Expression<Func<T, bool>> rightExpression = _right.ToExpression();
 
-            BinaryExpression andExpression = Expression.Or(
-                leftExpression.Body, rightExpression.Body);
-
-            return Expression.Lambda<Func<T, bool>>(
-                andExpression, leftExpression.Parameters.Single());
+            var invokedExpr = Expression.Invoke(rightExpression, leftExpression.Parameters.Cast<Expression>());
+            return Expression.Lambda<Func<T, bool>>(Expression.OrElse(leftExpression.Body, invokedExpr), leftExpression.Parameters);
         }
     }
 }

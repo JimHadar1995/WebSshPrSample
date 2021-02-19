@@ -35,6 +35,6 @@ namespace Identity.Application.Dto.Users
         /// Идентификаторы ролей пользователя
         /// </summary>
         [Required]
-        public List<int> RoleIds { get; init; }
+        public int RoleId { get; init; }
     }
 }

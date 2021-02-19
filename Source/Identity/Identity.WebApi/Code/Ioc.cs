@@ -9,6 +9,7 @@ using FluentValidation.AspNetCore;
 using Identity.Application.Internal;
 using Identity.Application.Services.Implementations;
 using Identity.Infrastructure.Code;
+using Identity.Infrastructure.Helpers;
 using Identity.WebApi.Code.Filters;
 using Library.Common.Authentication;
 using Library.Common.Jaeger;
@@ -57,7 +58,7 @@ namespace Identity.WebApi.Code
 
             services.AddJwt();
 
-            //services.InitializeData().Wait();
+            services.InitializeData().Wait();
 
             //services.AddHostedService<IdentityHostedService>();
 

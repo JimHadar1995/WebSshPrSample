@@ -27,7 +27,7 @@ namespace Library.Common.Database.Specifications
         {
             var specExpr = _spec.ToExpression();
             var param = specExpr.Parameters;
-            var body = Expression.Not(specExpr);
+            var body = Expression.Not(specExpr.Body);
             var expr = Expression.Lambda<Func<T, bool>>(body, param);
             return expr;
         }

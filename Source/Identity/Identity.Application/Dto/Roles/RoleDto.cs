@@ -22,15 +22,5 @@ namespace Identity.Application.Dto.Roles
         /// Описание
         /// </summary>
         public string Description { get; init; }
-
-        /// <summary>
-        /// Является ли ролью по умолчанию
-        /// </summary>
-        public bool IsDefaultRole { get; init; }
-
-        /// <summary>
-        /// Список привилегий
-        /// </summary>
-        public List<PrivilegeDto> Privilieges { get; init; }
     }
 }

@@ -25,9 +25,8 @@ namespace Identity.Application.Internal
             config.NewConfig<PasswordPolicyDto, PasswordPolicy>();
 
             config.NewConfig<User, UserDto>()
-                .Map(_ => _.Roles, o => o.Roles);
+                .Map(_ => _.Role, o => o.Roles.First().Role);
             config.NewConfig<Role, RoleDto>();
-            config.NewConfig<Privilege, PrivilegeDto>();
 
             config.NewConfig<UserAddDto, User>()
                 .Map(_ => _.UserName, _ => _.UserName)

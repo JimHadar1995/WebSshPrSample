@@ -15,7 +15,7 @@ namespace Identity.WebApi.Controllers
     /// Логи модуля
     /// </summary>
     [Route("api/[controller]")]
-    [JwtBasePrivilege]
+    [JwtBase]
     public sealed class LogsController : BaseController
     {
         public LogsController(IHttpContextAccessor accessor, IMediator mediator)

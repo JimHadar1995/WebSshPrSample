@@ -12,7 +12,7 @@ namespace Identity.WebApi.Controllers
     /// 
     /// </summary>
     [ApiController]
-    public class BaseController : ControllerBase
+    public abstract class BaseController : ControllerBase
     {
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Identity.WebApi.Controllers
         /// Является ли залогиненный пользователь администратором.
         /// </summary>
         protected bool IsAdmin
-            => User.IsInRole(Role.FullAdministratorRole);
+            => User.IsInRole(Role.Administrator);
 
         /// <summary>
         /// Идентификатор залогиненного пользователя.

@@ -116,5 +116,10 @@
         /// При получении настроек пользователя произошла ошибка
         /// </summary>
         public const string GettingUserAppSettingsError = "An error occurred while retrieving user settings";
+
+        /// <summary>
+        /// При авторизации пользователя произошла ошибка
+        /// </summary>
+        public const string LoginByPassError = "An error occurred while authorizing the user";
     }
 }

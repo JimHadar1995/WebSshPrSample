@@ -96,7 +96,7 @@ namespace Library.Common.Database.AppSettingsEntity
                 if (setting != null)
                 {
                     // 6 update existing value
-                    setting = setting with { Value = value };
+                    setting.Value = value;
                     await repository.UpdateAsync(setting);
                 }
                 else

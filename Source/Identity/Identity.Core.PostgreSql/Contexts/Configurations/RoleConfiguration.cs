@@ -10,9 +10,6 @@ namespace Identity.Core.PostgreSql.Contexts.Configurations
         {
             builder.Property(_ => _.Id).ValueGeneratedOnAdd();
             builder.ToTable("roles");
-
-            builder.HasMany(_ => _.Privileges)
-                .WithMany(_ => _.Roles);
         }
     }
 }

@@ -50,8 +50,6 @@ namespace Library.Common.Authentication
 
             var roles = claims[CustomClaims.RolesClaim].Split(';');
 
-            var privileges = claims[CustomClaims.PrivilegesClaim].Split(';');
-
             var needResetPassword = claims.FirstOrDefault(_ => _.Key == nameof(JsonWebTokenPayload.NeedResetPassword)).Value;
 
             return new JsonWebTokenPayload
@@ -61,7 +59,6 @@ namespace Library.Common.Authentication
                 Expires = jwt.ValidTo.ToTimestamp(),
                 Claims = claims,
                 Roles = roles,
-                Privileges = privileges,
                 NeedResetPassword = Convert.ToBoolean(needResetPassword),
                 TokenId = claims[CustomClaims.TokenIdClaim]
             };

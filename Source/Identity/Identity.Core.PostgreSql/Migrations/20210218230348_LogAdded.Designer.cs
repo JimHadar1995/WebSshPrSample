@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Identity.Core.PostgreSql.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20210217210051_Initial")]
-    partial class Initial
+    [Migration("20210218230348_LogAdded")]
+    partial class LogAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,28 +21,56 @@ namespace Identity.Core.PostgreSql.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("Identity.Core.Entities.Privilege", b =>
+            modelBuilder.Entity("Identity.Core.Entities.LogEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("bigint")
                         .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("date");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("EntityType")
+                        .HasColumnType("text")
+                        .HasColumnName("entity_type");
+
+                    b.Property<string>("Exception")
+                        .HasColumnType("text")
+                        .HasColumnName("exception");
+
+                    b.Property<string>("Level")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("name");
+                        .HasColumnName("level");
+
+                    b.Property<string>("Logger")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("logger");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("text")
+                        .HasColumnName("message");
+
+                    b.Property<string>("Stacktrace")
+                        .HasColumnType("text")
+                        .HasColumnName("stacktrace");
+
+                    b.Property<string>("Thread")
+                        .HasColumnType("text")
+                        .HasColumnName("thread");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text")
+                        .HasColumnName("username");
 
                     b.HasKey("Id")
-                        .HasName("pk_privileges");
+                        .HasName("pk_logs");
 
-                    b.ToTable("privileges");
+                    b.ToTable("logs");
                 });
 
             modelBuilder.Entity("Identity.Core.Entities.RefreshToken", b =>
@@ -105,10 +133,6 @@ namespace Identity.Core.PostgreSql.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
-
-                    b.Property<bool>("IsDefaultRole")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_default_role");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -279,6 +303,25 @@ namespace Identity.Core.PostgreSql.Migrations
                     b.ToTable("user_hash_histories");
                 });
 
+            modelBuilder.Entity("Identity.Core.Entities.UserRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
+
+                    b.HasKey("UserId", "RoleId")
+                        .HasName("pk_user_roles");
+
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_user_roles_role_id");
+
+                    b.ToTable("user_roles");
+                });
+
             modelBuilder.Entity("Library.Common.Database.AppSettingsEntity.SettingEntity", b =>
                 {
                     b.Property<string>("Name")
@@ -384,63 +427,6 @@ namespace Identity.Core.PostgreSql.Migrations
                     b.ToTable("user_logins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
-                        .HasColumnName("user_id");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("role_id");
-
-                    b.HasKey("UserId", "RoleId")
-                        .HasName("pk_user_roles");
-
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_user_roles_role_id");
-
-                    b.ToTable("user_roles");
-                });
-
-            modelBuilder.Entity("PrivilegeRole", b =>
-                {
-                    b.Property<int>("PrivilegesId")
-                        .HasColumnType("integer")
-                        .HasColumnName("privileges_id");
-
-                    b.Property<int>("RolesId")
-                        .HasColumnType("integer")
-                        .HasColumnName("roles_id");
-
-                    b.HasKey("PrivilegesId", "RolesId")
-                        .HasName("pk_privilege_role");
-
-                    b.HasIndex("RolesId")
-                        .HasDatabaseName("ix_privilege_role_roles_id");
-
-                    b.ToTable("privilege_role");
-                });
-
-            modelBuilder.Entity("RoleUser", b =>
-                {
-                    b.Property<int>("RolesId")
-                        .HasColumnType("integer")
-                        .HasColumnName("roles_id");
-
-                    b.Property<int>("UsersId")
-                        .HasColumnType("integer")
-                        .HasColumnName("users_id");
-
-                    b.HasKey("RolesId", "UsersId")
-                        .HasName("pk_role_user");
-
-                    b.HasIndex("UsersId")
-                        .HasDatabaseName("ix_role_user_users_id");
-
-                    b.ToTable("role_user");
-                });
-
             modelBuilder.Entity("Identity.Core.Entities.RefreshToken", b =>
                 {
                     b.HasOne("Identity.Core.Entities.User", null)
@@ -466,6 +452,27 @@ namespace Identity.Core.PostgreSql.Migrations
                         .HasConstraintName("fk_user_hash_history_id_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Identity.Core.Entities.UserRole", b =>
+                {
+                    b.HasOne("Identity.Core.Entities.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_user_roles_roles_role_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Identity.Core.Entities.User", "User")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_user_roles_users_user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
 
                     b.Navigation("User");
                 });
@@ -500,60 +507,16 @@ namespace Identity.Core.PostgreSql.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Identity.Core.Entities.Role", b =>
                 {
-                    b.HasOne("Identity.Core.Entities.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("fk_user_roles_roles_role_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Identity.Core.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("fk_user_roles_users_user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PrivilegeRole", b =>
-                {
-                    b.HasOne("Identity.Core.Entities.Privilege", null)
-                        .WithMany()
-                        .HasForeignKey("PrivilegesId")
-                        .HasConstraintName("fk_privilege_role_privileges_privileges_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Identity.Core.Entities.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .HasConstraintName("fk_privilege_role_roles_roles_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RoleUser", b =>
-                {
-                    b.HasOne("Identity.Core.Entities.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .HasConstraintName("fk_role_user_roles_roles_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Identity.Core.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .HasConstraintName("fk_role_user_users_users_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Identity.Core.Entities.User", b =>
                 {
                     b.Navigation("HashHistory");
+
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }

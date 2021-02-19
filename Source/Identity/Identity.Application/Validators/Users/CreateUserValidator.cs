@@ -50,7 +50,7 @@ namespace Identity.Application.Validators.Users
                 .WithMessage(localizer.Message(ValidationConstants.EntityMustBeUniqueTemplate))
                 .WithName(localizer.Name(FieldNameConstants.UserName));
 
-            RuleFor(_ => _.RoleIds)
+            RuleFor(_ => _.RoleId)
                 .NotEmpty()
                 .WithMessage(localizer.Message(ValidationConstants.NotEmptyMessageTemplate))
                 .Must(RoleExists)
@@ -83,32 +83,21 @@ namespace Identity.Application.Validators.Users
             try
             {
                 var spec = new UserWithNameExistsSpec(userName);
-                return _ufw.Repository<User>()
-                    .Any(new NotSpecification<User>(spec));
+                return !_ufw.Repository<User>()
+                    .Any(spec);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
         }
 
-        private bool RoleExists(List<int> roleIds)
+        private bool RoleExists(int roleId)
         {
             try
             {
-                if (!roleIds.Any())
-                    return true;
                 var roles = _ufw.Repository<Role>().GetAll();
-                var existsAnyRole = false;
-                foreach (var role in roles)
-                {
-                    if (roleIds.Contains(role.Id))
-                    {
-                        existsAnyRole = true;
-                    }
-                }
-
-                return existsAnyRole;
+                return roles.Any(_ => _.Id == roleId);
             }
             catch
             {

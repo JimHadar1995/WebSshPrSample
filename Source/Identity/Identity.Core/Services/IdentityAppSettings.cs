@@ -59,6 +59,8 @@ namespace Identity.Core.Services
         {
             var settings = new T();
 
+            settings.Load(_settingsRepo).Wait();
+
             return settings;
         }
     }

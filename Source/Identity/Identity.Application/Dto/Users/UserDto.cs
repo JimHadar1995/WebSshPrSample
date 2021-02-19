@@ -65,6 +65,6 @@ namespace Identity.Application.Dto.Users
         /// <summary>
         /// Роли пользователя
         /// </summary>
-        public List<RoleDto> Roles { get; init; }
+        public RoleDto Role { get; init; }
     }
 }

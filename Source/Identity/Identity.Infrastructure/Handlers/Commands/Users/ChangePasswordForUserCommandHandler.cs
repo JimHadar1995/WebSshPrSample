@@ -78,7 +78,6 @@ namespace Identity.Infrastructure.Handlers.Commands.Users
             {
                 string message = _localizer[UsersConstants.ChangePasswordError, model.UserId].Value;
                 _ufw.RollbackTransaction();
-                _logger.Error(ex, message);
                 throw new IdentityServiceException(message, ex);
             }
             return Unit.Value;

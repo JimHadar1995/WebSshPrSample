@@ -6,7 +6,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using Identity.Application.Dto.Users;
 using Identity.Application.Services.Contracts;
@@ -18,7 +17,6 @@ using Identity.ResourceManager.Constants;
 using Identity.ResourceManager.Validation;
 using Library.Common.Authentication;
 using Library.Common.Authentication.Models;
-using Library.Common.Database;
 using Library.Common.Extensions;
 using Library.Common.Localization;
 using Library.Logging.Contracts;
@@ -100,7 +98,7 @@ namespace Identity.Application.Services.Implementations
                 Expires = expires.DatetimeToUnixTimeStamp(),
                 UserId = user.Id,
                 UserName = user.UserName,
-                Roles = user.Roles.Select(_ => _.Name).ToArray(),
+                Roles = user.Roles.Select(_ => _.Role.Name).ToArray(),
                 NeedResetPassword = await IsNeedResetPassword(user.UserName),
                 TokenId = jwt.Claims.First(_ => _.Type == CustomClaims.TokenIdClaim).Value
             };
@@ -178,18 +176,9 @@ namespace Identity.Application.Services.Implementations
 
         private async Task<List<Claim>> GetUserClaims(User user)
         {
-            var (roles, privileges) = GetPrivileges(user);
+            var role = user.Roles.First();
 
             var needResetPassword = await IsNeedResetPassword(user.UserName);
-
-            List<Claim> foundClaims = new List<Claim>();
-            foreach (var role in roles)
-            {
-                var r = await _roleManager.FindByIdAsync(role.Id.ToString());
-                foundClaims.AddRange(await _roleManager.GetClaimsAsync(r));
-            }
-
-            var rolesString = roles.Select(_ => _.Name).ToList();
 
             var claims = new List<Claim>
             {
@@ -198,38 +187,17 @@ namespace Identity.Application.Services.Implementations
                 new Claim(JwtRegisteredClaimNames.Iat,
                     _jwtOptions.IssuedAt.DatetimeToUnixTimeStamp().ToString(CultureInfo.CurrentCulture),
                     ClaimValueTypes.Integer64),
-                new Claim(ClaimTypes.Role, roles.FirstOrDefault()!.Name),
+                new Claim(ClaimTypes.Role, role.Role.Name),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.CurrentCulture)),
-                new Claim(CustomClaims.RolesClaim, string.Join(';', rolesString)),
-                new Claim(CustomClaims.PrivilegesClaim, string.Join(';', privileges)),
                 new Claim(nameof(JsonWebTokenPayload.NeedResetPassword), JsonSerializer.Serialize(needResetPassword)),
                 new Claim(CustomClaims.TokenIdClaim, Guid.NewGuid().ToString())
             };
-            claims.AddRange(foundClaims);
 
             return claims;
         }
 
-        private (List<Role> roles, List<string> privileges) GetPrivileges(User user)
-        {
-            var roles = user.Roles.ToList();
-
-            List<string> privileges = new List<string>(roles.Count * 3);
-
-            foreach (var role in roles)
-            {
-                foreach (var rolePrivilege in role.Privileges)
-                {
-                    privileges.Add(rolePrivilege.Name);
-                }
-            }
-
-            return (roles, privileges);
-        }
-
         private async Task<bool> IsNeedResetPassword(string userName)
         {
-
             var admin = await _userManager.FindByNameAsync(userName);
             var passwordPolicy = _settings.PasswordPolicy;
             int maxExpireTime = passwordPolicy.RequiredMaxExpireTime;

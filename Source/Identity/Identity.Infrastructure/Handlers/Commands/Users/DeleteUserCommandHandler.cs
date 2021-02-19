@@ -79,8 +79,6 @@ namespace Identity.Infrastructure.Handlers.Commands.Users
             catch (Exception ex)
             {
                 _ufw.RollbackTransaction();
-                _logger.Error(ex,
-                    _localizer[UsersConstants.UserDeleteError, request.UserId]);
                 throw new IdentityServiceException(_localizer[UsersConstants.UserDeleteError, request.UserId], ex);
             }
 
