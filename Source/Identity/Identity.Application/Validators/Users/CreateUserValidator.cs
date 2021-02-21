@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using FluentValidation;
 using Identity.Application.Dto.Users;
@@ -9,7 +8,6 @@ using Identity.Core.Entities;
 using Identity.Core.Services;
 using Identity.ResourceManager.Validation;
 using Library.Common.Database;
-using Library.Common.Database.Specifications;
 using Library.Common.Localization;
 using Library.Common.ValidationHelpers;
 using Microsoft.Extensions.Configuration;

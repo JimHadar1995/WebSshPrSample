@@ -1,12 +1,10 @@
 ﻿using System;
-using Identity.Application.Commands.Users;
 using Identity.Application.Dto.Users;
 using Identity.Application.Validators.Users;
 using Identity.Tests.Inner;
-using NUnit.Framework.Constraints;
 using Xunit;
 
-namespace SC.Identity.Tests.Validators
+namespace Identity.Tests.Validators
 {
     /// <summary>
     /// 
@@ -38,7 +36,7 @@ namespace SC.Identity.Tests.Validators
         public void MaxFailedAccessAttemptsFieldTest()
         {
             AssertFalseValidator(_ => _ with { MaxFailedAccessAttempts = 2 });
-            AssertFalseValidator(_ => _ with { MaxFailedAccessAttempts = 9});
+            AssertFalseValidator(_ => _ with { MaxFailedAccessAttempts = 9 });
         }
 
         [Fact(DisplayName = "Тест на поле 'Время блокировки пользователя'")]
