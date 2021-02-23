@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <Platforms>AnyCPU;x64</Platforms>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <Platforms>AnyCPU;x64</Platforms>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition="Exists('..\..\.editorconfig')">
+        <AdditionalFiles Include="..\..\.editorconfig" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\WebSsh.Application\WebSsh.Application.csproj" />
+      <ProjectReference Include="..\WebSsh.Core.PostgreSql\WebSsh.Core.PostgreSql.csproj" />
+    </ItemGroup>
+
+</Project>

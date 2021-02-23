@@ -1,0 +1,57 @@
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Library.Common.Exceptions;
+using Library.Common.Localization;
+using Library.Logging.Contracts;
+using MediatR;
+using WebSsh.Application.Dto.Users;
+using WebSsh.Application.Queries.Users;
+using WebSsh.Application.Services.Contracts;
+using WebSsh.Core.Exceptions;
+using WebSsh.ResourceManager.Constants;
+
+namespace WebSsh.Infrastructure.Handlers.Queries.Users
+{
+    /// <summary>
+    /// Обработчик запроса получения пользователя по его идентификатору.
+    /// </summary>
+
+    public sealed class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserDto>
+    {
+        private readonly IUserService _userService;
+        private readonly IOwnSystemLocalizer<UsersConstants> _localizer;
+        private readonly ILogger _logger;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetUserByIdQueryHandler"/> class.
+        /// </summary>
+        public GetUserByIdQueryHandler(
+            IUserService userService,
+            IOwnSystemLocalizer<UsersConstants> localizer,
+            ILogger logger)
+        {
+            _userService = userService;
+            _logger = logger;
+            _localizer = localizer;
+        }
+
+        /// <inheritdoc/>
+        public async Task<UserDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await _userService.GetAsync(request.UserId, cancellationToken)
+                    .ConfigureAwait(false);
+            }
+            catch (BaseException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new IdentityServiceException(_localizer[UsersConstants.GettingUserAppSettingsError, request.UserId].Value, ex);
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <Platforms>AnyCPU;x64</Platforms>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('..\..\.editorconfig')">
+        <AdditionalFiles Include="..\..\.editorconfig" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="9.5.0" />
+        <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="5.1.1" />
+        <PackageReference Include="Mapster" Version="7.1.3" />
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.0" />
+        <PackageReference Include="Mapster.EFCore" Version="1.1.0" />
+        <PackageReference Include="MediatR" Version="9.0.0" />
+        <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Library.Logging\Library.Logging.csproj" />
+      <ProjectReference Include="..\WebSsh.Core\WebSsh.Core.csproj" />
+      <ProjectReference Include="..\WebSsh.ResourceManager\WebSsh.ResourceManager.csproj" />
+    </ItemGroup>
+
+</Project>
