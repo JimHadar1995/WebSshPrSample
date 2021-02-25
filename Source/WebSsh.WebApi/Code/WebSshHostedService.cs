@@ -31,7 +31,7 @@ namespace WebSsh.WebApi.Code
         /// <inheritdoc />
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine("Voltron server started");
+            Console.WriteLine("Server started");
 
             _appLifetime.ApplicationStarted.Register(OnStarted);
             _appLifetime.ApplicationStopping.Register(OnStopping);
@@ -45,7 +45,7 @@ namespace WebSsh.WebApi.Code
         /// <inheritdoc />
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine("Voltron server stopped");
+            Console.WriteLine("Server stopped");
 
             _cts.Cancel();
 

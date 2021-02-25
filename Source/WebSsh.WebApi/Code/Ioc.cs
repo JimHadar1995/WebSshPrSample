@@ -27,6 +27,7 @@ namespace WebSsh.WebApi.Code
     {
         internal static void InitializeDiServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddHostedService<WebSshHostedService>();
             services.ConfigureInfrastructureServices(configuration);
             services.ConfigureAppServices(configuration);
             services.Configure<KafkaConnection>(configuration.GetSection(nameof(KafkaConnection)));
@@ -55,6 +56,8 @@ namespace WebSsh.WebApi.Code
             services.ConfigureSwagger();
 
             services.AddJwt();
+
+            services.AddSignalR();
 
             services.InitializeData().Wait();
         }

@@ -1,4 +1,5 @@
-﻿using Library.Logging.Common;
+﻿using System;
+using Library.Logging.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using WebSsh.Terminal.Hubs;
 using WebSsh.WebApi.Code;
 using WebSsh.WebApi.Code.Middlewares;
 
@@ -65,6 +67,11 @@ namespace WebSsh.WebApi
                 endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller}/{action}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller}/{action=Index}/{id?}");
                 endpoints.MapFallbackToController("Index", "Home");
+
+                endpoints.MapHub<SshTerminalHub>("/hubs/sshTerminal", opt =>
+                {
+                    opt.LongPolling.PollTimeout = TimeSpan.FromMinutes(1);
+                });
             });
         }
     }

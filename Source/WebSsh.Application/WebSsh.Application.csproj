@@ -26,6 +26,11 @@
       <ProjectReference Include="..\Library.Logging\Library.Logging.csproj" />
       <ProjectReference Include="..\WebSsh.Core\WebSsh.Core.csproj" />
       <ProjectReference Include="..\WebSsh.ResourceManager\WebSsh.ResourceManager.csproj" />
+      <ProjectReference Include="..\WebSsh.Terminal\WebSsh.Terminal.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Queries\Ssh\" />
     </ItemGroup>
 
 </Project>

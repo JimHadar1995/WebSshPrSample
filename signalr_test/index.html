@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Efros ACS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+</head>
+
+<script src="signalr.js">
+	
+</script>
+
+<script type="text/javascript">
+	Object.defineProperty(WebSocket, 'OPEN', { value: 1, });
+	const connection = new signalR.HubConnectionBuilder()
+    .withUrl("http://localhost:5000/hubs/sshTerminal", {
+		accessTokenFactory: () =>  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJEZWZhdWx0QWRtaW4iLCJqdGkiOiIyMzRlN2FmYS04NzU0LTRmOWItYTczZS00NGVhM2JhMGU1NDQiLCJpYXQiOjE2MTQyODYzMTIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluaXN0cmF0b3IiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJOZWVkUmVzZXRQYXNzd29yZCI6InRydWUiLCJ0b2tlbl9pZCI6IjdkNDBiYTdmLTIzOTUtNDEzMi1iODY2LWMyYjE1N2Q2N2RjMiIsIm5iZiI6MTYxNDI4NjMxMSwiZXhwIjoxNjE0MjkzNTExLCJpc3MiOiJpZGVudGl0eS1zZXJ2aWNlIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MDAwLyJ9.srJ1XODDkQvtkJ9olrpfS8AhYjM4r6LPwFdgOaAmCKA',
+		skipNegotiation: true,
+		transport: signalR.HttpTransportType.WebSockets,
+	})
+    .configureLogging(signalR.LogLevel.Debug)
+	.withAutomaticReconnect()
+    .build();
+	
+	connection.start().then(function () { 
+		console.log("connected");
+	})
+	.catch(err => console.log('Error while establishing connection :(', err));
+	
+	connection.onclose((e) => {
+      console.log('Connection closed!', e);
+    });
+
+	connection.on('SendTerminalResult', (data) => {
+		console.log(data);
+	});
+
+	<!-- connection.start().then(function () { -->
+		<!-- console.log("connected"); -->
+	<!-- }); -->
+</script>
+
+<body>
+  <div id="root"></div>
+</body>
+
+</html>

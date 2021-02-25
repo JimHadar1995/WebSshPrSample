@@ -65,7 +65,7 @@ namespace WebSsh.Infrastructure.Handlers.Commands.Users
             catch (Exception ex)
             {
                 _ufw.RollbackTransaction();
-                throw new IdentityServiceException(_localizer[UsersConstants.UserDeleteError, request.UserId], ex);
+                throw new WebSshServiceException(_localizer[UsersConstants.UserDeleteError, request.UserId], ex);
             }
 
             return Unit.Value;

@@ -49,7 +49,7 @@ namespace WebSsh.Infrastructure.Handlers.Queries.Users
             }
             catch (Exception ex)
             {
-                throw new IdentityServiceException(_localizer[UsersConstants.GettingTreeUsersError].Value, ex);
+                throw new WebSshServiceException(_localizer[UsersConstants.GettingTreeUsersError].Value, ex);
             }
         }
     }

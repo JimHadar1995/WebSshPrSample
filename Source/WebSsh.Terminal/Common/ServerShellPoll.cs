@@ -44,7 +44,7 @@ namespace WebSsh.Terminal.Common
                         {
                             shell.Value.RemoveInActiveSessions();
 
-                            if (shell.Value.Sessions.Count == 0)
+                            if (shell.Value.Sessions.IsEmpty)
                             {
                                 _shellPoolDictionary.TryRemove(shell.Key, out _);
                             }

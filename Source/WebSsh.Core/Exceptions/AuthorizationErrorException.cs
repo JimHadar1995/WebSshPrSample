@@ -3,7 +3,7 @@
     /// <summary>
     /// 
     /// </summary>
-    public sealed class AuthorizationErrorException : IdentityServiceException
+    public sealed class AuthorizationErrorException : WebSshServiceException
     {
         public AuthorizationErrorException(string? message) : base(message)
         {

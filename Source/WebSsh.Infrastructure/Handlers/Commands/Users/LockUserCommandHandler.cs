@@ -62,7 +62,7 @@ namespace Identity.Infrastructure.Handlers.Commands.Users
             catch (Exception ex)
             {
                 _ufw.RollbackTransaction();
-                throw new IdentityServiceException(_localizer[UsersConstants.LockError, request.UserId], ex);
+                throw new WebSshServiceException(_localizer[UsersConstants.LockError, request.UserId], ex);
             }
             return Unit.Value;
         }

@@ -78,7 +78,7 @@ namespace WebSsh.Infrastructure.Handlers.Commands.Users
             {
                 var message = _localizer[UsersConstants.ChangePasswordError, model.UserId].Value;
                 _ufw.RollbackTransaction();
-                throw new IdentityServiceException(message, ex);
+                throw new WebSshServiceException(message, ex);
             }
             return Unit.Value;
         }

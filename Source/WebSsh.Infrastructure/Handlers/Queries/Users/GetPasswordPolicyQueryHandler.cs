@@ -47,7 +47,7 @@ namespace Identity.Infrastructure.Handlers.Queries.Users
             }
             catch (Exception ex)
             {
-                throw new IdentityServiceException(_localizer[UsersConstants.GettingPasswordPolicyError].Value, ex);
+                throw new WebSshServiceException(_localizer[UsersConstants.GettingPasswordPolicyError].Value, ex);
             }
         }
     }

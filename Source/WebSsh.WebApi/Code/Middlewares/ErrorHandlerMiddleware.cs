@@ -40,13 +40,7 @@ namespace WebSsh.WebApi.Code.Middlewares
                 switch (error)
                 {
                     case EntityNotFoundException:
-                        response.OnStarting(() =>
-                        {
-
-                            return Task.CompletedTask;
-                        });
                         response.StatusCode = StatusCodes.Status404NotFound;
-                        //await response.WriteAsync("");
                         break;
                     case AuthorizationErrorException authorizationError:
                         {
@@ -61,7 +55,7 @@ namespace WebSsh.WebApi.Code.Middlewares
                             LoggingHelper.Default.Error(acsEx, message);
 
                             response.StatusCode = StatusCodes.Status400BadRequest;
-                            await response.WriteAsync(acsEx.Message);
+                            await response.WriteAsync(message);
                             break;
                         }
                     default:

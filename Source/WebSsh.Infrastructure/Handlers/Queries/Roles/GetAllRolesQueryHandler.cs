@@ -52,7 +52,7 @@ namespace WebSsh.Infrastructure.Handlers.Queries.Roles
             }
             catch (Exception ex)
             {
-                throw new IdentityServiceException(_localizer[RolesConstants.GettingRolesError].Value, ex);
+                throw new WebSshServiceException(_localizer[RolesConstants.GettingRolesError].Value, ex);
             }
         }
     }

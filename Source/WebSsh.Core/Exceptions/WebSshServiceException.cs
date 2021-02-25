@@ -6,15 +6,15 @@ namespace WebSsh.Core.Exceptions
     /// <summary>
     /// 
     /// </summary>
-    public class IdentityServiceException : BaseException
+    public class WebSshServiceException : BaseException
     {
         /// <inheritdoc />
-        public IdentityServiceException(string? message) : base(message)
+        public WebSshServiceException(string? message) : base(message)
         {
         }
 
         /// <inheritdoc />
-        public IdentityServiceException(string? message, Exception? innerException)
+        public WebSshServiceException(string? message, Exception? innerException)
             : base(message, innerException)
         {
 

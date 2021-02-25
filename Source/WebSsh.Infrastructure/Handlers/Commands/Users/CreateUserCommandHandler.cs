@@ -57,7 +57,7 @@ namespace WebSsh.Infrastructure.Handlers.Commands.Users
             catch (Exception ex)
             {
                 _ufw.RollbackTransaction();
-                throw new IdentityServiceException(_localizer[UsersConstants.UserCreatedError, model.UserName], ex);
+                throw new WebSshServiceException(_localizer[UsersConstants.UserCreatedError, model.UserName], ex);
             }
         }
     }

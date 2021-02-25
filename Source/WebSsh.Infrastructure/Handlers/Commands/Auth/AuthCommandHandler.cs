@@ -40,7 +40,7 @@ namespace WebSsh.Infrastructure.Handlers.Commands.Auth
             }
             catch (Exception ex)
             {
-                throw new IdentityServiceException(_localizer[UsersConstants.LoginByPassError], ex);
+                throw new WebSshServiceException(_localizer[UsersConstants.LoginByPassError], ex);
             }
         }
     }

@@ -27,6 +27,7 @@
     <ItemGroup>
       <ProjectReference Include="..\WebSsh.Application\WebSsh.Application.csproj" />
       <ProjectReference Include="..\WebSsh.Core.PostgreSql\WebSsh.Core.PostgreSql.csproj" />
+      <ProjectReference Include="..\WebSsh.Terminal\WebSsh.Terminal.csproj" />
     </ItemGroup>
 
 </Project>

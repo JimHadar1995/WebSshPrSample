@@ -38,7 +38,7 @@ namespace WebSsh.Infrastructure.Handlers.Queries.Logs
             }
             catch (Exception ex)
             {
-                throw new IdentityServiceException(_localizer[LogsConstants.GettingLogsError], ex);
+                throw new WebSshServiceException(_localizer[LogsConstants.GettingLogsError], ex);
             }
         }
     }

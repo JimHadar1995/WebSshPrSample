@@ -64,7 +64,7 @@ namespace Identity.Infrastructure.Handlers.Commands.Users
             catch (Exception ex)
             {
                 _ufw.RollbackTransaction();
-                throw new IdentityServiceException(_localizer[UsersConstants.UserUpdateError, model.UserName], ex);
+                throw new WebSshServiceException(_localizer[UsersConstants.UserUpdateError, model.UserName], ex);
             }
 
             return Unit.Value;

@@ -119,7 +119,7 @@ namespace WebSsh.Application.Services.Implementations
 
             if (!passwordForReset)
             {
-                throw new IdentityServiceException(_localizer.Message(ValidationConstants.NewPasswordHasBeenUsedBefore));
+                throw new WebSshServiceException(_localizer.Message(ValidationConstants.NewPasswordHasBeenUsedBefore));
             }
 
             string oldHash = curUser.PasswordHash;
@@ -151,7 +151,7 @@ namespace WebSsh.Application.Services.Implementations
                 throw new EntityNotFoundException();
 
             if (curUser.IsDefaultUser)
-                throw new IdentityServiceException(_localizer.Message(ValidationConstants.DefaultUserLockIsProhibited));
+                throw new WebSshServiceException(_localizer.Message(ValidationConstants.DefaultUserLockIsProhibited));
 
             if (curUser.Status != UserStatus.Locked)
             {
@@ -207,7 +207,7 @@ namespace WebSsh.Application.Services.Implementations
 
             if (curUser.IsDefaultUser)
             {
-                throw new IdentityServiceException(_localizer.Message(ValidationConstants.RemovingDefaultUserIsProhibited));
+                throw new WebSshServiceException(_localizer.Message(ValidationConstants.RemovingDefaultUserIsProhibited));
             }
 
             await _userManager.DeleteAsync(curUser).ConfigureAwait(false);
