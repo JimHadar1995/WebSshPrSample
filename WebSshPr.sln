@@ -16,10 +16,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Common.Tests", "Sou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests.Common", "Source\Library\Tests.Common\Tests.Common.csproj", "{ED8FA800-51A9-41BE-8D39-BF08EDE6B86C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Common.SourceGenerators", "Source\Library\Library.Common.SourceGenerators\Library.Common.SourceGenerators.csproj", "{0682B873-449E-4FFF-AD42-35D42F8B11B0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Common.SourceGenerators.TestConsole", "Source\Library\Library.Common.SourceGenerators.TestConsole\Library.Common.SourceGenerators.TestConsole.csproj", "{67C7B884-0C61-46D2-9BE7-FDBA45C208DE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Logging", "Source\Library.Logging\Library.Logging.csproj", "{56329BB6-8618-467C-BFC9-51ECE6D61D1C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSsh.Infrastructure", "Source\WebSsh.Infrastructure\WebSsh.Infrastructure.csproj", "{25152FA5-9F5A-475B-B6F4-24AC95765FCE}"
@@ -36,7 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSsh.ResourceManager", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSsh.Tests", "Source\WebSsh.Tests\WebSsh.Tests.csproj", "{4669ABC8-0223-41EE-882A-3BD62521DF74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSsh.Terminal", "Source\WebSsh.Terminal\WebSsh.Terminal.csproj", "{9BD1FE83-B844-4B49-B85B-EF226A5093CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSsh.Terminal", "Source\WebSsh.Terminal\WebSsh.Terminal.csproj", "{9BD1FE83-B844-4B49-B85B-EF226A5093CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,22 +66,6 @@ Global
 		{ED8FA800-51A9-41BE-8D39-BF08EDE6B86C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED8FA800-51A9-41BE-8D39-BF08EDE6B86C}.Release|x64.ActiveCfg = Release|Any CPU
 		{ED8FA800-51A9-41BE-8D39-BF08EDE6B86C}.Release|x64.Build.0 = Release|Any CPU
-		{0682B873-449E-4FFF-AD42-35D42F8B11B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0682B873-449E-4FFF-AD42-35D42F8B11B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0682B873-449E-4FFF-AD42-35D42F8B11B0}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{0682B873-449E-4FFF-AD42-35D42F8B11B0}.Debug|x64.Build.0 = Debug|Any CPU
-		{0682B873-449E-4FFF-AD42-35D42F8B11B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0682B873-449E-4FFF-AD42-35D42F8B11B0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0682B873-449E-4FFF-AD42-35D42F8B11B0}.Release|x64.ActiveCfg = Release|Any CPU
-		{0682B873-449E-4FFF-AD42-35D42F8B11B0}.Release|x64.Build.0 = Release|Any CPU
-		{67C7B884-0C61-46D2-9BE7-FDBA45C208DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67C7B884-0C61-46D2-9BE7-FDBA45C208DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67C7B884-0C61-46D2-9BE7-FDBA45C208DE}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{67C7B884-0C61-46D2-9BE7-FDBA45C208DE}.Debug|x64.Build.0 = Debug|Any CPU
-		{67C7B884-0C61-46D2-9BE7-FDBA45C208DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67C7B884-0C61-46D2-9BE7-FDBA45C208DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67C7B884-0C61-46D2-9BE7-FDBA45C208DE}.Release|x64.ActiveCfg = Release|Any CPU
-		{67C7B884-0C61-46D2-9BE7-FDBA45C208DE}.Release|x64.Build.0 = Release|Any CPU
 		{56329BB6-8618-467C-BFC9-51ECE6D61D1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56329BB6-8618-467C-BFC9-51ECE6D61D1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56329BB6-8618-467C-BFC9-51ECE6D61D1C}.Debug|x64.ActiveCfg = Debug|x64

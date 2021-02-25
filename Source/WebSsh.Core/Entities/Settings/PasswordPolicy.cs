@@ -7,7 +7,7 @@ namespace WebSsh.Core.Entities.Settings
     /// <summary>
     /// Настройки парольных политик.
     /// </summary>
-    public sealed record PasswordPolicy : SettingsBase
+    public sealed class PasswordPolicy : SettingsBase
     {
         /// <summary>
         /// Минимальная длина пароля

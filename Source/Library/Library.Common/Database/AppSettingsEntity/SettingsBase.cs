@@ -14,7 +14,7 @@ namespace Library.Common.Database.AppSettingsEntity
     /// https://developingsoftware.com/how-to-store-application-settings-in-aspnet-mvc-using-entity-framework/
     /// </remarks>
     /// </summary>
-    public abstract record SettingsBase
+    public abstract class SettingsBase
     {
         // 1 name and properties cached in readonly fields
         private readonly string _name;
