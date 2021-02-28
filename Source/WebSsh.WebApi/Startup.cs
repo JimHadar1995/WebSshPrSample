@@ -34,12 +34,17 @@ namespace WebSsh.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseWebAssemblyDebugging();
+
+                app.UseBlazorFrameworkFiles();
+
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebSsh.WebApi v1"));
             }
 
             app.UseRouting();
             app.UseFileServer();
+            app.UseStaticFiles();
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -66,7 +71,8 @@ namespace WebSsh.WebApi
             {
                 endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller}/{action}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller}/{action=Index}/{id?}");
-                endpoints.MapFallbackToController("Index", "Home");
+                //endpoints.MapFallbackToController("Index", "Home");
+                endpoints.MapFallbackToFile("index.html");
 
                 endpoints.MapHub<SshTerminalHub>("/hubs/sshTerminal", opt =>
                 {
