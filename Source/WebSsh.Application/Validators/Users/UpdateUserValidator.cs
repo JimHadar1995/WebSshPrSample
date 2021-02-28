@@ -4,10 +4,10 @@ using FluentValidation;
 using Library.Common.Database;
 using Library.Common.Localization;
 using Library.Common.ValidationHelpers;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Application.Specifications.Users;
 using WebSsh.Core.Entities;
 using WebSsh.ResourceManager.Validation;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Validators.Users
 {

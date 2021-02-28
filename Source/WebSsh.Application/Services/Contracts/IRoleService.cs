@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using WebSsh.Application.Dto.Roles;
+using WebSsh.Shared.Dto.Roles;
 
 namespace WebSsh.Application.Services.Contracts
 {

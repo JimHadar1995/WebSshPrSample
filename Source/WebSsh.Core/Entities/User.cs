@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Library.Common.Database;
 using Library.Common.Types.Attributes;
 using Microsoft.AspNetCore.Identity;
-using WebSsh.Core.Enums;
+using WebSsh.Enums.Enums;
 
 namespace WebSsh.Core.Entities
 {

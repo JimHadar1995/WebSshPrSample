@@ -5,12 +5,12 @@ using Library.Common.Database;
 using Library.Common.Localization;
 using Library.Common.ValidationHelpers;
 using Microsoft.Extensions.Configuration;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Application.Specifications.Users;
 using WebSsh.Application.Validators.ValidatorHelpers;
 using WebSsh.Core.Entities;
 using WebSsh.Core.Services;
 using WebSsh.ResourceManager.Validation;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Validators.Users
 {

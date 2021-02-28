@@ -5,8 +5,8 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebSsh.Application.Commands.Users;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Application.Queries.Users;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.WebApi.Controllers
 {

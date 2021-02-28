@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebSsh.Application.Commands.Auth;
-using WebSsh.Application.Dto.Users;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.WebApi.Controllers
 {

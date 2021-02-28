@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Library.Common.Types.Paging;
-using WebSsh.Application.Dto;
 using WebSsh.Application.Dto.Filters;
+using WebSsh.Shared.Dto;
 
 namespace WebSsh.Application.Services.Contracts
 {

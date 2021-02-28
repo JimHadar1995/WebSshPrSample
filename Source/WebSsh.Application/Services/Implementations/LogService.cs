@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using Library.Common.Database;
 using Library.Common.Types.Paging;
 using MapsterMapper;
-using WebSsh.Application.Dto.Filters;
-using WebSsh.Application.Dto;
 using WebSsh.Application.Services.Contracts;
 using WebSsh.Core.Entities;
 using WebSsh.Application.Specifications.Logs;
+using WebSsh.Shared.Dto;
+using WebSsh.Application.Dto.Filters;
 
 namespace WebSsh.Application.Services.Implementations
 {

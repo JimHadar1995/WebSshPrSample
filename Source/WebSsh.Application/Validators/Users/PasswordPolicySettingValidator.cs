@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Library.Common.Localization;
-using WebSsh.Application.Dto.Users;
 using WebSsh.ResourceManager.Validation;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Validators.Users
 {

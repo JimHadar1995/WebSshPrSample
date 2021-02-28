@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Library.Common.Authentication.Models;
-using WebSsh.Application.Dto.Users;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Services.Contracts
 {

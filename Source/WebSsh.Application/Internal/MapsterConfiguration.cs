@@ -2,10 +2,10 @@
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
-using WebSsh.Application.Dto.Roles;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Core.Entities;
 using WebSsh.Core.Entities.Settings;
+using WebSsh.Shared.Dto.Roles;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Internal
 {

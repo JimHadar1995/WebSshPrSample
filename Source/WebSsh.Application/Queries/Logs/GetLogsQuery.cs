@@ -1,7 +1,7 @@
 ﻿using Library.Common.Types.Paging;
 using MediatR;
-using WebSsh.Application.Dto;
 using WebSsh.Application.Dto.Filters;
+using WebSsh.Shared.Dto;
 
 namespace WebSsh.Application.Queries.Logs
 {

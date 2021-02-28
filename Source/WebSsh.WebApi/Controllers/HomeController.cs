@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.IO;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +14,13 @@ namespace WebSsh.WebApi.Controllers
     [Route("api/[controller]")]
     public class HomeController : Controller
     {
+        public HomeController(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
+
+        private readonly IWebHostEnvironment _env;
+
         /// <summary>
         /// Редирект на index.html
         /// </summary>
@@ -19,6 +28,9 @@ namespace WebSsh.WebApi.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Index()
-            => RedirectPermanent("/swagger");
+        //=> RedirectPermanent("/swagger");
+        {
+            return PhysicalFile(Path.Combine(_env.WebRootPath, "index.html"), "text/html");
+        }
     }
 }

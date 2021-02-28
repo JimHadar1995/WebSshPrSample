@@ -8,8 +8,8 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebSsh.Application.Commands.Ssh;
-using WebSsh.Application.Dto.Ssh;
 using WebSsh.Application.Queries.Ssh;
+using WebSsh.Shared.Dto.Ssh;
 using WebSsh.Terminal.Models;
 
 namespace WebSsh.WebApi.Controllers

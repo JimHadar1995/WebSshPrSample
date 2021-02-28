@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MapsterMapper;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Application.Services.Contracts;
 using WebSsh.Core.Services;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Services.Implementations
 {

@@ -5,9 +5,9 @@ using Library.Common.Types.Paging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebSsh.Application.Dto;
 using WebSsh.Application.Dto.Filters;
 using WebSsh.Application.Queries.Logs;
+using WebSsh.Shared.Dto;
 
 namespace WebSsh.WebApi.Controllers
 {

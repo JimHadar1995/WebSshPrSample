@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Library.Common.Localization;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using WebSsh.Application.Dto.Ssh;
 using WebSsh.ResourceManager.Constants;
+using WebSsh.Shared.Dto.Ssh;
 using WebSsh.Terminal.Common;
 using WebSsh.Terminal.Exceptions;
 

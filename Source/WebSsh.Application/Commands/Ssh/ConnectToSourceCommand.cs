@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using WebSsh.Application.Dto.Ssh;
+using WebSsh.Shared.Dto.Ssh;
 using WebSsh.Terminal.Models;
 
 namespace WebSsh.Application.Commands.Ssh

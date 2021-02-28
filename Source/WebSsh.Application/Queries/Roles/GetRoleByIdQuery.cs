@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using WebSsh.Application.Dto.Roles;
+using WebSsh.Shared.Dto.Roles;
 
 namespace WebSsh.Application.Queries.Roles
 {

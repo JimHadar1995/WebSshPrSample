@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Library.Common.Exceptions;
-using WebSsh.Application.Dto.Users;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Services.Contracts
 {

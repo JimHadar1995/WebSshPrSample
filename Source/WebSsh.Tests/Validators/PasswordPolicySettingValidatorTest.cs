@@ -1,6 +1,6 @@
 ﻿using System;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Application.Validators.Users;
+using WebSsh.Shared.Dto.Users;
 using WebSsh.Tests.Inner;
 using Xunit;
 

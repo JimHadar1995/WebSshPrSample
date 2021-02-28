@@ -8,12 +8,13 @@
         <Platforms>AnyCPU;x64</Platforms>
     </PropertyGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Library\Library.Common\Library.Common.csproj" />
-    </ItemGroup>
-
     <ItemGroup Condition="Exists('..\..\.editorconfig')">
         <AdditionalFiles Include="..\..\.editorconfig" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Library\Library.Common\Library.Common.csproj" />
+      <ProjectReference Include="..\WebSsh.Enums\WebSsh.Enums.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Library.Common.Types.Paging;
+using WebSsh.Shared.Dto;
 
 namespace WebSsh.Application.Dto.Filters
 {

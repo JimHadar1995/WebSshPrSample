@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using MediatR;
-using WebSsh.Application.Dto.Ssh;
+using WebSsh.Shared.Dto.Ssh;
 
 namespace WebSsh.Application.Queries.Ssh
 {

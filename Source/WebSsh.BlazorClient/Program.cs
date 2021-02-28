@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.BlazorClient
 {

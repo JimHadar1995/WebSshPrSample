@@ -5,11 +5,11 @@ using Library.Common.Localization;
 using Library.Common.Types.Paging;
 using Library.Logging.Contracts;
 using MediatR;
-using WebSsh.Application.Dto;
 using WebSsh.Application.Queries.Logs;
 using WebSsh.Application.Services.Contracts;
 using WebSsh.Core.Exceptions;
 using WebSsh.ResourceManager.Constants;
+using WebSsh.Shared.Dto;
 
 namespace WebSsh.Infrastructure.Handlers.Queries.Logs
 {

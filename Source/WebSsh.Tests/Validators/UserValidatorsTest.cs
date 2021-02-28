@@ -5,11 +5,11 @@ using Library.Common.Database;
 using Library.Common.Database.Specifications;
 using Moq;
 using Tests.Common;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Application.Validators.Users;
 using WebSsh.Core.Entities;
 using WebSsh.Core.Entities.Settings;
 using WebSsh.Core.Services;
+using WebSsh.Shared.Dto.Users;
 using WebSsh.Tests.Inner;
 using Xunit;
 

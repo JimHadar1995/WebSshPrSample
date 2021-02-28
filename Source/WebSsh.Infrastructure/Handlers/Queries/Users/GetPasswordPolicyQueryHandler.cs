@@ -5,11 +5,11 @@ using Library.Common.Exceptions;
 using Library.Common.Localization;
 using Library.Logging.Contracts;
 using MediatR;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Application.Queries.Users;
 using WebSsh.Application.Services.Contracts;
 using WebSsh.Core.Exceptions;
 using WebSsh.ResourceManager.Constants;
+using WebSsh.Shared.Dto.Users;
 
 namespace Identity.Infrastructure.Handlers.Queries.Users
 {

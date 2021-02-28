@@ -1,6 +1,6 @@
 ﻿using Library.Common.Authentication.Models;
 using MediatR;
-using WebSsh.Application.Dto.Users;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Commands.Auth
 {

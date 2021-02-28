@@ -1,6 +1,22 @@
 ﻿@page "/"
+@using WebSsh.BlazorClient
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
-xzcxzcdsdasda
+
+<p>@Test()</p>
+
+<button @onclick="OnClick"></button>
+
+@code{
+    private int Test()
+    {
+        return 100;
+    }
+
+    private void OnClick()
+    {
+        Console.WriteLine("test click");
+    }
+}

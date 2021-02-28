@@ -4,11 +4,11 @@ using Library.Common.Localization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Application.Validators.ValidatorHelpers;
 using WebSsh.Core.Entities;
 using WebSsh.Core.Services;
 using WebSsh.ResourceManager.Validation;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Validators.Users
 {

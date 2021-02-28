@@ -5,8 +5,8 @@ using Library.Common.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebSsh.Application.Dto.Roles;
 using WebSsh.Application.Queries.Roles;
+using WebSsh.Shared.Dto.Roles;
 
 namespace WebSsh.WebApi.Controllers
 {

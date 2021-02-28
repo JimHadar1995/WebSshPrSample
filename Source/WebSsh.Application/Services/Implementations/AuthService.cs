@@ -15,14 +15,14 @@ using Library.Logging.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using WebSsh.Application.Dto.Users;
 using WebSsh.Application.Services.Contracts;
 using WebSsh.Core.Entities;
-using WebSsh.Core.Enums;
 using WebSsh.Core.Exceptions;
 using WebSsh.Core.Services;
+using WebSsh.Enums.Enums;
 using WebSsh.ResourceManager.Constants;
 using WebSsh.ResourceManager.Validation;
+using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.Application.Services.Implementations
 {
