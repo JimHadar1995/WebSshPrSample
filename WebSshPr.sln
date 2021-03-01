@@ -38,13 +38,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{C201D1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{4F8E80BA-A05D-4D51-A734-C0AEEEEE44C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSsh.BlazorClient", "Source\WebSsh.BlazorClient\WebSsh.BlazorClient.csproj", "{5F141F34-B9D7-4F3C-9D24-454AEC7C350D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSsh.BlazorClient", "Source\WebSsh.BlazorClient\WebSsh.BlazorClient.csproj", "{5F141F34-B9D7-4F3C-9D24-454AEC7C350D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSsh.Shared", "Source\WebSsh.Shared\WebSsh.Shared.csproj", "{D700893F-61F8-4FD9-9C17-06493F9E0AC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSsh.Shared", "Source\WebSsh.Shared\WebSsh.Shared.csproj", "{D700893F-61F8-4FD9-9C17-06493F9E0AC1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{650AEADD-F8BD-4626-A56B-6DD1700AEEA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSsh.Enums", "Source\WebSsh.Enums\WebSsh.Enums.csproj", "{EFB8D775-D4DF-4020-9027-2E2F874EC3F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSsh.Enums", "Source\WebSsh.Enums\WebSsh.Enums.csproj", "{EFB8D775-D4DF-4020-9027-2E2F874EC3F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

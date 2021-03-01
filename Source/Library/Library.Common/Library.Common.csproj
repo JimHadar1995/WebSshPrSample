@@ -24,6 +24,10 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Description>Общие классы / утилиты для работы сервисов.</Description>
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <PlatformTarget>AnyCPU</PlatformTarget>
+    </PropertyGroup>
     <ItemGroup Condition="Exists('..\..\..\.editorconfig')">
         <AdditionalFiles Include="..\..\..\.editorconfig" />
     </ItemGroup>
