@@ -1,11 +1,68 @@
 ﻿@page "/login"
 
+@using WebSsh.Shared.Dto.Users
+
+@inject IAuthService authService
+@inject MessageService _message
+@inject NotificationService _notice
+
 <Layout Class="login-layout">
     <Layout Class="form-layout">
-        <h1>Вход</h1>
+        <Form Loading="@Loading"
+              Model="@_model"
+              LabelColSpan="8"
+              ValidateOnChange="@auto"
+              @ref="@_form">
+            <h3>Вход</h3>
+            <FormItem Label="User name">
+                <Input @bind-Value="@context.UserName" />
+            </FormItem>
+            <FormItem Label="Password">
+                <InputPassword @bind-Value="@context.Password"/>
+            </FormItem>
+            <FormItem>
+                <Button Type="@ButtonType.Primary"
+                        HtmlType="submit"
+                        Style="max-width:200px;float: right;"
+                        OnClick="@OnSubmit">
+                    Login
+                </Button>
+            </FormItem>
+        </Form>
     </Layout>
 </Layout>
 
 @code {
+    private LoginByPassCredentials _model { get; set; } = new();
 
+    private bool Loading { get; set; }
+
+    private bool auto = true;
+
+    AntDesign.Form<LoginByPassCredentials> _form;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await authService.Logout();
+    }
+
+    private async void OnSubmit()
+    {
+        if (!_form.Validate())
+            return;
+        Loading = true;
+        try
+        {
+            var res = await authService.LoginByPass(_model);
+        }
+        catch (Exception ex)
+        {
+
+        }
+        finally
+        {
+            Loading = false;
+            StateHasChanged();
+        }
+    }
 }

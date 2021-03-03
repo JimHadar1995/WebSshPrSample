@@ -9,5 +9,10 @@
         /// Jwt token
         /// </summary>
         public const string AuthToken = nameof(AuthToken);
+
+        /// <summary>
+        /// Auth data
+        /// </summary>
+        public const string AuthData = nameof(AuthData);
     }
 }

@@ -36,6 +36,18 @@ namespace WebSsh.BlazorClient.Internal.Auth
                 return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
             }
 
+            var parsedClaims = ParseClaimsFromJwt(savedToken);
+
+            var expire = Convert.ToInt64(parsedClaims.First(_ => _.Type.Contains("exp")).Value);
+
+            var expireDateTime = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddSeconds(expire);
+
+            if(expireDateTime < DateTime.UtcNow)
+            {
+                MarkUserAsLoggedOut();
+                return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()));
+            }
+
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(savedToken), "jwt")));
         }
 

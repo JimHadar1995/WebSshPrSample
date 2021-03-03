@@ -6,18 +6,18 @@ namespace WebSsh.Shared.Dto.Users
     /// <summary>
     /// 
     /// </summary>
-    public record LoginByPassCredentials
+    public class LoginByPassCredentials
     {
         /// <summary>
         /// Имя пользователя.
         /// </summary>
         [Required]
-        public string UserName { get; init; }
+        public string UserName { get; set; }
 
         /// <summary>
         /// Пароль пользователя.
         /// </summary>
         [Required]
-        public string Password { get; init; }
+        public string Password { get; set; }
     }
 }

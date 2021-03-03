@@ -6,7 +6,7 @@ namespace WebSsh.BlazorClient.Internal.Models.Auth
     /// <summary>
     /// 
     /// </summary>
-    public class AuthSuccessResult
+    public class AuthData
     {
         /// <summary>
         /// Gets or sets the expires.

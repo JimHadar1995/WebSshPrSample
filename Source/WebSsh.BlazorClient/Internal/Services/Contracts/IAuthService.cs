@@ -14,5 +14,11 @@ namespace WebSsh.BlazorClient.Internal.Services.Contracts
         /// <param name="credentials"></param>
         /// <returns></returns>
         Task<bool> LoginByPass(LoginByPassCredentials credentials);
+
+        /// <summary>
+        /// Выход из системы
+        /// </summary>
+        /// <returns></returns>
+        Task Logout();
     }
 }

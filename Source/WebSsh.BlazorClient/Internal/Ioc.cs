@@ -29,22 +29,18 @@ namespace WebSsh.BlazorClient.Internal
                 {
                     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
                 }
+            })
+                .AddHttpMessageHandler<WebSshDelegatingHandler>();
 
-                var localStorage = sp.GetRequiredService<ILocalStorageService>();
-
-                var authToken = await localStorage.GetItem<string>(LocalStorageConstants.AuthToken);
-
-                if (!string.IsNullOrWhiteSpace(authToken))
-                {
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
-                }
-            });
-
-            builder.Services.AddScoped<ILocalStorageService, LocalStorageService>();
+            builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
+            builder.Services.AddScoped<IMessageService, MessageService>();
 
             builder.Services.AddAuthorizationCore();
 
             builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+
+            builder.Services.AddTransient<WebSshDelegatingHandler>();
+
             builder.Services.AddScoped<IAuthService, AuthService>();
         }
     }

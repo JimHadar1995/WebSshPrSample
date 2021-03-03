@@ -6,6 +6,22 @@
     background-color: white !important;
 }
 
+.form-layout{
+    vertical-align: central;
+}
+
+.form-layout .ant-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+
+h3 {
+    text-align: center;
+}
+
 .main-layout-pre-load {
     display: flex;
     justify-content: center;
