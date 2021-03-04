@@ -1,5 +1,15 @@
-﻿@inherits LayoutComponentBase
+﻿@inherits EmptyLayout
 
 <Layout Class="main-layout">
+    <MenuLeftSideBar/>
     @Body
 </Layout>
+
+@code{
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+}

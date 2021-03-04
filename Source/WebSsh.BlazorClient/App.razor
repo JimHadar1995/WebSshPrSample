@@ -1,6 +1,6 @@
 @using Microsoft.AspNetCore.Components.Authorization
 
-<Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">    
+<Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
     <Found Context="routeData">
         <AuthorizeRouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)">
             <NotAuthorized>
@@ -10,19 +10,11 @@
         <AntContainer />
     </Found>
     <NotFound>
-        <LayoutView Layout="@typeof(MainLayout)">
-            <p>Sorry, there's nothing at this address.</p>
-        </LayoutView>
+        <RedirectTo />
     </NotFound>
 </Router>
 
 @code {
     [CascadingParameter] private Task<AuthenticationState> authenticationStateTask { get; set; }
 
-    private async void LogUserAuthenticationState()
-    {
-        var authState = await authenticationStateTask;
-        Console.WriteLine(authState.User);
-        
-    }
 }

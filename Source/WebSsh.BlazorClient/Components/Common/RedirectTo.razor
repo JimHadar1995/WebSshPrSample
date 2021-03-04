@@ -1,0 +1,12 @@
+﻿@inject NavigationManager Manager
+
+@code {
+
+    [Parameter]
+    public string RedirectPageUrl { get; set; } = PageUrlConstants.Index;
+
+    protected override void OnInitialized()
+    {
+        Manager.NavigateTo(RedirectPageUrl);
+    }
+}

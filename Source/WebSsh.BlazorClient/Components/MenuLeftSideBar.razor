@@ -1,0 +1,39 @@
+﻿@inherits AuthWithRoleSupportComponentBase
+
+@inject IMenuService menuService
+@inject IAuthService authService
+@inject NavigationManager navigationManager
+
+
+<Sider Collapsible="false" Collapsed="false">
+    @if (_menuItems.Any())
+    {
+        <Menu Theme="MenuTheme.Dark"
+              @ref="Menu"
+              Mode="MenuMode.Inline">
+            @foreach (var item in _menuItems)
+            {
+                <MenuItem Key="@item.Title"
+                          RouterLink="@item.RouterLink"
+                          RouterMatch="@item.NavLinkMatch">
+                    @item.Title
+                </MenuItem>
+            }
+        </Menu>
+    }
+</Sider>
+
+@code{
+    private readonly string[] _defaultSelectedKeys = new string[] { "1" };
+
+    private IReadOnlyList<WebSsh.BlazorClient.Internal.Models.MenuItem> _menuItems = new List<WebSsh.BlazorClient.Internal.Models.MenuItem>();
+
+    private Menu? Menu;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _menuItems = await menuService.GetItems();
+    }
+
+}

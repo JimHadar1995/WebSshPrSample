@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,11 +34,17 @@ namespace WebSsh.BlazorClient.Internal
             builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
             builder.Services.AddScoped<IMessageService, MessageService>();
 
-            builder.Services.AddAuthorizationCore();
+            builder.Services.AddAuthorizationCore(config =>
+            {
+                config.AddPolicy(Policies.IsAdmin, Policies.IsAdminPolicy());
+                config.AddPolicy(Policies.IsReadonly, Policies.IsReadonlyPolicy());
+            });
 
             builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 
             builder.Services.AddTransient<WebSshDelegatingHandler>();
+
+            builder.Services.AddScoped<IMenuService, MenuService>();
 
             builder.Services.AddScoped<IAuthService, AuthService>();
         }
