@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Library.Common.Exceptions;
 using WebSsh.Shared.Dto.Users;
 
-namespace WebSsh.Application.Services.Contracts
+namespace WebSsh.Shared.Contracts
 {
     /// <summary>
     /// Сервис работы с пользователями
@@ -17,7 +16,7 @@ namespace WebSsh.Application.Services.Contracts
         /// <param name="model">The model.</param>
         /// <param name="token"></param>
         /// <returns></returns>
-        Task<int> CreateAsync(UserAddDto model, CancellationToken token);
+        Task<int> CreateAsync(UserAddDto model, CancellationToken token = default);
 
         /// <summary>
         /// Обновление информации о пользователе
@@ -25,8 +24,7 @@ namespace WebSsh.Application.Services.Contracts
         /// <param name="model">The model.</param>
         /// <param name="token"></param>
         /// <returns>Асинхронная операция</returns>
-        /// <exception cref="EntityNotFoundException"></exception>
-        Task UpdateAsync(UserUpdateDto model, CancellationToken token);
+        Task UpdateAsync(UserUpdateDto model, CancellationToken token = default);
 
         /// <summary>
         /// Изменение пароля пользователя.
@@ -36,7 +34,6 @@ namespace WebSsh.Application.Services.Contracts
         /// <param name="passwordForReset">Осуществляется сброс пароля. В таком случае нет проверок по истории паролей.</param>
         /// <param name="token"></param>
         /// <returns></returns>
-        /// <exception cref="EntityNotFoundException"></exception>
         Task ChangePasswordAsync(
             string userName,
             string newPassword,
@@ -49,8 +46,7 @@ namespace WebSsh.Application.Services.Contracts
         /// <param name="userId">Идентификатор пользователя для блокировки.</param>
         /// <param name="token"></param>
         /// <returns>Асинхронная операция.</returns>
-        /// <exception cref="EntityNotFoundException"></exception>
-        Task LockAsync(int userId, CancellationToken token);
+        Task LockAsync(int userId, CancellationToken token = default);
 
         /// <summary>
         /// Разблокировка пользователя.
@@ -58,8 +54,7 @@ namespace WebSsh.Application.Services.Contracts
         /// <param name="userId">Идентификатор пользователя для разблокировки.</param>
         /// <param name="token"></param>
         /// <returns>Асинхронная операция.</returns>
-        /// <exception cref="EntityNotFoundException"></exception>
-        Task UnLockAsync(int userId, CancellationToken token);
+        Task UnLockAsync(int userId, CancellationToken token = default);
 
         /// <summary>
         /// Получение пользователя по его идентификатору.
@@ -67,14 +62,13 @@ namespace WebSsh.Application.Services.Contracts
         /// <param name="id">Идентификатор пользователя.</param>
         /// <param name="token"></param>
         /// <returns>Пользователь.</returns>
-        /// <exception cref="EntityNotFoundException"></exception>
-        Task<UserDto> GetAsync(int id, CancellationToken token);
+        Task<UserDto> GetAsync(int id, CancellationToken token = default);
 
         /// <summary>
         /// Получение всех пользователей.
         /// </summary>
         /// <returns></returns>
-        Task<IReadOnlyList<UserDto>> GetAllAsync(CancellationToken token);
+        Task<IReadOnlyList<UserDto>> GetAllAsync(CancellationToken token = default);
 
         /// <summary>
         /// Удаление пользователя по его идентификатору
@@ -82,7 +76,7 @@ namespace WebSsh.Application.Services.Contracts
         /// <param name="id">Идентификатор пользователя для удаления.</param>
         /// <param name="token"></param>
         /// <returns>Асинхронная операция.</returns>
-        Task DeleteAsync(int id, CancellationToken token);
+        Task DeleteAsync(int id, CancellationToken token = default);
 
     }
 }

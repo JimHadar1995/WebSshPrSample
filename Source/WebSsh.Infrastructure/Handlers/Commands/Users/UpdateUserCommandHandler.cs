@@ -7,10 +7,10 @@ using Library.Common.Localization;
 using Library.Logging.Contracts;
 using MediatR;
 using WebSsh.Application.Commands.Users;
-using WebSsh.Application.Services.Contracts;
 using WebSsh.Core.Exceptions;
 using WebSsh.Infrastructure.Handlers.Commands.Users;
 using WebSsh.ResourceManager.Constants;
+using WebSsh.Shared.Contracts;
 
 namespace Identity.Infrastructure.Handlers.Commands.Users
 {

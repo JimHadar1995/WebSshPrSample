@@ -11,7 +11,7 @@ using WebSsh.BlazorClient.Internal.Models.Auth;
 using WebSsh.BlazorClient.Internal.Services.Contracts;
 using WebSsh.Shared.Dto.Users;
 
-namespace WebSsh.BlazorClient.Internal.Services.Implementations
+namespace WebSsh.BlazorClient.Internal.Services.Implementations.Api
 {
     /// <inheritdoc/>
     public class AuthService : IAuthService
@@ -40,11 +40,6 @@ namespace WebSsh.BlazorClient.Internal.Services.Implementations
         {
             using var client = _factory.CreateClient(HttpClients.WebSshClient);
 
-            foreach(var acc in client.DefaultRequestHeaders.AcceptLanguage)
-            {
-                string val = acc.Value;
-            }
-
             using var response = await client.PostAsync(UrlConstants.Login, credentials.AsStringContent());
 
             if (!response.IsSuccessStatusCode)
@@ -56,7 +51,7 @@ namespace WebSsh.BlazorClient.Internal.Services.Implementations
                 return false;
             }
 
-            AuthData result = (await response.Content.ReadFromJsonAsync<AuthData>(JsonExtensions.JsonSerializerOptions))!;
+            var result = (await response.Content.ReadFromJsonAsync<AuthData>(JsonExtensions.JsonSerializerOptions))!;
 
             await _localStorage.SetItem(LocalStorageConstants.AuthToken, result.AccessToken);
 
@@ -78,7 +73,8 @@ namespace WebSsh.BlazorClient.Internal.Services.Implementations
         }
 
         /// <inheritdoc/>
-        public async Task<bool> IsInRoles(string[] roles) {
+        public async Task<bool> IsInRoles(string[] roles)
+        {
             if (roles == null || !roles.Any())
                 return false;
 
@@ -93,7 +89,7 @@ namespace WebSsh.BlazorClient.Internal.Services.Implementations
         /// <inheritdoc/>
         public async Task<AuthData?> GetAuthData()
         {
-            return await _localStorage.GetItem<AuthData>(LocalStorageConstants.AuthData);            
+            return await _localStorage.GetItem<AuthData>(LocalStorageConstants.AuthData);
         }
 
         /// <inheritdoc/>

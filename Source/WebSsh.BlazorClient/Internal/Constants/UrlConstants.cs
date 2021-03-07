@@ -9,5 +9,10 @@
         /// 
         /// </summary>
         public const string Login = "/api/Auth/login";
+
+        /// <summary>
+        /// Пользователи
+        /// </summary>
+        public const string Users = "/api/users";
     }
 }

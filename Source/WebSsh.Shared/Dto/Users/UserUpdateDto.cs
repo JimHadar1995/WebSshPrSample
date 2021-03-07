@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WebSsh.Shared.Dto.Users
+﻿namespace WebSsh.Shared.Dto.Users
 {
     /// <summary>
     /// 
@@ -10,7 +8,6 @@ namespace WebSsh.Shared.Dto.Users
         /// <summary>
         /// Идентификатор пользователя.
         /// </summary>
-        [Required]
         public int Id { get; init; }
     }
 }

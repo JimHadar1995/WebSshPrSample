@@ -1,0 +1,66 @@
+﻿@page "/users"
+
+@inject IUserService userService
+@inject NavigationManager navigationManager
+
+@using WebSsh.Shared.Dto.Users
+@using WebSsh.BlazorClient.Internal.Extensions
+
+@inherits AuthWithRoleSupportComponentBase
+
+<h3>Users</h3>
+
+<Table DataSource="@_users"
+       Loading="loading"
+       PageSize="20">
+    <Column Field="@context.UserName" Title="User name">
+        @if (!context.IsDefaultUser)
+        {
+            <a @onclick="@(e => OnChangeUserName(context))">@context.UserName</a>
+        }
+        else{
+            <p>@context.UserName</p>
+        }
+    </Column>
+    <Column Field="@context.Description" Title="Description" />
+    <Column Field="@context.Email" Title="Email" />
+    <Column Field="@context.Role" Title="Role">
+        @if (context.Role != null)
+        {
+            <span>@context.Role.Name</span>
+        }
+    </Column>
+    <Column Field="@context.CreatedAt" Title="Date created" />
+    <Column Field="@context.UpdatedAt" Title="Date updated" />
+    <Column Field="@context.Status" Title="Status">
+        <span>@context.Status.ToStringStatus()</span>
+    </Column>
+</Table>
+
+@code {
+    private protected override string Roles => RoleConstants.Administrator;
+
+    private IEnumerable<UserDto> _users = new List<UserDto>();
+    private bool loading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            loading = true;
+            _users = await userService.GetAllAsync();
+            loading = false;
+        }
+        catch
+        {
+            loading = false;
+        }
+
+        await base.OnInitializedAsync();
+    }
+
+    private async void OnChangeUserName(UserDto data)
+    {
+        navigationManager.NavigateTo($"{PageUrlConstants.UsersEdit}/{data.Id}");
+    }
+}

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
 using WebSsh.BlazorClient.Internal.Constants;
 using WebSsh.BlazorClient.Internal.Models;
 using WebSsh.BlazorClient.Internal.Services.Contracts;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace WebSsh.BlazorClient.Internal.Services.Implementations
 {
@@ -42,7 +42,8 @@ namespace WebSsh.BlazorClient.Internal.Services.Implementations
         {
             return new List<MenuItem>
             {
-                new MenuItem("Home", PageUrlConstants.Index)
+                new MenuItem("Home", PageUrlConstants.Index),
+                new MenuItem("Users", PageUrlConstants.Users, NavLinkMatch.Prefix)
             };
         }
 

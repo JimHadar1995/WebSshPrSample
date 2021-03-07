@@ -6,10 +6,10 @@ using Library.Common.Database;
 using Library.Logging.Contracts;
 using Library.Common.Localization;
 using Library.Common.Exceptions;
-using WebSsh.Application.Services.Contracts;
 using WebSsh.ResourceManager.Constants;
 using WebSsh.Application.Commands.Users;
 using WebSsh.Core.Exceptions;
+using WebSsh.Shared.Contracts;
 
 namespace WebSsh.Infrastructure.Handlers.Commands.Users
 {

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace WebSsh.BlazorClient.Internal.Extensions
 {
@@ -7,10 +8,16 @@ namespace WebSsh.BlazorClient.Internal.Extensions
     /// </summary>
     public static class JsonExtensions
     {
-        public static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions
+        static JsonExtensions()
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
+            JsonSerializerOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+            JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        }
+
+        public static readonly JsonSerializerOptions JsonSerializerOptions;
 
         /// <summary>
         /// 

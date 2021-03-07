@@ -16,5 +16,15 @@
         /// Список пользоватедей
         /// </summary>
         public const string Users = "/users";
+
+        /// <summary>
+        /// Добавление пользователя
+        /// </summary>
+        public const string UsersAdd = "/users/add";
+
+        /// <summary>
+        /// Редактирование пользователя
+        /// </summary>
+        public const string UsersEdit = "/users/edit";
     }
 }

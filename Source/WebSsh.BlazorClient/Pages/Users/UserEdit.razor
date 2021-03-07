@@ -1,0 +1,63 @@
+﻿@page "/users/edit/{Id:int}"
+@page "/users/add"
+
+@using WebSsh.BlazorClient.Internal.Models.ViewModels.Users
+
+@inherits AuthWithRoleSupportComponentBase
+
+@inject IUserService userService
+
+@inject MapsterMapper.IMapper mapper
+
+
+@if (Id.HasValue)
+{
+    <h3>Edit user</h3>
+}
+else
+{
+    <h3>Create user</h3>
+}
+
+<Layout Class="form-layout">
+    <Form Layout="@FormLayout.Vertical"
+          Loading="loading"
+          Model="Model">
+        <FormItem Label="User name">
+            <Input @bind-Value="@context.UserName" />
+        </FormItem>
+    </Form>
+</Layout>
+
+@code {
+
+    private protected override string Roles => RoleConstants.Administrator;
+
+    [Parameter]
+    public int? Id { get; set; }
+
+    private bool loading = false;
+
+    private UserViewModel Model = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id.HasValue)
+        {
+            loading = true;
+            try
+            {
+                var user = await userService.GetAsync(Id.Value);
+                Model = mapper.Map<UserViewModel>(user);
+            }
+            catch
+            {
+                //
+            }
+            loading = false;
+            StateHasChanged();
+        }
+        await base.OnInitializedAsync();
+    }
+}

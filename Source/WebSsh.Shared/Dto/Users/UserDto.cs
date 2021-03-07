@@ -59,7 +59,7 @@ namespace WebSsh.Shared.Dto.Users
         /// <summary>
         /// Язык интерфейса
         /// </summary>
-        public Locale UiLocale { get; init; } = Locale.En;
+        public Locale UiLocale { get; init; }
 
         /// <summary>
         /// Роли пользователя

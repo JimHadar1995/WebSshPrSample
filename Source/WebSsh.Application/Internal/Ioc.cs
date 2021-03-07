@@ -10,6 +10,7 @@ using WebSsh.Application.Services.Contracts;
 using WebSsh.Application.Services.Implementations;
 using WebSsh.Core.Services;
 using WebSsh.ResourceManager.Implementations;
+using WebSsh.Shared.Contracts;
 
 namespace WebSsh.Application.Internal
 {

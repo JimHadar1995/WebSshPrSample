@@ -10,10 +10,10 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using WebSsh.Application.Commands.Users;
-using WebSsh.Application.Services.Contracts;
 using WebSsh.Core.Entities;
 using WebSsh.Core.Exceptions;
 using WebSsh.ResourceManager.Constants;
+using WebSsh.Shared.Contracts;
 
 namespace WebSsh.Infrastructure.Handlers.Commands.Users
 {

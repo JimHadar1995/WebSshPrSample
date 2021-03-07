@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebSsh.Application.Commands.Users;
 using WebSsh.Application.Queries.Users;
+using WebSsh.Core.Entities;
 using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.WebApi.Controllers
@@ -14,7 +15,7 @@ namespace WebSsh.WebApi.Controllers
     /// <summary>
     /// Контроллер для работы с пользователями
     /// </summary>
-    [JwtBase]
+    [JwtBase(Roles = Role.Administrator)]
     [Route("api/[controller]")]
     public sealed class UsersController : BaseController
     {
@@ -61,6 +62,7 @@ namespace WebSsh.WebApi.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [JwtBase(Roles = Role.Administrator)]
         public async Task<IActionResult> Create(
             [FromBody] UserAddDto model,
             CancellationToken token)

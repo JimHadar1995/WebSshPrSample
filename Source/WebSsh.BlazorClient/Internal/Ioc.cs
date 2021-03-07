@@ -6,6 +6,8 @@ using WebSsh.BlazorClient.Internal.Auth;
 using WebSsh.BlazorClient.Internal.Constants;
 using WebSsh.BlazorClient.Internal.Services.Contracts;
 using WebSsh.BlazorClient.Internal.Services.Implementations;
+using WebSsh.BlazorClient.Internal.Services.Implementations.Api;
+using WebSsh.Shared.Contracts;
 
 namespace WebSsh.BlazorClient.Internal
 {
@@ -47,6 +49,9 @@ namespace WebSsh.BlazorClient.Internal
             builder.Services.AddScoped<IMenuService, MenuService>();
 
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IUserService, UserService>();
+
+            builder.Services.ConfigureMapster();
         }
     }
 }

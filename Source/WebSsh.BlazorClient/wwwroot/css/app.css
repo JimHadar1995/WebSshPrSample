@@ -6,15 +6,22 @@
     background-color: white !important;
 }
 
-.form-layout{
+.login-layout {
     vertical-align: central;
+}
+
+.form-layout {
+    vertical-align: top;
+}
+
+.login-layout .ant-form {
+    text-align: center;
+    margin: 0 auto;
 }
 
 .form-layout .ant-form {
     max-width: 600px;
-    margin: 0 auto;
     display: block;
-    text-align: center;
     padding: 10px;
 }
 

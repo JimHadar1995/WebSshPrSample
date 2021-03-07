@@ -24,18 +24,18 @@ namespace WebSsh.BlazorClient.Internal.CodeComponents
 
         protected override async Task OnInitializedAsync()
         {
+            await base.OnInitializedAsync();
             if (!await _authService.IsAuthenticated())
             {
                 _navigationManager.NavigateTo(PageUrlConstants.Login);
                 return;
             }
-            string[] roles = Roles.Split(',') ?? new string[0];
+            string[] roles = Roles.Split(',').Where(_ => !string.IsNullOrWhiteSpace(_)).ToArray() ?? new string[0];
             if (roles.Any() && !await _authService.IsInRoles(roles))
             {
                 _navigationManager.NavigateTo(PageUrlConstants.Index);
                 return;
             }
-            await base.OnInitializedAsync();
         }
     }
 }

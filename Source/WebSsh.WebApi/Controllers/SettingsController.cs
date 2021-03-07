@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebSsh.Application.Commands.Users;
 using WebSsh.Application.Queries.Users;
+using WebSsh.Core.Entities;
 using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.WebApi.Controllers
@@ -45,6 +46,7 @@ namespace WebSsh.WebApi.Controllers
         [HttpPost("password-policy")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [JwtBase(Roles = Role.Administrator)]
         public async Task<IActionResult> SavePasswordPolicy([FromBody] PasswordPolicyDto model,
             CancellationToken token)
         {
