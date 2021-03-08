@@ -14,5 +14,10 @@
         /// Пользователи
         /// </summary>
         public const string Users = "/api/users";
+
+        /// <summary>
+        /// Роли
+        /// </summary>
+        public const string Roles = "/api/roles";
     }
 }

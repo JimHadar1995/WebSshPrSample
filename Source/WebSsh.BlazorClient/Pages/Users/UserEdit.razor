@@ -2,15 +2,18 @@
 @page "/users/add"
 
 @using WebSsh.BlazorClient.Internal.Models.ViewModels.Users
+@using WebSsh.Shared.Dto.Roles
+@using WebSsh.Shared.Dto.Users
 
 @inherits AuthWithRoleSupportComponentBase
 
 @inject IUserService userService
+@inject IRoleService roleService
 
 @inject MapsterMapper.IMapper mapper
 
 
-@if (Id.HasValue)
+@if (IsExistingUser)
 {
     <h3>Edit user</h3>
 }
@@ -20,11 +23,48 @@ else
 }
 
 <Layout Class="form-layout">
-    <Form Layout="@FormLayout.Vertical"
-          Loading="loading"
-          Model="Model">
+    <Form Loading="loading"
+          Model="Model"
+          LabelColSpan="8"
+          @ref="@_form"
+          ValidateOnChange="true">
         <FormItem Label="User name">
             <Input @bind-Value="@context.UserName" />
+        </FormItem>
+        <FormItem Label="Description">
+            <TextArea @bind-Value="@context.Description" />
+        </FormItem>
+        <FormItem Label="Email">
+            <Input @bind-Value="@context.Email" />
+        </FormItem>
+        <FormItem Label="Role">
+            <Select DataSource="@_roles"
+                    @bind-Value="@Model.RoleId"
+                    ValueName="@nameof(RoleDto.Id)"
+                    LabelName="@nameof(RoleDto.Name)" />
+        </FormItem>
+        @if (!IsExistingUser)
+        {
+            <FormItem Label="Password"
+                      Required="true">
+                <InputPassword @bind-Value="@Model.Password" />
+            </FormItem>
+        }
+        <FormItem>
+            <Button Type="@ButtonType.Primary"
+                    HtmlType="submit"
+                    Class="submit-btn"
+                    Disabled="@(!_form.IsModified || !_form.Validate())"
+                    OnClick="@OnSubmit">
+                @if (IsExistingUser)
+                {
+                    <Text>Редактировать</Text>
+                }
+                else
+                {
+                    <Text>Создать</Text>
+                }
+            </Button>
         </FormItem>
     </Form>
 </Layout>
@@ -40,24 +80,58 @@ else
 
     private UserViewModel Model = new();
 
+    private IReadOnlyList<RoleDto> _roles = new List<RoleDto>();
+
+    private Form<UserViewModel> _form = new Form<UserViewModel>();
+
+    private bool IsExistingUser => Id.HasValue;
 
     protected override async Task OnInitializedAsync()
     {
-        if (Id.HasValue)
+        loading = true;
+        try
         {
-            loading = true;
-            try
+            _roles = await roleService.GetAllAsync();
+            if (IsExistingUser)
             {
-                var user = await userService.GetAsync(Id.Value);
+                var user = await userService.GetAsync(Id!.Value);
                 Model = mapper.Map<UserViewModel>(user);
             }
-            catch
+        }
+        catch
+        {
+            //
+        }
+        loading = false;
+        await base.OnInitializedAsync();
+    }
+
+    protected async void OnSubmit()
+    {
+        if (!_form.Validate())
+            return;
+
+        loading = true;
+        try
+        {
+            if (!IsExistingUser)
             {
-                //
+                Id = await userService.CreateAsync(mapper.Map<UserAddDto>(Model));
             }
+            else
+            {
+                await userService.UpdateAsync(mapper.Map<UserUpdateDto>(Model));
+            }
+            _navigationManager.NavigateTo(PageUrlConstants.Users);
+        }
+        catch
+        {
+
+        }
+        finally
+        {
             loading = false;
             StateHasChanged();
         }
-        await base.OnInitializedAsync();
     }
 }

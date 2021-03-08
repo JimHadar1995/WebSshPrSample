@@ -27,12 +27,12 @@ namespace WebSsh.BlazorClient.Internal.Models.ViewModels.Users
         /// <summary>
         /// Электронный адрес пользователя.
         /// </summary>
+        [RegularExpression("^\\S+@\\S+\\.\\S+", ErrorMessage = "Incorrect email specified")]
         public string? Email { get; set; } = string.Empty;
 
         /// <summary>
         /// Пароль пользователя. Установка значения возможна только в случае создания пользователя.
         /// </summary>
-        [Required]
         public string Password { get; set; } = string.Empty;
 
         /// <summary>

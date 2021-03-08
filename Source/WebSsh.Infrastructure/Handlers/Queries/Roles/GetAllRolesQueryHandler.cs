@@ -7,9 +7,9 @@ using Library.Common.Localization;
 using Library.Logging.Contracts;
 using MediatR;
 using WebSsh.Application.Queries.Roles;
-using WebSsh.Application.Services.Contracts;
 using WebSsh.Core.Exceptions;
 using WebSsh.ResourceManager.Constants;
+using WebSsh.Shared.Contracts;
 using WebSsh.Shared.Dto.Roles;
 
 namespace WebSsh.Infrastructure.Handlers.Queries.Roles

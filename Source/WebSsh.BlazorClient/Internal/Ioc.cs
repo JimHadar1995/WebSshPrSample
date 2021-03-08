@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using WebSsh.BlazorClient.Internal.Auth;
 using WebSsh.BlazorClient.Internal.Constants;
+using WebSsh.BlazorClient.Internal.Models;
 using WebSsh.BlazorClient.Internal.Services.Contracts;
 using WebSsh.BlazorClient.Internal.Services.Implementations;
 using WebSsh.BlazorClient.Internal.Services.Implementations.Api;
@@ -50,6 +51,9 @@ namespace WebSsh.BlazorClient.Internal
 
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
+
+            builder.Services.AddSingleton<AppState>();
 
             builder.Services.ConfigureMapster();
         }

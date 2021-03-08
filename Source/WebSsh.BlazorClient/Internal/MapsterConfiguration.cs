@@ -26,6 +26,9 @@ namespace WebSsh.BlazorClient.Internal
                 .Map(_ => _.Id, _ => _.Id)
                 .IgnoreNonMapped(true);
 
+            config.NewConfig<UserViewModel, UserAddDto>();
+            config.NewConfig<UserViewModel, UserUpdateDto>();                
+
             return config;
         }
     }

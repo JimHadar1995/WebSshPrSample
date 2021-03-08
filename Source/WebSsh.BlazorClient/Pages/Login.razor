@@ -9,27 +9,29 @@
 @inject NotificationService _notice
 
 <Layout Class="login-layout">
-    <Form Loading="@Loading"
-          Model="@_model"
-          LabelColSpan="8"
-          ValidateOnChange="@auto"
-          @ref="@_form">
-        <h3>Вход</h3>
-        <FormItem Label="User name">
-            <Input @bind-Value="@context.UserName" />
-        </FormItem>
-        <FormItem Label="Password">
-            <InputPassword @bind-Value="@context.Password" />
-        </FormItem>
-        <FormItem>
-            <Button Type="@ButtonType.Primary"
-                    HtmlType="submit"
-                    Style="max-width:200px;float: right;"
-                    OnClick="@OnSubmit">
-                Login
-            </Button>
-        </FormItem>
-    </Form>
+    <Layout Class="form-layout">
+        <Form Loading="@Loading"
+              Model="@_model"
+              LabelColSpan="8"
+              ValidateOnChange="@auto"
+              @ref="@_form">
+            <h3>Вход</h3>
+            <FormItem Label="User name">
+                <Input @bind-Value="@context.UserName" />
+            </FormItem>
+            <FormItem Label="Password">
+                <InputPassword @bind-Value="@context.Password" />
+            </FormItem>
+            <FormItem>
+                <Button Type="@ButtonType.Primary"
+                        HtmlType="submit"
+                        Style="max-width:200px;float: right;"
+                        OnClick="@OnSubmit">
+                    Login
+                </Button>
+            </FormItem>
+        </Form>
+    </Layout>
 </Layout>
 
 @code {

@@ -9,6 +9,16 @@
 @inherits AuthWithRoleSupportComponentBase
 
 <h3>Users</h3>
+<Row>
+    <Col Span="8"
+         Offset="16">
+    <Button Type="@ButtonType.Primary"
+            Class="create-entity-btn"
+            OnClick="@OnAddUserChange">
+        Add user
+    </Button>
+    </Col>
+</Row>
 
 <Table DataSource="@_users"
        Loading="loading"
@@ -18,7 +28,8 @@
         {
             <a @onclick="@(e => OnChangeUserName(context))">@context.UserName</a>
         }
-        else{
+        else
+        {
             <p>@context.UserName</p>
         }
     </Column>
@@ -30,8 +41,8 @@
             <span>@context.Role.Name</span>
         }
     </Column>
-    <Column Field="@context.CreatedAt" Title="Date created" />
-    <Column Field="@context.UpdatedAt" Title="Date updated" />
+    <Column Field="@context.CreatedAt" Title="Date created" Format="dd.MM.yyyy hh:mm:ss"/>
+    <Column Field="@context.UpdatedAt" Title="Date updated" Format="dd.MM.yyyy hh:mm:ss"/>
     <Column Field="@context.Status" Title="Status">
         <span>@context.Status.ToStringStatus()</span>
     </Column>
@@ -50,6 +61,7 @@
             loading = true;
             _users = await userService.GetAllAsync();
             loading = false;
+            navigationManager.NavigateTo(PageUrlConstants.Users);
         }
         catch
         {
@@ -59,8 +71,13 @@
         await base.OnInitializedAsync();
     }
 
-    private async void OnChangeUserName(UserDto data)
+    private void OnChangeUserName(UserDto data)
     {
         navigationManager.NavigateTo($"{PageUrlConstants.UsersEdit}/{data.Id}");
+    }
+
+    private void OnAddUserChange()
+    {
+        navigationManager.NavigateTo(PageUrlConstants.UsersAdd);
     }
 }

@@ -9,8 +9,8 @@ using Mapster;
 using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WebSsh.Application.Services.Contracts;
 using WebSsh.Core.Entities;
+using WebSsh.Shared.Contracts;
 using WebSsh.Shared.Dto.Roles;
 
 namespace WebSsh.Application.Services.Implementations
