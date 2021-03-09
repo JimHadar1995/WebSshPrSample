@@ -2,6 +2,7 @@
 
 @inject IUserService userService
 @inject NavigationManager navigationManager
+@inject ModalService _modalService
 
 @using WebSsh.Shared.Dto.Users
 @using WebSsh.BlazorClient.Internal.Extensions
@@ -41,11 +42,33 @@
             <span>@context.Role.Name</span>
         }
     </Column>
-    <Column Field="@context.CreatedAt" Title="Date created" Format="dd.MM.yyyy hh:mm:ss"/>
-    <Column Field="@context.UpdatedAt" Title="Date updated" Format="dd.MM.yyyy hh:mm:ss"/>
+    <Column Field="@context.CreatedAt" Title="Date created" Format="dd.MM.yyyy hh:mm:ss" />
+    <Column Field="@context.UpdatedAt" Title="Date updated" Format="dd.MM.yyyy hh:mm:ss" />
     <Column Field="@context.Status" Title="Status">
         <span>@context.Status.ToStringStatus()</span>
     </Column>
+    <ActionColumn>
+        @if (!context.IsDefaultUser)
+        {
+            <Space>
+                <SpaceItem>
+                    <Button Danger OnClick="() => OnDelete(context.Id)">Delete</Button>
+                </SpaceItem>
+                @if (context.Status == Enums.Enums.UserStatus.Active)
+                {
+                    <SpaceItem>
+                        <Button Danger OnClick="() => OnLock(context.Id)">Lock</Button>
+                    </SpaceItem>
+                }
+                @if (context.Status == Enums.Enums.UserStatus.Locked)
+                {
+                    <SpaceItem>
+                        <Button Danger OnClick="() => OnUnLock(context.Id)">Unlock</Button>
+                    </SpaceItem>
+                }
+            </Space>
+        }
+    </ActionColumn>
 </Table>
 
 @code {
@@ -79,5 +102,73 @@
     private void OnAddUserChange()
     {
         navigationManager.NavigateTo(PageUrlConstants.UsersAdd);
+    }
+
+    private void OnDelete(int id)
+    {
+        try
+        {
+            _modalService.Confirm(new ConfirmOptions
+            {
+                Content = "Are you sure you want to delete the user?",
+                OkType = "danger",
+                OnOk = async (e) =>
+                {
+                    await userService.DeleteAsync(id);
+                    loading = true;
+                    _users = await userService.GetAllAsync();
+                    loading = false;
+                    StateHasChanged();
+                },
+            });
+        }
+        catch
+        {
+            loading = false;
+        }
+    }
+
+    private void OnLock(int id)
+    {
+        _modalService.Confirm(new ConfirmOptions
+        {
+            Content = "Are you sure you want to lock the user?",
+            OkType = "danger",
+            OnOk = async (e) =>
+            {
+                try
+                {
+                    await userService.LockAsync(id);
+                    _users = await userService.GetAllAsync();
+                }
+                catch
+                {
+
+                }
+                StateHasChanged();
+            },
+        });
+    }
+
+    private void OnUnLock(int id)
+    {
+        _modalService.Confirm(new ConfirmOptions
+        {
+            Content = "Are you sure you want to unlock the user?",
+            OkType = "danger",
+            OnOk = async (e) =>
+            {
+                try
+                {
+                    await userService.UnLockAsync(id);
+                    _users = await userService.GetAllAsync();
+                }
+                catch
+                {
+
+                }
+                StateHasChanged();
+            },
+        });
     }
 }

@@ -79,6 +79,29 @@ namespace WebSsh.BlazorClient.Internal.Services.Implementations.Api
             }
         }
 
+        private protected async Task PostEmptyResponseAsync<TRequest>(string url, TRequest data, CancellationToken token = default)
+        {
+            using var client = _factory.CreateClient(HttpClients.WebSshClient);
+
+            try
+            {
+                var result = await client.PostAsync(url, data.AsStringContent(), token);
+                await CheckApiResponse(result);
+            }
+            catch (ApiException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
+                _message.Error("Unknown error");
+                throw new ApiException("Unknown error", ex);
+            }
+        }
+
         private protected async Task PutAsync<TRequest>(string url, TRequest data, CancellationToken token = default)
         {
             using var client = _factory.CreateClient(HttpClients.WebSshClient);

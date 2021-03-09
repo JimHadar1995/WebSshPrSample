@@ -68,6 +68,8 @@ namespace WebSsh.Application.Services.Implementations
 
             await _userManager.CreateAsync(user);
 
+            await _userManager.AddPasswordAsync(user, model.Password);
+
             var roleId = model.RoleId;
             var allRoles = await _roleManager.Roles.ToListAsync(token);
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using WebSsh.Enums.Enums;
 using WebSsh.Terminal.Exceptions;
 using WebSsh.Terminal.Hubs;
 using WebSsh.Terminal.Models;

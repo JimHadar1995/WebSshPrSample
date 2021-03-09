@@ -54,15 +54,15 @@ namespace WebSsh.BlazorClient.Internal.Services.Implementations.Api
         }
 
         /// <inheritdoc/>
-        public Task LockAsync(int userId, CancellationToken token = default)
+        public async Task LockAsync(int userId, CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            await PostEmptyResponseAsync<object?>($"{UrlConstants.Users}/{userId}/lock", null);
         }
 
         /// <inheritdoc/>
-        public Task UnLockAsync(int userId, CancellationToken token = default)
+        public async Task UnLockAsync(int userId, CancellationToken token = default)
         {
-            throw new NotImplementedException();
+            await PostEmptyResponseAsync<object?>($"{UrlConstants.Users}/{userId}/unlock", null);
         }
 
     }

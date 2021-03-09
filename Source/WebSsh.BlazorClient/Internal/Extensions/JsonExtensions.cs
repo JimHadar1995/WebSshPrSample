@@ -26,6 +26,6 @@ namespace WebSsh.BlazorClient.Internal.Extensions
         /// <param name="obj"></param>
         /// <returns></returns>
         public static string AsJson<T>(this T obj)
-            => JsonSerializer.Serialize(obj, JsonSerializerOptions);        
+            => obj == null ? string.Empty : JsonSerializer.Serialize(obj, JsonSerializerOptions);
     }
 }

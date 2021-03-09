@@ -1,4 +1,5 @@
 ﻿using System;
+using WebSsh.Enums.Enums;
 
 namespace WebSsh.Terminal.Models
 {

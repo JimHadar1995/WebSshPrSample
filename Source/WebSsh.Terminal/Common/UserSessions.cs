@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.SignalR;
 using Renci.SshNet;
+using WebSsh.Enums.Enums;
 using WebSsh.Terminal.Hubs;
 using WebSsh.Terminal.Models;
 using Session = WebSsh.Terminal.Models.Session;

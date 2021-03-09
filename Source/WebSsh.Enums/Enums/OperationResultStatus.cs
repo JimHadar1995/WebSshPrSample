@@ -1,4 +1,4 @@
-﻿namespace WebSsh.Terminal.Models
+﻿namespace WebSsh.Enums.Enums
 {
     /// <summary>
     /// 
