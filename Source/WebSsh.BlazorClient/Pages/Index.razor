@@ -1,7 +1,13 @@
 ﻿@page "/"
 @attribute [Authorize]
 
+@using WebSsh.BlazorClient.Components.SshTerminal
+
 <h3>Ssh terminals</h3>
+
+<Layout>
+    <ConnectComponent />
+</Layout>
 
 @code{
 

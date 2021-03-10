@@ -1,7 +1,9 @@
 ﻿using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
+using WebSsh.BlazorClient.Internal.Models.Ssh;
 using WebSsh.BlazorClient.Internal.Models.ViewModels.Users;
+using WebSsh.Shared.Dto.Ssh;
 using WebSsh.Shared.Dto.Users;
 
 namespace WebSsh.BlazorClient.Internal
@@ -27,7 +29,8 @@ namespace WebSsh.BlazorClient.Internal
                 .IgnoreNonMapped(true);
 
             config.NewConfig<UserViewModel, UserAddDto>();
-            config.NewConfig<UserViewModel, UserUpdateDto>();                
+            config.NewConfig<UserViewModel, UserUpdateDto>();
+            config.NewConfig<ConnectionViewModel, ConnectionsInfoDto>();
 
             return config;
         }

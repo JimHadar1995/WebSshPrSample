@@ -19,5 +19,10 @@
         /// Роли
         /// </summary>
         public const string Roles = "/api/roles";
+
+        /// <summary>
+        /// SSH терминал
+        /// </summary>
+        public const string SshTerminal = "/api/SshTerminal";
     }
 }

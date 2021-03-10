@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Library.Common.Authentication;
@@ -18,7 +16,7 @@ namespace WebSsh.WebApi.Controllers
     /// 
     /// </summary>
     [JwtBase]
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class SshTerminalController : BaseController
     {
         /// <inheritdoc />

@@ -52,6 +52,7 @@ namespace WebSsh.BlazorClient.Internal
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IRoleService, RoleService>();
+            builder.Services.AddScoped<ISshTerminalService, SshTerminalService>();
 
             builder.Services.AddSingleton<AppState>();
 

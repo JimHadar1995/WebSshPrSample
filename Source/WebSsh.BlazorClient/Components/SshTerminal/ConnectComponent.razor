@@ -1,0 +1,134 @@
+﻿@inject ISshTerminalService _sshTerminalService
+@inject MapsterMapper.IMapper _mapper
+@inject IMessageService _messageService
+@inject WebSsh.BlazorClient.Internal.Models.AppState _appState
+
+@using WebSsh.BlazorClient.Internal.Models.Ssh
+@using WebSsh.Shared.Dto.Ssh
+
+<Layout Class="form-layout"
+        Style="max-width:300px;">
+    <Form Model="@_model"
+          ValidateOnChange="true"
+          LabelColSpan="8"
+          Loading="_loading"
+          @ref="@_form">
+        <FormItem Label="Host"
+                  Required="true">
+            <Input @bind-Value="@context.Host" />
+        </FormItem>
+        <FormItem Label="Port"
+                  Required="true">
+            <AntDesign.InputNumber @bind-Value="@context.Port" />
+        </FormItem>
+        <FormItem Label="User name"
+                  Required="true">
+            <Input @bind-Value="@context.UserName" />
+        </FormItem>
+        <FormItem Label="Password"
+                  Required="true">
+            <InputPassword @bind-Value="@context.Password" />
+        </FormItem>
+        <FormItem>
+            @if (!_sessionExistsAndActive)
+            {
+                <Button Type="@ButtonType.Primary"
+                        HtmlType="submit"
+                        Class="submit-btn"
+                        Disabled="@(!_form.IsModified || !_form.Validate())"
+                        OnClick="@OnConnectSubmit">
+                    Try connect
+                </Button>
+            }
+            else
+            {
+                <Button Type="@ButtonType.Primary"
+                        HtmlType="submit"
+                        Class="submit-btn"
+                        OnClick="@OnDisconnectSubmit">
+                    Disconnect
+                </Button>
+            }
+        </FormItem>
+    </Form>
+</Layout>
+
+@code {
+
+    [Parameter]
+    public Guid? SessionId { get; set; }
+
+    [Parameter]
+    public EventCallback<SessionEventArgs>? OnSuccessConnectCallback { get; set; }
+
+    [Parameter]
+    public EventCallback<SessionEventArgs>? OnDisconnectCallback { get; set; }
+
+    private ConnectionViewModel _model = new();
+
+    private bool _loading = false;
+
+    private Form<ConnectionViewModel> _form;
+
+    private bool _sessionExistsAndActive => SessionId.HasValue && _appState.SshSessions.Keys.Any(_ => _ == SessionId.Value);
+
+    protected override async Task OnInitializedAsync()
+    {
+        _appState.OnChange += StateHasChanged;
+        await base.OnInitializedAsync();
+    }
+
+    private async void OnConnectSubmit()
+    {
+        _loading = true;
+        try
+        {
+            var res = await _sshTerminalService.ConnectToSource(_mapper.Map<ConnectionsInfoDto>(_model));
+            if (!res.Success)
+            {
+                _messageService.Error(res.Message);
+            }
+            else
+            {
+                _appState.AddSession(new ActiveSession
+                {
+                    SessionsId = res.SessionKey,
+                    Status = res.Success
+                });
+                SessionId = res.SessionKey;
+                await OnSuccessConnectCallback?.InvokeAsync(new SessionEventArgs(res.SessionKey))!;
+            }
+        }
+        catch
+        {
+
+        }
+        _loading = false;
+        StateHasChanged();
+    }
+
+    private async void OnDisconnectSubmit()
+    {
+        _loading = true;
+        try
+        {
+            await _sshTerminalService.DisconnectFromSource(new SshSessionModel
+            {
+                SessionId = SessionId!.Value
+            });
+            _appState.RemoveSession(SessionId!.Value);
+            await OnDisconnectCallback?.InvokeAsync(new SessionEventArgs(SessionId!.Value));
+        }
+        catch
+        {
+
+        }
+        _loading = false;
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        _appState.OnChange -= StateHasChanged;
+    }
+}
