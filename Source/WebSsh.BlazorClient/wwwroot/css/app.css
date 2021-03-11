@@ -39,6 +39,25 @@ h3 {
     text-align: center;
 }
 
+.terminal-view {
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 60vh;
+}
+
+.terminal-text-view {
+    height: 100%;
+    background-color: black;
+    overflow-y: scroll;
+    margin: 10px 0;
+    padding: 5px;
+}
+
+    .terminal-text-view .ant-typography {
+        color: white;
+        white-space: pre-line;
+    }
+
 .main-layout-pre-load {
     display: flex;
     justify-content: center;

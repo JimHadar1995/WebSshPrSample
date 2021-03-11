@@ -29,6 +29,17 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/AntDesign/js/ant-design-blazor.js"></script>
+
+    <script>
+        window.scrollToElementId = (elementId) => {
+            var element = document.getElementById(elementId);
+            if (!element) {
+                return false;
+            }
+            element.scrollIntoView();
+            return true;
+        }
+    </script>
 </body>
 
 </html>

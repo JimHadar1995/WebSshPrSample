@@ -16,5 +16,10 @@ namespace WebSsh.BlazorClient.Internal.Models.Ssh
         /// Статус сессии
         /// </summary>
         public bool Status { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SshText { get; set; } = string.Empty;
     }
 }

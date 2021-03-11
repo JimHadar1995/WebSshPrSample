@@ -1,14 +1,72 @@
 ﻿@page "/"
+
+@implements IAsyncDisposable
+
 @attribute [Authorize]
 
+@inject WebSsh.BlazorClient.Internal.Models.AppState _appState
+@inject NavigationManager NavigationManager
+@inject IAuthService authService
+
 @using WebSsh.BlazorClient.Components.SshTerminal
+@using WebSsh.BlazorClient.Internal.Models.Ssh
+@using Microsoft.AspNetCore.SignalR.Client
+@using WebSsh.BlazorClient.Internal.Constants
 
 <h3>Ssh terminals</h3>
 
 <Layout>
-    <ConnectComponent />
+    <SshTerminalView OnSuccessConnectCallback="@OnSuccessConnect"
+                     OnDisconnectCallback="@OnDisconnect"
+                     SessionId="@_sessionKey"/>
 </Layout>
 
 @code{
+    private Guid? _sessionKey;
 
+    private string? _sshText { get; set; }
+
+    private HubConnection hubConnection;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authData = await authService.GetAuthData();
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(new Uri($"http://localhost:5000{HubsConstants.SshTerminalHub}?access_token={authData!.AccessToken}"))
+            .WithAutomaticReconnect()
+            .Build();
+
+        hubConnection.On<SshOperationResult>(HubsConstants.SendTerminalResultMessage, (message) =>
+        {
+            var sessionId = message.SessionKey;
+            if (_appState.SshSessions.ContainsKey(sessionId))
+            {
+                _appState.SshSessions[sessionId].SshText += message.Message;
+                _appState.SshSessions[sessionId].Status = message.Status != Enums.Enums.OperationResultStatus.SessionClosed;
+                StateHasChanged();
+            }
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    public bool IsConnected =>
+        hubConnection.State == HubConnectionState.Connected;
+
+    private void OnSuccessConnect(SessionEventArgs eventArgs)
+    {
+        _appState.AddSession(new ActiveSession() { SessionsId = eventArgs.SessionKey, Status = true });
+
+        _sessionKey = eventArgs.SessionKey;
+    }
+
+    private void OnDisconnect(SessionEventArgs eventArgs)
+    {
+        _appState.RemoveSession(eventArgs.SessionKey);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await hubConnection.DisposeAsync();
+    }
 }

@@ -1,0 +1,96 @@
+﻿@inject ISshTerminalService _sshTerminalService
+@inject MapsterMapper.IMapper _mapper
+@inject IMessageService _messageService
+@inject WebSsh.BlazorClient.Internal.Models.AppState _appState
+@inject IJSRuntime jsRuntime
+
+@implements IDisposable
+
+@using WebSsh.BlazorClient.Internal.Models.Ssh
+@using WebSsh.Shared.Dto.Ssh
+
+<Layout Class="terminal-view">
+    <div class="terminal-text-view">
+        <Text>
+            @_sshText
+        </Text>
+        <div id="anchorText"></div>
+    </div>
+    <Input @bind-Value="@_model.TerminalCommand"
+           Disabled="!_sessionExistsAndActive" />
+    <Space>
+        <SpaceItem>
+            <Button OnClick="OnClick"
+                    Type="@ButtonType.Primary"
+                    HtmlType="submit"
+                    Class="submit-btn"
+                    Disabled="!_sessionExistsAndActive">
+                Send
+            </Button>
+        </SpaceItem>
+    </Space>
+</Layout>
+
+@code {
+
+    [Parameter]
+    public Guid? SessionId { get; set; }
+
+    private TerminalModel _model = new();
+
+    private bool _sessionExistsAndActive => SessionId.HasValue && _appState.SshSessions.Keys.Any(_ => _ == SessionId.Value);
+
+    private Text _anchorText;
+
+    private string _sshText => _sessionExistsAndActive ? _appState.SshSessions[SessionId!.Value].SshText : string.Empty;
+
+    private System.Threading.CancellationTokenSource _cts = new System.Threading.CancellationTokenSource();
+
+    protected override Task OnInitializedAsync()
+    {
+
+        Task.Run(async () =>
+        {
+            while (true)
+            {
+                await InvokeAsync(async () =>
+                {
+                    await ScrollToElementId();
+                });
+                await Task.Delay(1000);
+            }
+        });
+
+        return Task.CompletedTask;
+    }
+
+    private async void OnClick(MouseEventArgs e)
+    {
+
+        if (SessionId.HasValue)
+        {
+            try
+            {
+                var operationresult = await _sshTerminalService.ExecuteCommand(new ExecuteCommandModel
+                {
+                    Command = _model.TerminalCommand,
+                    UniqueSessionId = SessionId.Value
+                });
+            }
+            catch
+            {
+                //
+            }
+        }
+    }
+
+    private async Task<bool> ScrollToElementId()
+    {
+        return await jsRuntime.InvokeAsync<bool>("scrollToElementId", "anchorText");
+    }
+
+    public void Dispose()
+    {
+        _cts.Cancel();
+    }
+}

@@ -1,0 +1,24 @@
+﻿@using WebSsh.BlazorClient.Internal.Models.Ssh
+
+<Layout>
+    <Row Style="height:100%;">
+        <Col Span="8">
+        <ConnectComponent SessionId="@SessionId"
+                          OnSuccessConnectCallback="@OnSuccessConnectCallback"
+                          OnDisconnectCallback="@OnDisconnectCallback" />
+        </Col>
+        <Col Span="16">
+        <Terminal SessionId="SessionId" />
+        </Col>
+    </Row>
+</Layout>
+@code {
+    [Parameter]
+    public Guid? SessionId { get; set; }
+
+    [Parameter]
+    public EventCallback<SessionEventArgs> OnSuccessConnectCallback { get; set; }
+
+    [Parameter]
+    public EventCallback<SessionEventArgs> OnDisconnectCallback { get; set; }
+}

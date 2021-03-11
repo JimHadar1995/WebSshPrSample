@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.VisualBasic;
 using Renci.SshNet;
 using WebSsh.Enums.Enums;
 using WebSsh.Terminal.Hubs;
@@ -81,10 +82,10 @@ namespace WebSsh.Terminal.Common
                 {
                     try
                     {
-                        //sessionModel.Lines.TryAdd(Encoding.UTF8.GetString(e.Data));
+                        var data = Encoding.UTF8.GetString(e.Data);
                         sessionModel.OnLineReceive?.Invoke(
                             new OperationResult(OperationResultStatus.NoError,
-                                Encoding.UTF8.GetString(e.Data),
+                                data,
                                 sessionModel.UniqueKey));
                     }
                     catch (Exception ex)

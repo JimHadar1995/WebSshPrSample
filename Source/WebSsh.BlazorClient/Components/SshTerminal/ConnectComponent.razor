@@ -6,8 +6,7 @@
 @using WebSsh.BlazorClient.Internal.Models.Ssh
 @using WebSsh.Shared.Dto.Ssh
 
-<Layout Class="form-layout"
-        Style="max-width:300px;">
+<Layout Class="form-layout">
     <Form Model="@_model"
           ValidateOnChange="true"
           LabelColSpan="8"
@@ -15,19 +14,23 @@
           @ref="@_form">
         <FormItem Label="Host"
                   Required="true">
-            <Input @bind-Value="@context.Host" />
+            <Input @bind-Value="@context.Host" 
+                   Disabled="@_sessionExistsAndActive"/>
         </FormItem>
         <FormItem Label="Port"
                   Required="true">
-            <AntDesign.InputNumber @bind-Value="@context.Port" />
+            <AntDesign.InputNumber @bind-Value="@context.Port" 
+                                   Disabled="@_sessionExistsAndActive"/>
         </FormItem>
         <FormItem Label="User name"
                   Required="true">
-            <Input @bind-Value="@context.UserName" />
+            <Input @bind-Value="@context.UserName" 
+                   Disabled="@_sessionExistsAndActive"/>
         </FormItem>
         <FormItem Label="Password"
                   Required="true">
-            <InputPassword @bind-Value="@context.Password" />
+            <InputPassword @bind-Value="@context.Password" 
+                           Disabled="@_sessionExistsAndActive"/>
         </FormItem>
         <FormItem>
             @if (!_sessionExistsAndActive)
@@ -59,10 +62,10 @@
     public Guid? SessionId { get; set; }
 
     [Parameter]
-    public EventCallback<SessionEventArgs>? OnSuccessConnectCallback { get; set; }
+    public EventCallback<SessionEventArgs> OnSuccessConnectCallback { get; set; }
 
     [Parameter]
-    public EventCallback<SessionEventArgs>? OnDisconnectCallback { get; set; }
+    public EventCallback<SessionEventArgs> OnDisconnectCallback { get; set; }
 
     private ConnectionViewModel _model = new();
 
@@ -90,13 +93,7 @@
             }
             else
             {
-                _appState.AddSession(new ActiveSession
-                {
-                    SessionsId = res.SessionKey,
-                    Status = res.Success
-                });
-                SessionId = res.SessionKey;
-                await OnSuccessConnectCallback?.InvokeAsync(new SessionEventArgs(res.SessionKey))!;
+                await OnSuccessConnectCallback.InvokeAsync(new SessionEventArgs(res.SessionKey))!;
             }
         }
         catch
@@ -116,8 +113,7 @@
             {
                 SessionId = SessionId!.Value
             });
-            _appState.RemoveSession(SessionId!.Value);
-            await OnDisconnectCallback?.InvokeAsync(new SessionEventArgs(SessionId!.Value));
+            await OnDisconnectCallback.InvokeAsync(new SessionEventArgs(SessionId!.Value))!;
         }
         catch
         {
