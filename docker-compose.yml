@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+
+  ui:
+    container_name: ui-service
+    image: webssh-ui
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.client
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - webssh-network
+
+  api:
+    container_name: api-service
+    image: 'webssh-api'
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.server
+    ports:
+     - "5000:5000"
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Docker
+     - ASPNETCORE_URLS=http://api-service:5000
+#     - ConnectionStrings__DefaultConnection=User Id=webssh; Password=sql;  Server=db-service; Port=5432; Database=webssh;
+    depends_on:
+      - postgres
+    networks:
+      - webssh-network
+
+  postgres:
+    container_name: db-service
+    image: postgres:latest
+#    ports:
+#      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: sql
+      POSTGRES_USER: webssh
+      POSTGRES_DB: webssh
+    networks:
+      - webssh-network
+    volumes:
+      - db:/var/lib/postgresql/data
+
+networks:
+  webssh-network:
+
+volumes:
+  db:

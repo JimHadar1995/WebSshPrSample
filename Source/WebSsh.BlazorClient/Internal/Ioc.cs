@@ -19,8 +19,8 @@ namespace WebSsh.BlazorClient.Internal
     {
         public static void InitServices(this WebAssemblyHostBuilder builder)
         {
-            builder.Services.AddAntDesign();
-
+            builder.Services.AddAntDesign();   
+            
             builder.Services.AddHttpClient(HttpClients.WebSshClient, async (sp, client) =>
             {
                 if (builder.HostEnvironment.Environment == "Development")

@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-blazor-webassembly
+WORKDIR /app
+COPY ./ ./
+RUN dotnet publish ./Source/WebSsh.BlazorClient/WebSsh.BlazorClient.csproj -c Release -o output
+
+FROM nginx:alpine
+WORKDIR /var/www/web
+COPY --from=build-blazor-webassembly /app/output/wwwroot .
+COPY ./docker/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80

@@ -1,0 +1,36 @@
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /source
+
+# copy csproj and restore as distinct layers
+COPY ./ ./
+WORKDIR /app
+RUN dotnet publish /source/Source/WebSsh.WebApi/WebSsh.WebApi.csproj -r linux-x64 -p:PublishSingleFile=true -c Deploy /p:DebugSymbols=false /p:DebugType=None -o /app
+
+# final stage/image
+FROM amd64/debian:buster-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        \
+        # .NET Core dependencies
+        libc6 \
+        libgcc1 \
+        libgssapi-krb5-2 \
+        libicu63 \
+        libssl1.1 \
+        libstdc++6 \
+        zlib1g \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+
+ENV \
+    # Enable detection of running in a container
+    DOTNET_RUNNING_IN_CONTAINER=true \
+    # Set the invariant mode since icu_libs isn't included (see https://github.com/dotnet/announcements/issues/20)
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true   \
+    ASPNETCORE_ENVIRONMENT=Docker
+
+COPY --from=build /app ./
+CMD ["/app/WebSsh.WebApi"]

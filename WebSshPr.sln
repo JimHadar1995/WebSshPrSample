@@ -46,6 +46,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{650AEA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSsh.Enums", "Source\WebSsh.Enums\WebSsh.Enums.csproj", "{EFB8D775-D4DF-4020-9027-2E2F874EC3F5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{DC122AE6-3AE3-4B9E-BB7C-0455415742D2}"
+ProjectSection(SolutionItems) = preProject
+	docker\nginx.conf = docker\nginx.conf
+	docker\Dockerfile.client = docker\Dockerfile.client
+	docker\Dockerfile.server = docker\Dockerfile.server
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -37,9 +37,8 @@ namespace WebSsh.WebApi
 
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebSsh.WebApi v1"));
+                app.UseBlazorFrameworkFiles();
             }
-
-            app.UseBlazorFrameworkFiles();
 
             app.UseFileServer();
 
